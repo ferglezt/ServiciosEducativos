@@ -46,14 +46,24 @@
 				</div>
 				<div id="navbar" class="collapse navbar-collapse">
 					<ul class="nav navbar-nav">
-						<li class="active"><a href="#">Home</a></li>
+						<li class="active"><a href="#">Inicio</a></li>
 					</ul>
+					<ul class="nav navbar-nav navbar-right">
+				      	
+				    </ul>
 				</div><!--/.nav-collapse -->
 			</div>
 		</nav>
 	    <!-- Sidebar -->
 	    <div id="sidebar-wrapper">
-	        @yield('sidebar')
+	    	<nav id="spy">
+	    		<ul class="sidebar-nav nav">
+			        <li class="sidebar-brand">
+			            <a href="#logo"><img style="max-width: 50%;" src="{{ URL::to('/') }}/images/upiicsa_logo.png"></a>
+			        </li>
+	        		@yield('sidebar')
+	        	</ul>
+	        </nav>
 	    </div>
 	    <!-- Page content -->
 	    <div id="page-content-wrapper">
