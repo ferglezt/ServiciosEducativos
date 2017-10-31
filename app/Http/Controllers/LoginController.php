@@ -39,7 +39,8 @@ class LoginController extends Controller
     	}
 
     	$request->session()->put('email', $email);
-    	$request->session()->put('rolId', $usuario->rolId);
+    	$request->session()->put('rol_id', $usuario->rol_id);
+    	$request->session()->put('nombre', $usuario->nombre);
 
     	return redirect()->route('home');
     }

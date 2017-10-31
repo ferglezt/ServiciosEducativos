@@ -22,7 +22,7 @@ class CreateRolsTable extends Migration
                 'nombre' => 'admin'
             ),
             array(
-                'nombre' => 'capturista'
+                'nombre' => 'CAPTURISTA BECAS'
             )
         ));
     }

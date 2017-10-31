@@ -14,7 +14,7 @@ class CustomSessionMiddleware
      * @return mixed
      */
     public function handle($request, Closure $next) {
-        if(!$request->session()->has('email')) {
+        if(!$request->session()->has('email') || !$request->session()->has('rol_id')) {
             return redirect()->route('login');
         }
 

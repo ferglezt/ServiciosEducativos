@@ -6,7 +6,8 @@
 	<link rel="stylesheet" href="{{ URL::to('/') }}/css/bootstrap.css">
 	<link rel="stylesheet" href="{{ URL::to('/') }}/css/customnav.css">
 	<script src="{{ URL::to('/') }}/js/jquery.js"></script>
-	<script src="{{ URL::to('/') }}/js/bootstrap.js"></script> 
+	<script src="{{ URL::to('/') }}/js/bootstrap.js"></script>
+	@stack('scripts') 
 </head>
 <body>
 
@@ -18,7 +19,6 @@
 	    	});
 
 	    	$(".sidebar-element-toggle").click(function(e) {
-	    		e.preventDefault();
 	    		$(".sidebar-element-toggle").removeClass("active");
 	    		$(this).addClass("active");
 	    		//$("#wrapper").toggleClass("active");
@@ -48,9 +48,7 @@
 					<ul class="nav navbar-nav">
 						<li class="active"><a href="{{ URL::to('/') }}">Inicio</a></li>
 					</ul>
-					<ul class="nav navbar-nav navbar-right">
-				      	<li class="active"><a href="{{ URL::to('/cerrarSesion') }}">@yield('cerrarSesion')</a></li>
-				    </ul>
+					@yield('dropdown')
 				</div><!--/.nav-collapse -->
 			</div>
 		</nav>

@@ -11,14 +11,15 @@
 |
 */
 
-Route::get('/', function() {
-	return view('adminDashboard'); 
-})->middleware('custom.session')->name('home');
+Route::group(['middleware' => ['custom.session']], function() {
+	Route::get('/', 'HomeController@home')->name('home');
+	Route::get('/altaCapturista', 'AltaCapturistaController@altaCapturista')->name('altaCapturista');
+});
 
 Route::get('/login', function() {
 	return view('login');
 })->name('login');
 
-Route::get('/cerrarSesion', 'LoginController@cerrarSesion');
+Route::get('/cerrarSesion', 'LoginController@cerrarSesion')->name('cerrarSesion');
 Route::post('/attemptLogin', 'LoginController@attemptLogin');
 Route::get('/test', 'TestController@test')->name('test');
