@@ -11,8 +11,14 @@
 |
 */
 
-Route::get('/', function () {
-    return view('login');
-});
+Route::get('/', function() {
+	return view('adminDashboard'); 
+})->middleware('custom.session')->name('home');
 
-Route::get('/test', 'TestController@test');
+Route::get('/login', function() {
+	return view('login');
+})->name('login');
+
+Route::get('/cerrarSesion', 'LoginController@cerrarSesion');
+Route::post('/attemptLogin', 'LoginController@attemptLogin');
+Route::get('/test', 'TestController@test')->name('test');
