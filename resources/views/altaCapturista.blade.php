@@ -32,6 +32,16 @@
                     <input type="password" class="form-control" id="password" placeholder="Password" name="password">
                   </div>
                 </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="rol">Rol</label>
+                  <div class="col-sm-6">
+                    <select multiple class="form-control" id="rol" name="rol">
+                      @foreach($roles as $rol)
+                        <option value="{{ $rol->id }}">{{ $rol->nombre }}</option>
+                      @endforeach  
+                    </select>
+                  </div>
+                </div>
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <div class="form-group">        
                   <div class="col-sm-offset-2 col-sm-10">
