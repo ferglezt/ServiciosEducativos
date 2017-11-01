@@ -35,7 +35,8 @@
                 <div class="form-group">
                   <label class="control-label col-sm-2" for="rol">Rol</label>
                   <div class="col-sm-6">
-                    <select multiple class="form-control" id="rol" name="rol">
+                    <select class="form-control" id="rol" name="rol">
+                      <option value="0"></option>
                       @foreach($roles as $rol)
                         <option value="{{ $rol->id }}">{{ $rol->nombre }}</option>
                       @endforeach  

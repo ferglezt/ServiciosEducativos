@@ -14,72 +14,74 @@ class CapturistaController extends Controller
 
     public function altaCapturista(Request $request) {
     	//Esta función está reservada únicamente para el administrador
-    	if(self::isAdmin($request)) {
-
-    		return view('altaCapturista', [
-                'roles' => self::getAllRolesExceptAdmin()
-            ]);
+    	if(!self::isAdmin($request)) {
+    	   return redirect()->route('home');	
     	}
-    	return redirect()->route('home');
+        
+        return view('altaCapturista', [
+            'roles' => self::getAllRolesExceptAdmin()
+        ]);
     }
 
     public function attemptAltaCapturista(Request $request) {
     	//Esta función está reservada únicamente para el administrador
-    	if(self::isAdmin($request)) {
-    		$nombre = $request->input('nombre');
-    		$email = $request->input('email');
-    		$password = $request->input('password');
-            $rol = $request->input('rol');
+        if(!self::isAdmin($request)) {
+            return redirect()->route('home');
+        }
+    	
+		$nombre = $request->input('nombre');
+		$email = $request->input('email');
+		$password = $request->input('password');
+        $rol = $request->input('rol');
 
-    		if(!isset($nombre) || $nombre == '') {
-    			return view('altaCapturista', [
-                    'roles' => self::getAllRolesExceptAdmin(),
-                    'error' => 'El campo nombre es obligatorio'
-                ]);
-	    	}
-
-    		if(!isset($email) || $email == '') {
-    			return view('altaCapturista', [
-                    'roles' => self::getAllRolesExceptAdmin(),
-                    'error' => 'El campo email es obligatorio']
-                );
-	    	}
-
-	    	if(!isset($password) || $password == '') {
-	    		return view('altaCapturista', [
-                    'roles' => self::getAllRolesExceptAdmin(),
-                    'error' => 'El campo password es obligatorio']
-                );
-	    	}
-
-            if(!isset($rol)) {
-                return view('altaCapturista', [
-                    'roles' => self::getAllRolesExceptAdmin(),
-                    'error' => 'Debe elegir un rol para el usuario']
-                );
-            }
-
-	    	$usuario = new Usuario;
-	    	$usuario->nombre = $nombre;
-	    	$usuario->email = $email;
-	    	$usuario->password = Hash::make($password);
-	    	$usuario->rol_id = $rol;
-
-	    	try {
-	    		$usuario->save();
-	    	} catch(QueryException $e) {
-	    		return view('altaCapturista', [
-                    'roles' => self::getAllRolesExceptAdmin(),
-                    'error' => 'Este usuario ya existe'
-                ]);
-	    	}
-
-	    	return view('altaCapturista', [
+		if(!isset($nombre) || $nombre == '') {
+			return view('altaCapturista', [
                 'roles' => self::getAllRolesExceptAdmin(),
-                'successMessage' => 'Se ha dado de alta al capturista '.$nombre
+                'error' => 'El campo nombre es obligatorio'
             ]);
     	}
-    	return redirect()->route('home');
+
+		if(!isset($email) || $email == '') {
+			return view('altaCapturista', [
+                'roles' => self::getAllRolesExceptAdmin(),
+                'error' => 'El campo email es obligatorio']
+            );
+    	}
+
+    	if(!isset($password) || $password == '') {
+    		return view('altaCapturista', [
+                'roles' => self::getAllRolesExceptAdmin(),
+                'error' => 'El campo password es obligatorio']
+            );
+    	}
+
+        if(!isset($rol) || $rol == 0) {
+            return view('altaCapturista', [
+                'roles' => self::getAllRolesExceptAdmin(),
+                'error' => 'Debe elegir un rol para el usuario']
+            );
+        }
+
+    	$usuario = new Usuario;
+    	$usuario->nombre = $nombre;
+    	$usuario->email = $email;
+    	$usuario->password = Hash::make($password);
+    	$usuario->rol_id = $rol;
+
+    	try {
+    		$usuario->save();
+    	} catch(QueryException $e) {
+    		return view('altaCapturista', [
+                'roles' => self::getAllRolesExceptAdmin(),
+                'error' => 'Este usuario ya existe'
+            ]);
+    	}
+
+    	return view('altaCapturista', [
+            'roles' => self::getAllRolesExceptAdmin(),
+            'successMessage' => 'Se ha dado de alta al capturista '.$nombre
+        ]);
+    	
     }
 
     private function isAdmin(Request $request) {
