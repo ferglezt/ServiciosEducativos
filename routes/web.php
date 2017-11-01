@@ -15,10 +15,10 @@ Route::group(['middleware' => ['custom.session']], function() {
 	Route::get('/', 'HomeController@home')
 		->name('home');
 
-	Route::get('/altaCapturista', 'AltaCapturistaController@altaCapturista')
+	Route::get('/altaCapturista', 'CapturistaController@altaCapturista')
 		->name('altaCapturista');
 		
-	Route::post('attemptAltaCapturista', 'AltaCapturistaController@attemptAltaCapturista')
+	Route::post('attemptAltaCapturista', 'CapturistaController@attemptAltaCapturista')
 		->name('attemptAltaCapturista');
 });
 

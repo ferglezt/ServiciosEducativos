@@ -10,11 +10,8 @@
 
 @section('sidebar')
 
-    @if(Session::get('rol_id', 0) == 1) {{-- ADMIN --}}
-        @include('adminSidebar')
-    
-    @endif
-
+    @include('sidebar')
+ 
 @stop
 
 @section('content')

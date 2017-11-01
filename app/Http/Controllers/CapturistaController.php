@@ -7,7 +7,7 @@ use App\Usuario;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\QueryException;
 
-class AltaCapturistaController extends Controller
+class CapturistaController extends Controller
 {
 	const ADMIN = 1;
 

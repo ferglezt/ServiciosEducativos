@@ -13,7 +13,7 @@
 
 	<div class="container-fluid">
         <div class="row">
-            <form class="form-horizontal" action="{{ action('AltaCapturistaController@attemptAltaCapturista') }}" method="post">
+            <form class="form-horizontal" action="{{ action('CapturistaController@attemptAltaCapturista') }}" method="post">
                 <div class="form-group">
                   <label class="control-label col-sm-2" for="nombre">Nombre:</label>
                   <div class="col-sm-6">
