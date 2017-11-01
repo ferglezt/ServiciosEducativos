@@ -5,30 +5,54 @@
 @section('content')
 
 	<script type="text/javascript">
-		$('#item-alta-capturista').addClass('active');
+		$('#menucapturistas, #item-alta-capturista').addClass('active');
 		$('#item-alta-capturista').click(function(e) {
 			e.preventDefault();
 		});
 	</script>
 
-    <div class="jumbotron text-center">
-        <h1>Alta capturista</h1>
-        <p>Sistema de administración del departamento de extensión y apoyos educativos</p> 
-    </div>
-
-	{{--<div class="container-fluid">
+	<div class="container-fluid">
         <div class="row">
-            <div class="col-md-12">                    
-                <div class="panel panel-success">
-                    <div class="panel-heading">
-                            Info
-                    </div>
-                    <div class="panel-body">
-                        Content
-                    </div>
+            <form class="form-horizontal" action="{{ action('AltaCapturistaController@attemptAltaCapturista') }}" method="post">
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="nombre">Nombre:</label>
+                  <div class="col-sm-6">
+                    <input type="text" class="form-control" id="nombre" placeholder="Nombre" name="nombre">
+                  </div>
                 </div>
-            </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="email">Email:</label>
+                  <div class="col-sm-6">
+                    <input type="email" class="form-control" id="email" value="{{ $email or '' }}" placeholder="Email" name="email">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="password">Password provisional:</label>
+                  <div class="col-sm-6">          
+                    <input type="password" class="form-control" id="password" placeholder="Password" name="password">
+                  </div>
+                </div>
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                <div class="form-group">        
+                  <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-default">Registrar</button>
+                  </div>
+                </div>
+            </form>
+
+            @if(isset($error))
+                <div class="alert alert-danger col-md-4">
+                  <strong>Error:</strong> {{ $error }}
+                </div>
+            @endif
+
+            @if(isset($successMessage))
+                <div class="alert alert-success col-md-4">
+                  <strong>Operación exitosa</strong> {{ $successMessage }}
+                </div>
+            @endif
+
         </div>
-    </div>--}}
+    </div>
 
 @stop

@@ -12,8 +12,14 @@
 */
 
 Route::group(['middleware' => ['custom.session']], function() {
-	Route::get('/', 'HomeController@home')->name('home');
-	Route::get('/altaCapturista', 'AltaCapturistaController@altaCapturista')->name('altaCapturista');
+	Route::get('/', 'HomeController@home')
+		->name('home');
+
+	Route::get('/altaCapturista', 'AltaCapturistaController@altaCapturista')
+		->name('altaCapturista');
+		
+	Route::post('attemptAltaCapturista', 'AltaCapturistaController@attemptAltaCapturista')
+		->name('attemptAltaCapturista');
 });
 
 Route::get('/login', function() {
