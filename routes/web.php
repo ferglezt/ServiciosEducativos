@@ -18,8 +18,14 @@ Route::group(['middleware' => ['custom.session']], function() {
 	Route::get('/altaCapturista', 'CapturistaController@altaCapturista')
 		->name('altaCapturista');
 		
-	Route::post('attemptAltaCapturista', 'CapturistaController@attemptAltaCapturista')
-		->name('attemptAltaCapturista');
+	Route::post('/attemptAltaCapturista', 'CapturistaController@attemptAltaCapturista')
+		->name('/attemptAltaCapturista');
+
+	Route::get('/cambioContrasena', 'UsuarioController@cambioContrasena')
+		->name('cambioContrasena');
+
+	Route::post('/attemptCambioContrasena', 'UsuarioController@attemptCambioContrasena')
+		->name('attemptCambioContrasena');
 });
 
 Route::get('/login', function() {

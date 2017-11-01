@@ -7,7 +7,7 @@
         </a>
 
         <ul class="dropdown-menu">
-            <li><a href="#">Cambiar Contraseña</a></li>
+            <li><a href="{{ URL::to('/cambioContrasena') }}">Cambiar Contraseña</a></li>
             <li><a href="{{ URL::to('/cerrarSesion') }}">Cerrar Sesión</a></li>   
         </ul>
 
