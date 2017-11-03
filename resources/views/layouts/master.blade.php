@@ -5,8 +5,13 @@
 	 <!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="{{ URL::to('/') }}/css/bootstrap.css">
 	<link rel="stylesheet" href="{{ URL::to('/') }}/css/customnav.css">
+	<link rel="stylesheet" href="{{ URL::to('/') }}/css/datatables.css">
+
 	<script src="{{ URL::to('/') }}/js/jquery.js"></script>
 	<script src="{{ URL::to('/') }}/js/bootstrap.js"></script>
+	<script src="{{ URL::to('/') }}/js/datatables.js"></script>
+	
+
 	@stack('scripts') 
 </head>
 <body>

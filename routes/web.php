@@ -26,6 +26,9 @@ Route::group(['middleware' => ['custom.session']], function() {
 
 	Route::post('/attemptCambioContrasena', 'UsuarioController@attemptCambioContrasena')
 		->name('attemptCambioContrasena');
+
+	Route::get('/verCapturistas', 'CapturistaController@verCapturistas')
+		->name('verCapturistas');
 });
 
 Route::get('/login', function() {

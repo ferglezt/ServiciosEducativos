@@ -7,7 +7,10 @@
     </a>
     <ul class="nav collapse" id="submenu-capturistas" role="menu">
       <li id="item-alta-capturista">
-        <a href="{{ URL::to('/altaCapturista') }}">Alta</a>
+        <a href="{{ URL::to('/altaCapturista') }}">Nuevo Capturista</a>
+      </li>
+      <li id="item-ver-capturistas">
+        <a href="{{ URL::to('/verCapturistas') }}">Ver Capturistas</a>
       </li>
     </ul>
   </li>

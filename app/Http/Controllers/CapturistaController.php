@@ -12,6 +12,17 @@ class CapturistaController extends Controller
 {
 	const ADMIN = 1;
 
+    public function verCapturistas(Request $request) {
+        //Esta función está reservada únicamente para el administrador
+        if(!self::isAdmin($request)) {
+           return redirect()->route('home');    
+        }
+
+        return view('verCapturistas', [
+            'capturistas' => Usuario::where('rol_id', '!=', self::ADMIN)->get()
+        ]);
+    }
+
     public function altaCapturista(Request $request) {
     	//Esta función está reservada únicamente para el administrador
     	if(!self::isAdmin($request)) {

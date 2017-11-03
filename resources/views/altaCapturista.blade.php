@@ -9,6 +9,7 @@
 		$('#item-alta-capturista').click(function(e) {
 			e.preventDefault();
 		});
+    $('#capturistaTable').DataTable();
 	</script>
 
 	<div class="container-fluid">
