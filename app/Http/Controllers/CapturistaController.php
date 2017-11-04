@@ -12,6 +12,18 @@ class CapturistaController extends Controller
 {
 	const ADMIN = 1;
 
+    public function borrarCapturista(Request $request, $id) {
+        //Esta función está reservada únicamente para el administrador
+        if(!self::isAdmin($request)) {
+           return redirect()->route('home');    
+        }
+
+        $usuario = Usuario::findOrFail($id);
+
+        $usuario->delete();
+
+    }
+
     public function verCapturistas(Request $request) {
         //Esta función está reservada únicamente para el administrador
         if(!self::isAdmin($request)) {

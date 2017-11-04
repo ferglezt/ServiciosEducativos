@@ -29,6 +29,9 @@ Route::group(['middleware' => ['custom.session']], function() {
 
 	Route::get('/verCapturistas', 'CapturistaController@verCapturistas')
 		->name('verCapturistas');
+
+	Route::get('/borrarCapturista/{id}', 'CapturistaController@borrarCapturista')
+		->name('borrarCapturista');
 });
 
 Route::get('/login', function() {
