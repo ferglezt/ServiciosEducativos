@@ -32,6 +32,12 @@ Route::group(['middleware' => ['custom.session']], function() {
 
 	Route::get('/borrarCapturista/{id}', 'CapturistaController@borrarCapturista')
 		->name('borrarCapturista');
+
+	Route::post('/editarCapturista/{id}', 'CapturistaController@editarCapturista')
+		->name('editarCapturista');
+
+	Route::post('/cambiarContrasenaCapturista/{id}', 'CapturistaController@cambiarContrasenaCapturista')
+		->name('cambiarContrasenaCapturista');
 });
 
 Route::get('/login', function() {

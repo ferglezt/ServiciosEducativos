@@ -4,13 +4,12 @@
 
 @section('content')
 
-	<script type="text/javascript">
-		$('#menucapturistas, #item-alta-capturista').addClass('active');
-		$('#item-alta-capturista').click(function(e) {
-			e.preventDefault();
-		});
-    $('#capturistaTable').DataTable();
-	</script>
+  <script type="text/javascript">
+    $('#menucapturistas, #item-alta-capturista').addClass('active');
+    $('#item-alta-capturista').click(function(e) {
+      e.preventDefault();
+    });
+  </script>
 
 	<div class="container-fluid">
 

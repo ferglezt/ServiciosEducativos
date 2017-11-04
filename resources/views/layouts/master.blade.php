@@ -10,27 +10,11 @@
 	<script src="{{ URL::to('/') }}/js/jquery.js"></script>
 	<script src="{{ URL::to('/') }}/js/bootstrap.js"></script>
 	<script src="{{ URL::to('/') }}/js/datatables.js"></script>
-	
+	<script src="{{ URL::to('/') }}/js/master.js"></script>
 
-	@stack('scripts') 
+	@stack('scripts')
 </head>
 <body>
-
-	<script type="text/javascript">
-		$(document).ready(function() {
-			$("#menu-toggle").click(function(e) {
-		        e.preventDefault();
-		        $("#wrapper").toggleClass("active");
-	    	});
-
-	    	$(".sidebar-element-toggle").click(function(e) {
-	    		$(".sidebar-element-toggle").removeClass("active");
-	    		$(this).addClass("active");
-	    		//$("#wrapper").toggleClass("active");
-	    	});
-
-		});
-	</script>
 
 	<div id="wrapper">
 	    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">

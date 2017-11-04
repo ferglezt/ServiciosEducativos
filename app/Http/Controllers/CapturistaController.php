@@ -12,10 +12,45 @@ class CapturistaController extends Controller
 {
 	const ADMIN = 1;
 
-    public function borrarCapturista(Request $request, $id) {
+    public function cambiarContrasenaCapturista(Request $request, $id) {
         //Esta función está reservada únicamente para el administrador
         if(!self::isAdmin($request)) {
            return redirect()->route('home');    
+        }
+
+        $password = $request->input('password');
+
+        if(!isset($password) || $password == '') {
+            abort(500);
+        }
+
+        $usuario = Usuario::findOrFail($id);
+
+        $usuario->password = Hash::make($password);
+
+        $usuario->save();
+
+    }
+
+    public function editarCapturista(Request $request, $id) {
+        //Esta función está reservada únicamente para el administrador
+        if(!self::isAdmin($request)) {
+           abort(401); 
+        }
+
+        $usuario = Usuario::findOrFail($id);
+
+        $usuario->nombre = $request->input('nombre');
+        $usuario->email = $request->input('email');
+        $usuario->rol_id = $request->input('rol_id');
+
+        $usuario->save();
+    }
+
+    public function borrarCapturista(Request $request, $id) {
+        //Esta función está reservada únicamente para el administrador
+        if(!self::isAdmin($request)) {
+           abort(401);
         }
 
         $usuario = Usuario::findOrFail($id);
@@ -31,7 +66,8 @@ class CapturistaController extends Controller
         }
 
         return view('verCapturistas', [
-            'capturistas' => Usuario::where('rol_id', '!=', self::ADMIN)->get()
+            'capturistas' => Usuario::where('rol_id', '!=', self::ADMIN)->get(),
+            'roles' => self::getAllRolesExceptAdmin()
         ]);
     }
 
