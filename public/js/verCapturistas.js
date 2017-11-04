@@ -45,8 +45,11 @@ $(document).ready(function() {
           location.reload();
         },
         error: function() {
-          $('#guardarCapturista').modal('hide');
-          alert('No fue posible actualizar la información del capturista');
+          $('#modalEditar').modal('hide');
+          $('#message').removeClass('alert-success');
+          $('#message').addClass('alert-danger');
+          $('#message').html('No fue posible actualizar la información del capturista');
+          $('#modalMessage').modal('show');
         }
       });
     });
@@ -72,7 +75,7 @@ $(document).ready(function() {
           $('#modalNuevaContrasena').modal('hide');
           $('#message').removeClass('alert-danger');
           $('#message').addClass('alert-success');
-          $('#message').html('Se actualizó correctamente la contraseña');
+          $('#message').html('Se actualizó correctamente la contraseña de ' + emailCapturista);
           $('#modalMessage').modal('show');
         },
         error: function(xhr,status,error) {
@@ -98,10 +101,17 @@ $(document).ready(function() {
         success: function() {
           $('#modalBorrar').modal('hide');
           capturistasTable.row($('#tr-id-' + idCapturista)).remove().draw();
+          $('#message').removeClass('alert-danger');
+          $('#message').addClass('alert-success');
+          $('#message').html('Se ha borrado al capturista ' + nombreCapturista);
+          $('#modalMessage').modal('show');
         },
         error: function() {
           $('#modalBorrar').modal('hide');
-          alert("Error: capturista no encontrado");
+          $('#message').removeClass('alert-success');
+          $('#message').addClass('alert-danger');
+          $('#message').html('No fue posible borrar al capturista ' + nombreCapturista);
+          $('#modalMessage').modal('show');
         } 
       });
     });
