@@ -47,6 +47,12 @@ Route::group(['middleware' => ['custom.session']], function() {
 
 	Route::get('/findBoleta/{boleta}', 'EstudianteController@findBoleta')
 		->name('findBoleta');
+
+	Route::get('/verEstudiantes', 'EstudianteController@verEstudiantes')
+		->name('verEstudiantes');
+
+	Route::get('/searchEstudiante', 'EstudianteController@searchEstudiante')
+		->name('searchEstudiante');
 });
 
 Route::get('/login', function() {

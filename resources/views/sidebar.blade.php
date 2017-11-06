@@ -25,6 +25,9 @@
     <li id="item-alta-estudiante">
       <a href="{{ URL::to('/altaEstudiante') }}">Nuevo Estudiante</a>
     </li>
+    <li id="item-ver-estudiantes">
+      <a href="{{ URL::to('/verEstudiantes') }}">Ver estudiantes</a>
+    </li>
   </ul>
 </li>
 

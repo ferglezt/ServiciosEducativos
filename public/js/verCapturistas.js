@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-  $('#menucapturistas, #item-ver-capturistas').addClass('active');
+  $('#item-ver-capturistas').addClass('active');
 
   $('#item-ver-capturistas').click(function(e) {
     e.preventDefault();

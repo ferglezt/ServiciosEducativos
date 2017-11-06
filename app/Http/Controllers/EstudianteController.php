@@ -6,9 +6,14 @@ use Illuminate\Http\Request;
 use App\Carrera;
 use App\Estudiante;
 use Illuminate\Database\QueryException;
+use DB;
 
 class EstudianteController extends Controller
 {
+    public function verEstudiantes(Request $request) {
+      return view('verEstudiantes');
+    }
+
     public function altaEstudiante(Request $request) {
     	return view('altaEstudiante', [
     		'carreras' => Carrera::all()
@@ -59,4 +64,21 @@ class EstudianteController extends Controller
    	public function findBoleta(Request $request, $boleta) {
    		Estudiante::where('boleta', '=', $boleta)->firstOrFail();
    	}
+
+    public function searchEstudiante(Request $request) {
+      $data = [];
+      $q = $request->input('q');
+
+      if(isset($q) && $q != '') {
+        $data = DB::table('estudiantes')
+        ->join('carreras', 'estudiantes.carrera_id', '=', 'carreras.id')
+        ->where('estudiantes.boleta', 'like', '%'.$q.'%')
+        ->orWhere('estudiantes.nombre', 'like', '%'.$q.'%')
+        ->limit(200)
+        ->select('estudiantes.*', 'carreras.nombre as carrera')
+        ->get();
+      }
+
+      return response()->json($data, 200, ['Content-type'=> 'application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
+    }
 }
