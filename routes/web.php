@@ -38,6 +38,15 @@ Route::group(['middleware' => ['custom.session']], function() {
 
 	Route::post('/cambiarContrasenaCapturista/{id}', 'CapturistaController@cambiarContrasenaCapturista')
 		->name('cambiarContrasenaCapturista');
+
+	Route::get('/altaEstudiante', 'EstudianteController@altaEstudiante')
+		->name('altaEstudiante');
+
+	Route::post('/attemptAltaEstudiante', 'EstudianteController@attemptAltaEstudiante')
+		->name('attemptAltaEstudiante');
+
+	Route::get('/findBoleta/{boleta}', 'EstudianteController@findBoleta')
+		->name('findBoleta');
 });
 
 Route::get('/login', function() {

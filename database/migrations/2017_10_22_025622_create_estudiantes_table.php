@@ -16,12 +16,10 @@ class CreateEstudiantesTable extends Migration
         Schema::create('estudiantes', function (Blueprint $table) {
             $table->increments('id');
             $table->string('boleta', 16)->unique();
-            $table->string('apellido_paterno', 80);
-            $table->string('apellido_materno', 80);
-            $table->string('nombres', 200);
+            $table->string('nombre', 300);
             $table->integer('carrera_id')->unsigned();
             $table->string('curp', 20);
-            $table->string('email', 100)->nullable();
+            $table->string('email', 191)->nullable();
             $table->string('telefono', 20)->nullable();
             $table->enum('genero', ['M', 'F']);
             $table->string('oriundo', 60)->nullable();

@@ -16,16 +16,19 @@
   </li>
 @endif
 
-<li class="sidebar-element-toggle">
-  <a href="#anch2">
-    <span class="fa fa-anchor solo">Anchor 2</span>
+<li id="menu-estudiantes">
+  <a href="#" data-toggle="collapse" data-target="#submenu-estudiantes" aria-expanded="false">
+    Estudiantes
+    <span class="caret"></span> 
   </a>
+  <ul class="nav collapse" id="submenu-estudiantes" role="menu">
+    <li id="item-alta-estudiante">
+      <a href="{{ URL::to('/altaEstudiante') }}">Nuevo Estudiante</a>
+    </li>
+  </ul>
 </li>
-<li class="sidebar-element-toggle">
-  <a href="#anch3"> 
-    <span class="fa fa-anchor solo">Anchor 3</span>
-  </a>
-</li>
+
+
 <li class="sidebar-element-toggle">
   <a href="#anch4">
     <span class="fa fa-anchor solo">Anchor 4</span>

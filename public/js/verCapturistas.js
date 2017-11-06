@@ -6,6 +6,8 @@ $(document).ready(function() {
     e.preventDefault();
   });
 
+  $('#submenu-capturistas').addClass('in');
+
   var capturistasTable = $('#capturistasTable').DataTable({
     "language": {
         "lengthMenu": "Mostrando _MENU_ registros por página",
