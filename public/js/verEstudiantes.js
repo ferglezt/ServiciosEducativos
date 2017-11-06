@@ -32,11 +32,7 @@ $(document).ready(function() {
     				return[
     					obj.boleta,
     					obj.nombre,
-    					obj.carrera,
-    					obj.curp,
-    					obj.email,
-    					obj.telefono,
-    					obj.genero
+    					obj.carrera
     				];
     			});
     			table.clear();

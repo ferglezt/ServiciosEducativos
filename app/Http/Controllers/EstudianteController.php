@@ -74,7 +74,7 @@ class EstudianteController extends Controller
         ->join('carreras', 'estudiantes.carrera_id', '=', 'carreras.id')
         ->where('estudiantes.boleta', 'like', '%'.$q.'%')
         ->orWhere('estudiantes.nombre', 'like', '%'.$q.'%')
-        ->limit(200)
+        ->limit(100)
         ->select('estudiantes.*', 'carreras.nombre as carrera')
         ->get();
       }

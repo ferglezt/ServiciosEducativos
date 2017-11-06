@@ -28,10 +28,6 @@
           	  <th>Boleta</th>
           	  <th>Nombre</th>
           	  <th>Carrera</th>
-          	  <th>CURP</th>
-          	  <th>Email</th>
-          	  <th>Teléfono</th>
-          	  <th>Género</th>
           	</thead>
           	<tbody>
           	  
