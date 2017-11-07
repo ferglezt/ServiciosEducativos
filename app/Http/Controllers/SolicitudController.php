@@ -11,7 +11,7 @@ use DB;
 class SolicitudController extends Controller
 {
     public function searchSolicitud(Request $request) {
-    	$data = ["not"];
+    	$data = [];
     	$anio = $request->input('anio');
     	$q = $request->input('q');
 
