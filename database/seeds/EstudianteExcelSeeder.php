@@ -17,7 +17,7 @@ class EstudianteExcelSeeder extends Seeder
     {
         $reader = ReaderFactory::create(Type::XLSX); 
 
-		$reader->open('C:\Users\dell\Desktop\est.xlsx');
+		$reader->open('C:\Users\fgonzalez\downloads\est.xlsx');
 
 		foreach ($reader->getSheetIterator() as $sheet) {
 
@@ -39,6 +39,9 @@ class EstudianteExcelSeeder extends Seeder
 		        $carrera = $row[7];
 		        $email = $row[25];
 		        $telefono = $row[26];
+		        $oriundo = $row[24];
+
+		        $carrera = str_replace(' ', '', $carrera);
 
 		        if(strcasecmp($carrera, 'IN') == 0) {
 		        	$carrera = 1;
@@ -51,6 +54,7 @@ class EstudianteExcelSeeder extends Seeder
 		        } else if(strcasecmp($carrera, 'IT') == 0) {
 		        	$carrera = 5;
 		        } else {
+		        	$this->command->info('Inconsistencia carrera: '.$carrera.' '.$i);
 		        	$carrera = 6;
 		        }
 
@@ -74,6 +78,7 @@ class EstudianteExcelSeeder extends Seeder
 		   		$estudiante->email = $email;
 		   		$estudiante->telefono = $telefono;
 		   		$estudiante->genero = $genero;
+		   		$estudiante->oriundo = $oriundo;
 
 		   		try {
 		   			$estudiante->save();
