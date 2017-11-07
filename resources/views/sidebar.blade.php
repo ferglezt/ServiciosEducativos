@@ -31,10 +31,15 @@
   </ul>
 </li>
 
-
-<li class="sidebar-element-toggle">
-  <a href="#anch4">
-    <span class="fa fa-anchor solo">Anchor 4</span>
+<li id="menu-becas">
+  <a href="#" data-toggle="collapse" data-target="#submenu-becas" aria-expanded="false">
+    Becas
+    <span class="caret"></span> 
   </a>
+  <ul class="nav collapse" id="submenu-becas" role="menu">
+    <li id="item-ver-becas">
+      <a href="{{ URL::to('/verSolicitudes') }}">Ver Solicitudes</a>
+    </li>
+  </ul>
 </li>
 

@@ -56,6 +56,9 @@ Route::group(['middleware' => ['custom.session']], function() {
 
 	Route::get('/searchSolicitud', 'SolicitudController@searchSolicitud')
 		->name('searchSolicitud');
+
+	Route::get('/verSolicitudes', 'SolicitudController@verSolicitudes')
+		->name('verSolicitudes');
 });
 
 Route::get('/login', function() {

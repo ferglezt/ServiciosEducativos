@@ -10,6 +10,10 @@ use DB;
 
 class SolicitudController extends Controller
 {
+	public function verSolicitudes(Request $request) {
+		return view('verSolicitudes');
+	}
+
     public function searchSolicitud(Request $request) {
     	$data = [];
     	$anio = $request->input('anio');
@@ -33,7 +37,6 @@ class SolicitudController extends Controller
     		])
     		//->limit(100)
     		->select(
-    			'solicitudes.anio as anio',
     			'solicitudes.folio as folio',
     			'solicitudes.etiqueta as etiqueta',
     			'estudiantes.boleta as boleta',
