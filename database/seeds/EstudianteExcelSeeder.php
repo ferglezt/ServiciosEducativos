@@ -20,7 +20,6 @@ class EstudianteExcelSeeder extends Seeder
 		$reader->open('C:\Users\fgonzalez\downloads\est.xlsx');
 
 		foreach ($reader->getSheetIterator() as $sheet) {
-
 			if($sheet->getName() != 'FORMATO ORIGINAL') {
 				continue;
 			}
@@ -42,6 +41,8 @@ class EstudianteExcelSeeder extends Seeder
 		        $oriundo = $row[24];
 
 		        $carrera = str_replace(' ', '', $carrera);
+		        $boleta = str_replace(' ', '', $boleta);
+		        $curp = str_replace(' ', '', $curp);
 
 		        if(strcasecmp($carrera, 'IN') == 0) {
 		        	$carrera = 1;

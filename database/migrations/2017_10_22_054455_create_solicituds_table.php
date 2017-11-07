@@ -20,7 +20,7 @@ class CreateSolicitudsTable extends Migration
             $table->string('etiqueta', 60)->nullable();
             $table->integer('estudiante_id')->unsigned();
             $table->integer('semestre')->unsigned()->nullable();
-            $table->decimal('promedio', 2, 2)->nullable();
+            $table->decimal('promedio', 18, 5)->nullable();
             $table->string('estatus_estudiante', 20)->nullable();
             $table->integer('carga')->unsigned()->nullable();
             $table->string('estatus_becario', 20)->nullable();
@@ -28,10 +28,10 @@ class CreateSolicitudsTable extends Migration
             $table->string('beca_solicitada', 30)->nullable();
             $table->string('folio_manutencion', 30)->nullable();
             $table->string('folio_transporte', 30)->nullable();
-            $table->string('comprobante_ingresos', 30)->nullable();
-            $table->string('mapa', 20)->nullable();
-            $table->date('fecha_recibido')->nullable();
-            $table->decimal('ingresos', 6, 2)->nullable();
+            $table->string('comprobante_ingresos', 60)->nullable();
+            $table->string('mapa', 60)->nullable();
+            $table->string('fecha_recibido', 20)->nullable();
+            $table->decimal('ingresos', 18, 10)->nullable();
             $table->integer('dependientes')->unsigned()->nullable();
             $table->text('observaciones')->nullable();
         });
