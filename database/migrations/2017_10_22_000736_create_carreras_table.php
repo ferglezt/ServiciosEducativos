@@ -38,6 +38,10 @@ class CreateCarrerasTable extends Migration
             array(
                 'nombre' => 'INGENIERIA EN TRANSPORTE',
                 'nomenclatura' => 'IT'
+            ),
+            array(
+                'nombre' => 'DESCONOCIDA',
+                'nomenclatura' => 'N/A'
             )
         ));
     }
