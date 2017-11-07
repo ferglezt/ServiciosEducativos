@@ -23,14 +23,11 @@ class CreateDocumentacionsTable extends Migration
             $table->boolean('carta_compromiso')->nullable();
             $table->boolean('kardex')->nullable();
             $table->boolean('formato_ingresos_egresos')->nullable();
-            $table->string('comprobante_ingresos', 60)->nullable();
+            $table->boolean('comprobante_ingresos')->nullable();
             $table->boolean('credencial_elector')->nullable();
             $table->boolean('ficha_inscripcion')->nullable();
             $table->boolean('certificado_nivel_medio')->nullable();
             $table->boolean('transporte_estudio_socioeconomico');
-            $table->string('mapa', 20)->nullable();
-            $table->string('folio_manutencion', 30)->nullable();
-            $table->string('folio_transporte', 30)->nullable();
             $table->boolean('manutencion_acuse')->nullable();
             $table->boolean('transporte_subes')->nullable();
         });

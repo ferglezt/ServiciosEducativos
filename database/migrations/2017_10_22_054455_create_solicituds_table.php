@@ -26,7 +26,10 @@ class CreateSolicitudsTable extends Migration
             $table->string('estatus_becario', 20)->nullable();
             $table->string('beca_anterior', 30)->nullable();
             $table->string('beca_solicitada', 30)->nullable();
-            
+            $table->string('folio_manutencion', 30)->nullable();
+            $table->string('folio_transporte', 30)->nullable();
+            $table->string('comprobante_ingresos', 30)->nullable();
+            $table->string('mapa', 20)->nullable();
             $table->date('fecha_recibido')->nullable();
             $table->decimal('ingresos', 6, 2)->nullable();
             $table->integer('dependientes')->unsigned()->nullable();
