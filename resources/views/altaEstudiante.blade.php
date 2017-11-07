@@ -65,6 +65,12 @@
                   </select>
                 </div>
               </div>
+              <div class="form-group">
+                <label class="control-label col-sm-2" for="Oriundo">Oriundo:</label>
+                <div class="col-sm-6">
+                  <input type="text" class="form-control" id="oriundo" placeholder="Oriundo" name="oriundo">
+                </div>
+              </div>
               <input type="hidden" name="_token" value="{{ csrf_token() }}">
               <div class="form-group">        
                 <div class="col-sm-offset-2 col-sm-10">

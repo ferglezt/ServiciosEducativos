@@ -28,6 +28,7 @@ class EstudianteController extends Controller
    		$email = $request->input('email');
    		$telefono = $request->input('telefono');
    		$genero = $request->input('genero');
+      $oriundo = $request->input('oriundo');
 
    		if(!isset($boleta) || $boleta == '' || !preg_match('/[0-9]/', $boleta)) {
    			return view('altaEstudiante', [
@@ -51,6 +52,7 @@ class EstudianteController extends Controller
    		$estudiante->email = $email;
    		$estudiante->telefono = $telefono;
    		$estudiante->genero = $genero;
+      $estudiante->oriundo = $oriundo;
 
    		$estudiante->save();
 
