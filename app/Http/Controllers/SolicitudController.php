@@ -11,7 +11,35 @@ use DB;
 class SolicitudController extends Controller
 {
 	public function verSolicitudes(Request $request) {
-		return view('verSolicitudes');
+		return view('verSolicitudes', [
+            'columnas' => [
+                (object)['data_column' => 0, 'nombre' => 'Folio'],
+                (object)['data_column' => 1, 'nombre' => 'Etiqueta'],
+                (object)['data_column' => 2, 'nombre' => 'Boleta'],
+                (object)['data_column' => 3, 'nombre' => 'Curp'],
+                (object)['data_column' => 4, 'nombre' => 'Género'],
+                (object)['data_column' => 5, 'nombre' => 'Nombre'],
+                (object)['data_column' => 6, 'nombre' => 'Carrera'],
+                (object)['data_column' => 7, 'nombre' => 'Semestre'],
+                (object)['data_column' => 8, 'nombre' => 'Promedio'],
+                (object)['data_column' => 9, 'nombre' => 'Estatus Académico'],
+                (object)['data_column' => 10, 'nombre' => 'Carga'],
+                (object)['data_column' => 11, 'nombre' => 'Tipo Becario'],
+                (object)['data_column' => 12, 'nombre' => 'Beca Anterior'],
+                (object)['data_column' => 13, 'nombre' => 'Beca Solicitada'],
+                (object)['data_column' => 14, 'nombre' => 'Folio Manutención'],
+                (object)['data_column' => 15, 'nombre' => 'Folio Transporte'],
+                (object)['data_column' => 16, 'nombre' => 'Mapa'],
+                (object)['data_column' => 17, 'nombre' => 'Fecha Recibido'],
+                (object)['data_column' => 18, 'nombre' => 'Comprobante Oficial'],
+                (object)['data_column' => 19, 'nombre' => 'Ingresos'],
+                (object)['data_column' => 20, 'nombre' => 'Dependientes'],
+                (object)['data_column' => 21, 'nombre' => 'Oriundo'],
+                (object)['data_column' => 22, 'nombre' => 'Email'],
+                (object)['data_column' => 23, 'nombre' => 'Teléfono'],
+                (object)['data_column' => 24, 'nombre' => 'Observaciones'],
+            ]
+        ]);
 	}
 
     public function searchSolicitud(Request $request) {

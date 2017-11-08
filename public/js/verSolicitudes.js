@@ -66,5 +66,11 @@ $(document).ready(function() {
     };
 
     $('#search').keyup(search);
+
+    $('.toggle-column').change(function(e) {
+        e.preventDefault();
+        var column = table.column($(this).attr('data-column'));
+        column.visible($(this).is(':checked'));
+    });
 	
 });
