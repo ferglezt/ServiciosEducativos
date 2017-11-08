@@ -23,11 +23,16 @@
 
       <div class="row">
         <div class="col-md-12">
-          <table id="estudiantesTable" class="table-bordered">
+          <table id="estudiantesTable" class="cell-border" width="100%">
           	<thead>
           	  <th>Boleta</th>
           	  <th>Nombre</th>
           	  <th>Carrera</th>
+              <th>Curp</th>
+              <th>Email</th>
+              <th>Teléfono</th>
+              <th>Género</th>
+              <th>Oriundo</th>
           	</thead>
           	<tbody>
           	  

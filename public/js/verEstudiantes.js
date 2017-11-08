@@ -10,6 +10,7 @@ $(document).ready(function() {
 
     var table = $('#estudiantesTable').DataTable({
     	"searching": false,
+        "scrollX": true,
 	    "language": {
 	        "lengthMenu": "Mostrando _MENU_ registros por página",
 	        "zeroRecords": "No se encontraron registros",
@@ -32,7 +33,12 @@ $(document).ready(function() {
     				return[
     					obj.boleta,
     					obj.nombre,
-    					obj.carrera
+    					obj.carrera,
+                        obj.curp,
+                        obj.email,
+                        obj.telefono,
+                        obj.genero,
+                        obj.oriundo
     				];
     			});
     			table.clear();

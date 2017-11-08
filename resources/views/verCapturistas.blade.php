@@ -31,9 +31,9 @@
                   <td>{{ $capturista->nombre }}</td>
                   <td>{{ $capturista->email }}</td>
                   <td>{{ $capturista->rol->nombre}}</td>
-                  <td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#modalEditar" data-nombrecapturista="{{ $capturista->nombre }}" data-idcapturista={{ $capturista->id }} data-rolid="{{ $capturista->rol_id }}" data-emailcapturista="{{ $capturista->email }}">Editar</button></td>
-                  <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalBorrar" data-nombrecapturista="{{ $capturista->nombre }}" data-idcapturista={{ $capturista->id }}>Borrar</button></td>
-                  <td><button type="button" class="btn btn-link" data-toggle="modal" data-target="#modalNuevaContrasena" data-emailcapturista="{{ $capturista->email }}" data-idcapturista={{ $capturista->id }}>Generar Nueva Contraseña</button></td>
+                  <td><button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalEditar" data-nombrecapturista="{{ $capturista->nombre }}" data-idcapturista={{ $capturista->id }} data-rolid="{{ $capturista->rol_id }}" data-emailcapturista="{{ $capturista->email }}">Editar</button></td>
+                  <td><button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalBorrar" data-nombrecapturista="{{ $capturista->nombre }}" data-idcapturista={{ $capturista->id }}>Borrar</button></td>
+                  <td><button type="button" class="btn btn-link btn-sm" data-toggle="modal" data-target="#modalNuevaContrasena" data-emailcapturista="{{ $capturista->email }}" data-idcapturista={{ $capturista->id }}>Generar Nueva Contraseña</button></td>
                 </tr>
               @endforeach
             </tbody>

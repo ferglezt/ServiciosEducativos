@@ -47,7 +47,7 @@
 
       <div class="row">
         <div class="col-md-12">
-          <table id="becasTable" class="displa cell-border" width="100%">
+          <table id="becasTable" class="cell-border" width="100%">
           	<thead>
           	  @foreach($columnas as $c)
                 <th>{{ $c->nombre }}</th>
