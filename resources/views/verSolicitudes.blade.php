@@ -16,7 +16,7 @@
       	<div class="col-md-4">
       	  <div class="form-group">
       			<label for="search">Buscar:</label>
-      			<input type="text" class="form-control" id="search" placeholder="Nombre o Boleta">
+      			<input type="text" class="form-control" id="search" placeholder="Nombre, Boleta o Folio">
       		</div>
       	</div>
       </div>
