@@ -25,10 +25,21 @@
         <div class="col-md-1">
           <label>Filtros:</label>
         </div>
-        <div class="col-md-11">
+        <div class="col-sm-2">
+          <button id="selectAll" type="button" class="btn btn-success btn-xs">Seleccionar todo</button>
+        </div>
+        <div class="col-sm-2">
+          <button id="deselectAll" type="button" class="btn btn-danger btn-xs">Deseleccionar todo</button>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="col-md-12">
           @foreach($columnas as $c)
             <label class="checkbox-inline"><input class="toggle-column" type="checkbox" data-column="{{ $c->data_column }}" checked>{{ $c->nombre }}</label>
           @endforeach
+        </div>
         </div>
       </div>
 
@@ -36,7 +47,7 @@
 
       <div class="row">
         <div class="col-md-12">
-          <table id="becasTable" class="table-bordered">
+          <table id="becasTable" class="displa cell-border" width="100%">
           	<thead>
           	  @foreach($columnas as $c)
                 <th>{{ $c->nombre }}</th>

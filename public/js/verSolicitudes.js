@@ -67,10 +67,30 @@ $(document).ready(function() {
 
     $('#search').keyup(search);
 
+    var toggleColumns = function() {
+        $('.toggle-column').each(function() {
+            var column = table.column($(this).attr('data-column'));
+            column.visible($(this).is(':checked'));
+        });
+    };
+
     $('.toggle-column').change(function(e) {
         e.preventDefault();
         var column = table.column($(this).attr('data-column'));
         column.visible($(this).is(':checked'));
+    });
+
+    $('#selectAll').click(function(e) {
+        e.preventDefault();
+        $('.toggle-column').prop('checked', true);
+        toggleColumns();
+        
+    });
+
+    $('#deselectAll').click(function(e) {
+        e.preventDefault();
+        $('.toggle-column').prop('checked', false);
+        toggleColumns();
     });
 	
 });
