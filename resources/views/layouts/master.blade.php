@@ -30,7 +30,7 @@
 	                    <a id="menu-toggle" href="#" class="glyphicon glyphicon-align-justify btn-menu toggle">
 	                        <i class="fa fa-bars"></i>
 	                    </a>
-	    				<a href="#">IPN - UPIICSA</a>
+	    				<a id="nav-title" href="#">IPN - UPIICSA</a>
 	                </div>
 				</div>
 				<div id="navbar" class="collapse navbar-collapse">

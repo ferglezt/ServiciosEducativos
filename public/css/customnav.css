@@ -16,6 +16,10 @@
   transition: all 0.4s ease 0s;
 }
 
+#nav-title {
+  color:#019e05;
+}
+
 #wrapper.active {
   padding-left: 0;
 }
