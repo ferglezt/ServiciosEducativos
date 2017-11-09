@@ -23,6 +23,7 @@
         $('#telefono').val(null);
         $('#oriundo').val(null);
         $('#genero').val(null);
+        $('#estudiante_id').val(null);
       });
 
       $('#boleta').focusout(function() {
@@ -40,6 +41,7 @@
             $('#telefono').val(result.telefono);
             $('#oriundo').val(result.oriundo);
             $('#genero').val(result.genero);
+            $('#estudiante_id').val(result.id);
 
             $('html, body').animate({
               scrollTop: $("#oriundo").offset().top
