@@ -59,6 +59,12 @@ Route::group(['middleware' => ['custom.session']], function() {
 
 	Route::get('/verSolicitudes', 'SolicitudController@verSolicitudes')
 		->name('verSolicitudes');
+
+	Route::get('/altaSolicitud', 'SolicitudController@altaSolicitud')
+		->name('altaSolicitud');
+
+	Route::post('/attemptAltaSolicitud', 'SolicitudController@attemptAltaSolicitud')
+		->name('attemptAltaSolicitud');
 });
 
 Route::get('/login', function() {

@@ -64,7 +64,9 @@ class EstudianteController extends Controller
    	}
 
    	public function findBoleta(Request $request, $boleta) {
-   		Estudiante::where('boleta', '=', $boleta)->firstOrFail();
+   		$data = Estudiante::where('boleta', '=', $boleta)->firstOrFail();
+
+      return response()->json($data, 200, ['Content-type'=> 'application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
    	}
 
     public function searchEstudiante(Request $request) {

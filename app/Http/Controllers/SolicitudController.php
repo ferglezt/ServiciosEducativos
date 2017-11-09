@@ -5,11 +5,22 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Estudiante;
 use App\Solicitud;
+use App\Carrera;
 use Illuminate\Database\QueryException;
 use DB;
 
 class SolicitudController extends Controller
 {
+    public function altaSolicitud(Request $request) {
+        return view('altaSolicitud', [
+            'carreras' => Carrera::all()
+        ]);
+    }
+
+    public function attemptAltaSolicitud(Request $request) {
+        
+    }
+
 	public function verSolicitudes(Request $request) {
 		return view('verSolicitudes', [
             'columnas' => [

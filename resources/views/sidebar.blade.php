@@ -37,6 +37,9 @@
     <span class="caret"></span> 
   </a>
   <ul class="nav collapse" id="submenu-becas" role="menu">
+    <li id="item-alta-solicitud">
+      <a href="{{ URL::to('/altaSolicitud') }}">Nueva Solicitud</a>
+    </li>
     <li id="item-ver-becas">
       <a href="{{ URL::to('/verSolicitudes') }}">Ver Solicitudes</a>
     </li>

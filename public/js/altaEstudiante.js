@@ -24,13 +24,6 @@ $(document).ready(function() {
 
     var boleta = $(this).val();
 
-    if(!/^\d+$/.test(boleta)) {
-      $('#warningBoleta').addClass('alert alert-danger col-sm-3');
-      $('#warningBoleta').html('La boleta debe contener sólo valores numéricos');
-      $('#submit').attr('disabled', 'disabled');
-      return;
-    }
-
     $.ajax({
       url: '/findBoleta/' + boleta,
       success: function() {
