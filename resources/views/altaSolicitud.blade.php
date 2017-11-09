@@ -61,15 +61,19 @@
 
       <div class="row">
           @if(isset($error))
+            <div class="row">
               <div class="alert alert-danger col-md-4">
                 <strong>Error:</strong> {{ $error }}
               </div>
+            </div>
           @endif
 
           @if(isset($successMessage))
+            <div class="row">
               <div class="alert alert-success col-md-4">
                 <strong>Operación exitosa</strong> {{ $successMessage }}
               </div>
+            </div>
           @endif
 
           <form class="form-horizontal" action="{{ action('SolicitudController@attemptAltaSolicitud') }}" method="post">

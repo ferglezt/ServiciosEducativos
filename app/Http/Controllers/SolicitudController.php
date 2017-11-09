@@ -18,7 +18,62 @@ class SolicitudController extends Controller
     }
 
     public function attemptAltaSolicitud(Request $request) {
-        
+        $insertOrUpdateEstudiante = self::insertOrUpdateEstudiante($request);
+
+        if(!$insertOrUpdateEstudiante->result) {
+            return $insertOrUpdateEstudiante->view;
+        }
+    }
+
+    private function insertOrUpdateEstudiante(Request $request) {
+        $estudiante_id = $request->input('estudiante_id');
+        $boleta = $request->input('boleta');
+        $nombre = $request->input('nombre');
+        $carrera = $request->input('carrera');
+        $curp = $request->input('curp');
+        $email = $request->input('email');
+        $telefono = $request->input('telefono');
+        $genero = $request->input('genero');
+        $oriundo = $request->input('oriundo');
+
+        if(!isset($boleta) || $boleta == '') {
+            return (object)[
+                'result' => false,
+                'view' => view('altaSolicitud', [
+                    'carreras' => Carrera::all(),
+                    'error' => 'El campo boleta es obligatorio'
+                ])
+            ];
+        }
+
+        $estudiante = Estudiante::where('id', '=', $estudiante_id)->first();
+
+        if(!$estudiante) {
+            $estudiante = new Estudiante;
+        }
+
+        $estudiante->boleta = $boleta;
+        $estudiante->nombre = $nombre;
+        $estudiante->carrera_id = $carrera;
+        $estudiante->curp = $curp;
+        $estudiante->email = $email;
+        $estudiante->telefono = $telefono;
+        $estudiante->genero = $genero;
+        $estudiante->oriundo = $oriundo;
+
+        try {
+            $estudiante->save();
+        } catch(QueryException $e) {
+            return (object)[
+                'result' => false,
+                'view' => view('altaSolicitud', [
+                    'carreras' => Carrera::all(),
+                    'error' => 'No fue posible dar de alta o actualizar al estudiante'
+                ])
+            ];
+        }
+
+        return (object)['result' => true, 'view' => null];
     }
 
 	public function verSolicitudes(Request $request) {
