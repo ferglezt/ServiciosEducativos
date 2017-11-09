@@ -30,10 +30,10 @@ class EstudianteController extends Controller
    		$genero = $request->input('genero');
       $oriundo = $request->input('oriundo');
 
-   		if(!isset($boleta) || $boleta == '' || !preg_match('/[0-9]/', $boleta)) {
+   		if(!isset($boleta) || $boleta == '') {
    			return view('altaEstudiante', [
     			'carreras' => Carrera::all(),
-    			'error' => 'El campo boleta debe ser numérico'
+    			'error' => 'El campo boleta es obligatorio'
     		]);
    		}
 
@@ -57,9 +57,9 @@ class EstudianteController extends Controller
    		$estudiante->save();
 
    		return view('altaEstudiante', [
-			'carreras' => Carrera::all(),
-			'successMessage' => 'Estudiante '.$nombre.' dado de alta exitosamente'
-		]);
+  			'carreras' => Carrera::all(),
+  			'successMessage' => 'Estudiante '.$nombre.' dado de alta exitosamente'
+		  ]);
 
    	}
 
