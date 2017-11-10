@@ -26,14 +26,28 @@ $(document).ready(function() {
         }
     });
 
-    var search = function() {
+    $('#modalCambioEstatus').on('show.bs.modal', function(e) {
+        var nombre = e.relatedTarget.dataset.nombre;
+        var id = e.relatedTarget.dataset.id;
+        var estatus = e.relatedTarget.dataset.estatus;
+
+        $('#modalCambioEstatus #nombre').text(nombre);
+        $('#modalCambioEstatus #estatus').val(estatus);
+
+        $('#btnCambioEstatus').unbind('click').click(function(e) {
+            alert(1);
+        });
+    });
+
+
+    var search = function(query) {
         $.ajax({
-            url: '/searchSolicitud?anio=2017&q=' + $(this).val(),
+            url: '/searchSolicitud?anio=2017&q=' + query,
             success: function(result,status,xhr) {
                 var arr = result.map(function(obj) {
                     var hiddenButton = $('#hiddenButton').clone();
                     hiddenButton.removeClass();
-                    hiddenButton.addClass('estatus-solicitud-btn btn btn-xs');
+                    hiddenButton.addClass('btn btn-xs');
                     var btnClass = '';
 
                     switch(obj.estatus_solicitud) {
@@ -45,6 +59,11 @@ $(document).ready(function() {
 
                     hiddenButton.addClass(btnClass);
                     hiddenButton.html(obj.estatus_solicitud);
+                    hiddenButton.attr('data-toggle', 'modal');
+                    hiddenButton.attr('data-target', '#modalCambioEstatus');
+                    hiddenButton.attr('data-id', obj.id);
+                    hiddenButton.attr('data-nombre', obj.nombre);
+                    hiddenButton.attr('data-estatus', obj.estatus_solicitud);
 
                     return[
                         hiddenButton.get(0).outerHTML,
@@ -82,7 +101,9 @@ $(document).ready(function() {
         });
     };
 
-    $('#search').keyup(search);
+    $('#search').keyup(function() {
+        search($(this).val());
+    });
 
     var toggleColumns = function() {
         $('.toggle-column').each(function() {

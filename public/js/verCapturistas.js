@@ -31,7 +31,7 @@ $(document).ready(function() {
 
     $('#modalEditar #nombreCapturista').val(nombreCapturista);
     $('#modalEditar #emailCapturista').val(emailCapturista);
-    $('#modalEditar #rol[value="' + rolId + '"]').attr('selected');
+    $('#modalEditar #rol').val(rolId);
 
     $('#guardarCapturista').unbind('click').click(function(e) {
       $.ajax({
