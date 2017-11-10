@@ -17,7 +17,7 @@ class EstudianteExcelSeeder extends Seeder
     {
         $reader = ReaderFactory::create(Type::XLSX); 
 
-		$reader->open('C:\Users\fgonzalez\downloads\est.xlsx');
+		$reader->open('C:\Users\dell\desktop\est.xlsx');
 
 		foreach ($reader->getSheetIterator() as $sheet) {
 			if($sheet->getName() != 'FORMATO ORIGINAL') {

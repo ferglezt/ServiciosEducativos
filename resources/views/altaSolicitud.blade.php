@@ -165,7 +165,7 @@
               <div class="form-group">
                 <label class="control-label col-sm-2" for="semestre">Semestre:</label>
                 <div class="col-sm-6">
-                  <input type="text" class="form-control" name="semestre" id="semestre" placeholder="semestre">
+                  <input type="text" class="form-control" name="semestre" id="semestre" placeholder="Semestre">
                 </div>
               </div>
               <div class="form-group">

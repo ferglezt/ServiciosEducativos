@@ -54,7 +54,31 @@ class SolicitudController extends Controller
             ]);
         }
 
-        
+        $alreadyExists = Solicitud::where([
+            ['folio', '=', $solicitud->folio],
+            ['anio', '=', $solicitud->anio]
+        ])->first();
+
+        if($alreadyExists) {
+            return view('altaSolicitud', [
+                'carreras' => Carrera::all(),
+                'error' => 'Esta solicitud ya existe en la base de datos'
+            ]);
+        }
+
+        try {
+            $solicitud->save();
+        } catch(QueryException $e) {
+            return view('altaSolicitud', [
+                'carreras' => Carrera::all(),
+                'error' => $e->getMessage()
+            ]);
+        }
+
+        return view('altaSolicitud', [
+            'carreras' => Carrera::all(),
+            'successMessage' => 'Solicitud dada de alta satisfactoriamente'
+        ]);
 
 
     }
