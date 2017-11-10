@@ -66,7 +66,7 @@ Route::group(['middleware' => ['custom.session']], function() {
 	Route::post('/attemptAltaSolicitud', 'SolicitudController@attemptAltaSolicitud')
 		->name('attemptAltaSolicitud');
 
-	Route::post('/updateEstatusSolicitud/{id]', 'SolicitudController@updateEstatusSolicitud')
+	Route::post('/updateEstatusSolicitud/{id}', 'SolicitudController@updateEstatusSolicitud')
 		->name('updateEstatusSolicitud');
 });
 

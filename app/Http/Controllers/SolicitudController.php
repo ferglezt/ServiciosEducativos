@@ -169,8 +169,9 @@ class SolicitudController extends Controller
 
     public function updateEstatusSolicitud(Request $request, $id) {
         $solicitud = Solicitud::where('id', '=', $id)->firstOrFail();
-        $solicitud->estatus_solicitud = $request->input('estatus');
+        $solicitud->estatus_solicitud = $request->input('estatus_solicitud');
         $solicitud->save();
+        return response()->json($solicitud, 200, ['Content-type'=> 'application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     }
 
     public function searchSolicitud(Request $request) {

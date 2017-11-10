@@ -81,10 +81,29 @@
                 <option value='RECHAZADO'>RECHAZADO</option>
                 <option value='LISTA DE ESPERA'>LISTA DE ESPERA</option>
               </select>
+              <input type="hidden" id="_token" value="{{ csrf_token() }}">
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
               <button id="btnCambioEstatus" type="button" class="btn btn-default">Aceptar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal Éxito-->
+      <div id="modalMessage" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Éxito</h4>
+            </div>
+            <div id="message" class="modal-body alert">
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-info" data-dismiss="modal">Aceptar</button>
             </div>
           </div>
         </div>

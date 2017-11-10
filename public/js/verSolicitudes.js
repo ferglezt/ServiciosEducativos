@@ -26,20 +26,6 @@ $(document).ready(function() {
         }
     });
 
-    $('#modalCambioEstatus').on('show.bs.modal', function(e) {
-        var nombre = e.relatedTarget.dataset.nombre;
-        var id = e.relatedTarget.dataset.id;
-        var estatus = e.relatedTarget.dataset.estatus;
-
-        $('#modalCambioEstatus #nombre').text(nombre);
-        $('#modalCambioEstatus #estatus').val(estatus);
-
-        $('#btnCambioEstatus').unbind('click').click(function(e) {
-            
-        });
-    });
-
-
     var search = function(query) {
         $.ajax({
             url: '/searchSolicitud?anio=2017&q=' + query,
@@ -100,6 +86,45 @@ $(document).ready(function() {
             }
         });
     };
+
+    $('#modalCambioEstatus').on('show.bs.modal', function(e) {
+        var nombre = e.relatedTarget.dataset.nombre;
+        var id = e.relatedTarget.dataset.id;
+        var estatus = e.relatedTarget.dataset.estatus;
+
+        $('#modalCambioEstatus #nombre').text(nombre);
+        $('#modalCambioEstatus #estatus').val(estatus);
+
+        $('#btnCambioEstatus').unbind('click').click(function(e) {
+            $.ajax({
+                url: '/updateEstatusSolicitud/' + id,
+                type: 'POST',
+                data: {
+                    '_token': $('#modalCambioEstatus #_token').val(),
+                    'estatus_solicitud': $('#modalCambioEstatus #estatus').val()
+                },
+                success: function(result,status,xhr) {
+                    $('#modalCambioEstatus').modal('hide');
+                    $('#modalMessage #message').removeClass('alert-danger');
+                    $('#modalMessage #message').addClass('alert-success');
+                    $('#modalMessage #message').html(
+                        'Se ha actualizado el estatus de la solicitud con folio ' + result.folio +
+                        ' a ' + result.estatus_solicitud
+                    );
+                    $('#modalMessage').modal('show');
+                    search($('#search').val());
+
+                },
+                error: function() {
+                    $('#modalCambioEstatus').modal('hide');
+                    $('#modalMessage #message').removeClass('alert-success');
+                    $('#modalMessage #message').addClass('alert-danger');
+                    $('#modalMessage #message').html('No fue posible actualizar el estatus de la solicitud');
+                    $('#modalMessage').modal('show');
+                }
+            });
+        });
+    });
 
     $('#search').keyup(function() {
         search($(this).val());
