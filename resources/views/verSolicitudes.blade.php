@@ -60,6 +60,10 @@
         </div>
       </div>
 
+      <div id="hiddenButtonDiv">
+        <button id="hiddenButton"></button>
+      </div>
+
   	</div>
 
 @stop

@@ -7,6 +7,7 @@ $(document).ready(function() {
 
   	$('#submenu-becas').addClass('in');
 
+    $('#hiddenButtonDiv').hide();
 
     var table = $('#becasTable').DataTable({
     	"searching": false,
@@ -30,7 +31,23 @@ $(document).ready(function() {
             url: '/searchSolicitud?anio=2017&q=' + $(this).val(),
             success: function(result,status,xhr) {
                 var arr = result.map(function(obj) {
+                    var hiddenButton = $('#hiddenButton').clone();
+                    hiddenButton.removeClass();
+                    hiddenButton.addClass('estatus-solicitud-btn btn btn-xs');
+                    var btnClass = '';
+
+                    switch(obj.estatus_solicitud) {
+                        case 'ACEPTADO': btnClass = 'btn-success'; break;
+                        case 'RECHAZADO': btnClass = 'btn-danger'; break;
+                        case 'LISTA DE ESPERA': btnClass = 'btn-warning'; break;
+                        default: btnClass = 'btn-info';
+                    }
+
+                    hiddenButton.addClass(btnClass);
+                    hiddenButton.html(obj.estatus_solicitud);
+
                     return[
+                        hiddenButton.get(0).outerHTML,
                         obj.folio,
                         obj.etiqueta,
                         obj.boleta,

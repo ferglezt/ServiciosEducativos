@@ -137,31 +137,32 @@ class SolicitudController extends Controller
 	public function verSolicitudes(Request $request) {
 		return view('verSolicitudes', [
             'columnas' => [
-                (object)['data_column' => 0, 'nombre' => 'Folio'],
-                (object)['data_column' => 1, 'nombre' => 'Etiqueta'],
-                (object)['data_column' => 2, 'nombre' => 'Boleta'],
-                (object)['data_column' => 3, 'nombre' => 'Curp'],
-                (object)['data_column' => 4, 'nombre' => 'Género'],
-                (object)['data_column' => 5, 'nombre' => 'Nombre'],
-                (object)['data_column' => 6, 'nombre' => 'Carrera'],
-                (object)['data_column' => 7, 'nombre' => 'Semestre'],
-                (object)['data_column' => 8, 'nombre' => 'Promedio'],
-                (object)['data_column' => 9, 'nombre' => 'Estatus Académico'],
-                (object)['data_column' => 10, 'nombre' => 'Carga'],
-                (object)['data_column' => 11, 'nombre' => 'Tipo Becario'],
-                (object)['data_column' => 12, 'nombre' => 'Beca Anterior'],
-                (object)['data_column' => 13, 'nombre' => 'Beca Solicitada'],
-                (object)['data_column' => 14, 'nombre' => 'Folio Manutención'],
-                (object)['data_column' => 15, 'nombre' => 'Folio Transporte'],
-                (object)['data_column' => 16, 'nombre' => 'Mapa'],
-                (object)['data_column' => 17, 'nombre' => 'Fecha Recibido'],
-                (object)['data_column' => 18, 'nombre' => 'Comprobante Oficial'],
-                (object)['data_column' => 19, 'nombre' => 'Ingresos'],
-                (object)['data_column' => 20, 'nombre' => 'Dependientes'],
-                (object)['data_column' => 21, 'nombre' => 'Oriundo'],
-                (object)['data_column' => 22, 'nombre' => 'Email'],
-                (object)['data_column' => 23, 'nombre' => 'Teléfono'],
-                (object)['data_column' => 24, 'nombre' => 'Observaciones'],
+                (object)['data_column' => 0, 'nombre' => 'Estatus Solicitud'],
+                (object)['data_column' => 1, 'nombre' => 'Folio'],
+                (object)['data_column' => 2, 'nombre' => 'Etiqueta'],
+                (object)['data_column' => 3, 'nombre' => 'Boleta'],
+                (object)['data_column' => 4, 'nombre' => 'Curp'],
+                (object)['data_column' => 5, 'nombre' => 'Género'],
+                (object)['data_column' => 6, 'nombre' => 'Nombre'],
+                (object)['data_column' => 7, 'nombre' => 'Carrera'],
+                (object)['data_column' => 8, 'nombre' => 'Semestre'],
+                (object)['data_column' => 9, 'nombre' => 'Promedio'],
+                (object)['data_column' => 10, 'nombre' => 'Estatus Académico'],
+                (object)['data_column' => 11, 'nombre' => 'Carga'],
+                (object)['data_column' => 12, 'nombre' => 'Tipo Becario'],
+                (object)['data_column' => 13, 'nombre' => 'Beca Anterior'],
+                (object)['data_column' => 14, 'nombre' => 'Beca Solicitada'],
+                (object)['data_column' => 15, 'nombre' => 'Folio Manutención'],
+                (object)['data_column' => 16, 'nombre' => 'Folio Transporte'],
+                (object)['data_column' => 17, 'nombre' => 'Mapa'],
+                (object)['data_column' => 18, 'nombre' => 'Fecha Recibido'],
+                (object)['data_column' => 19, 'nombre' => 'Comprobante Oficial'],
+                (object)['data_column' => 20, 'nombre' => 'Ingresos'],
+                (object)['data_column' => 21, 'nombre' => 'Dependientes'],
+                (object)['data_column' => 22, 'nombre' => 'Oriundo'],
+                (object)['data_column' => 23, 'nombre' => 'Email'],
+                (object)['data_column' => 24, 'nombre' => 'Teléfono'],
+                (object)['data_column' => 25, 'nombre' => 'Observaciones'],
             ]
         ]);
 	}
@@ -193,6 +194,8 @@ class SolicitudController extends Controller
     		])
     		//->limit(100)
     		->select(
+                'solicitudes.id as id',
+                'solicitudes.estatus_solicitud as estatus_solicitud',
     			'solicitudes.folio as folio',
     			'solicitudes.etiqueta as etiqueta',
     			'estudiantes.boleta as boleta',
@@ -219,7 +222,7 @@ class SolicitudController extends Controller
     			'estudiantes.telefono as telefono',
     			'solicitudes.observaciones as observaciones'
     		)
-    		->get();
+            ->get();
     	}
 
     	return response()->json($data, 200, ['Content-type'=> 'application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
