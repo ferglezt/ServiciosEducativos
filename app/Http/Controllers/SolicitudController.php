@@ -167,8 +167,10 @@ class SolicitudController extends Controller
         ]);
 	}
 
-    public function findSolicitud(Request $request) {
-
+    public function updateEstatusSolicitud(Request $request, $id) {
+        $solicitud = Solicitud::where('id', '=', $id)->firstOrFail();
+        $solicitud->estatus_solicitud = $request->input('estatus');
+        $solicitud->save();
     }
 
     public function searchSolicitud(Request $request) {

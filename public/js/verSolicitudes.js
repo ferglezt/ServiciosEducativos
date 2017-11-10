@@ -35,7 +35,7 @@ $(document).ready(function() {
         $('#modalCambioEstatus #estatus').val(estatus);
 
         $('#btnCambioEstatus').unbind('click').click(function(e) {
-            alert(1);
+            
         });
     });
 
