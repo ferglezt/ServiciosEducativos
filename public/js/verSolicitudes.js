@@ -94,9 +94,10 @@ $(document).ready(function() {
 
         $('#modalCambioEstatus #nombre').text(nombre);
         $('#modalCambioEstatus #estatus').val(estatus);
+        $('#btnCambioEstatus').removeAttr('disabled');
 
-        $('#btnCambioEstatus').unbind('click').click(function(e) {   
-            $('#modalCambioEstatus').modal('hide');  
+        $('#btnCambioEstatus').unbind('click').click(function(e) { 
+            $(this).attr('disabled', 'disabled');    
             $.ajax({
                 url: '/updateEstatusSolicitud/' + id,
                 type: 'POST',
@@ -105,6 +106,7 @@ $(document).ready(function() {
                     'estatus_solicitud': $('#modalCambioEstatus #estatus').val()
                 },
                 success: function(result,status,xhr) {
+                    $('#modalCambioEstatus').modal('hide');
                     $('#modalMessage #message').removeClass('alert-danger');
                     $('#modalMessage #message').addClass('alert-success');
                     $('#modalMessage #message').html(
@@ -116,6 +118,7 @@ $(document).ready(function() {
 
                 },
                 error: function() {
+                    $('#modalCambioEstatus').modal('hide');
                     $('#modalMessage #message').removeClass('alert-success');
                     $('#modalMessage #message').addClass('alert-danger');
                     $('#modalMessage #message').html('No fue posible actualizar el estatus de la solicitud');

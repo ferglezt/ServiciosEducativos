@@ -32,9 +32,10 @@ $(document).ready(function() {
     $('#modalEditar #nombreCapturista').val(nombreCapturista);
     $('#modalEditar #emailCapturista').val(emailCapturista);
     $('#modalEditar #rol').val(rolId);
+    $('#guardarCapturista').removeAttr('disabled');
 
     $('#guardarCapturista').unbind('click').click(function(e) {
-      $('#modalEditar').modal('hide');
+      $(this).attr('disabled', 'disabled');
       $.ajax({
         url: '/editarCapturista/' + idCapturista,
         type: 'POST',
@@ -48,6 +49,7 @@ $(document).ready(function() {
           location.reload();
         },
         error: function() {
+          $('#modalEditar').modal('hide');
           $('#message').removeClass('alert-success');
           $('#message').addClass('alert-danger');
           $('#message').html('No fue posible actualizar la información del capturista');
