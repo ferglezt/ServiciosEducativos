@@ -38,6 +38,7 @@ class LoginController extends Controller
     		return view('login', ['error' => 'Contraseña errónea', 'email' => $email]);
     	}
 
+        $request->session()->put('usuario_id', $usuario->id);
     	$request->session()->put('email', $email);
     	$request->session()->put('rol_id', $usuario->rol_id);
     	$request->session()->put('nombre', $usuario->nombre);

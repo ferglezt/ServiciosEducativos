@@ -23,6 +23,40 @@ class SolicitudController extends Controller
         if(!$insertOrUpdateEstudiante->result) {
             return $insertOrUpdateEstudiante->view;
         }
+
+        $solicitud = new Solicitud;
+
+        $solicitud->estudiante_id = $insertOrUpdateEstudiante->estudiante_id;
+        $solicitud->anio = $request->input('anio');
+        $solicitud->folio = $request->input('folio');
+        $solicitud->etiqueta = $request->input('etiqueta');
+        $solicitud->semestre = $request->input('semestre');
+        $solicitud->promedio = $request->input('promedio');
+        $solicitud->estatus_estudiante = $request->input('estatus_estudiante');
+        $solicitud->carga = $request->input('carga');
+        $solicitud->estatus_becario = $request->input('estatus_becario');
+        $solicitud->beca_anterior = $request->input('beca_anterior');
+        $solicitud->beca_solicitada = $request->input('beca_solicitada');
+        $solicitud->folio_manutencion = $request->input('folio_manutencion');
+        $solicitud->folio_transporte = $request->input('folio_transporte');
+        $solicitud->comprobante_ingresos = $request->input('comprobante_ingresos');
+        $solicitud->mapa = $request->input('mapa');
+        $solicitud->fecha_recibido = $request->input('fecha_recibido');
+        $solicitud->ingresos = $request->input('ingresos');
+        $solicitud->dependientes = $request->input('dependientes');
+        $solicitud->observaciones = $request->input('observaciones');
+        $solicitud->usuario_id = $request->session()->get('usuario_id', null);
+
+        if(is_null($solicitud->folio) || !is_numeric($solicitud->folio)) {
+            return view('altaSolicitud', [
+                'carreras' => Carrera::all(),
+                'error' => 'El folio debe ser un dato numérico'
+            ]);
+        }
+
+        
+
+
     }
 
     private function insertOrUpdateEstudiante(Request $request) {
@@ -73,7 +107,7 @@ class SolicitudController extends Controller
             ];
         }
 
-        return (object)['result' => true, 'view' => null];
+        return (object)['result' => true, 'view' => null, 'estudiante_id' => $estudiante->id];
     }
 
 	public function verSolicitudes(Request $request) {
@@ -107,6 +141,10 @@ class SolicitudController extends Controller
             ]
         ]);
 	}
+
+    public function findSolicitud(Request $request) {
+
+    }
 
     public function searchSolicitud(Request $request) {
     	$data = [];
