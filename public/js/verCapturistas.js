@@ -34,6 +34,7 @@ $(document).ready(function() {
     $('#modalEditar #rol').val(rolId);
 
     $('#guardarCapturista').unbind('click').click(function(e) {
+      $('#modalEditar').modal('hide');
       $.ajax({
         url: '/editarCapturista/' + idCapturista,
         type: 'POST',
@@ -47,7 +48,6 @@ $(document).ready(function() {
           location.reload();
         },
         error: function() {
-          $('#modalEditar').modal('hide');
           $('#message').removeClass('alert-success');
           $('#message').addClass('alert-danger');
           $('#message').html('No fue posible actualizar la información del capturista');
