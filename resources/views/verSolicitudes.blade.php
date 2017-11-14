@@ -9,7 +9,7 @@
 	<div class="container-fluid">
 
       <div class="page-header">
-        <h1>Solicitudes</h1>      
+        <h3>Solicitudes</h3>      
       </div>
 
       <div class="row">
@@ -64,7 +64,7 @@
 
       <div class="row">
         <div class="col-md-12">
-          <table id="becasTable" class="cell-border" width="100%">
+          <table id="becasTable" class="cell-border" width="100%" style="font-size: 12px;">
           	<thead>
           	  @foreach($columnas as $c)
                 <th>{{ $c->nombre }}</th>

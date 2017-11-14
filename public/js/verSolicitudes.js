@@ -12,6 +12,8 @@ $(document).ready(function() {
     var table = $('#becasTable').DataTable({
     	"searching": false,
         "scrollX": true,
+        "scrollY": "200px",
+        "scrollCollapse": true,
 	    "language": {
 	        "lengthMenu": "Mostrando _MENU_ registros por página",
 	        "zeroRecords": "No se encontraron registros",
