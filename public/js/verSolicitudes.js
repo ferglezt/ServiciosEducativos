@@ -26,9 +26,9 @@ $(document).ready(function() {
         }
     });
 
-    var search = function(query) {
+    var search = function(query, periodo) {
         $.ajax({
-            url: '/searchSolicitud?periodo=1&q=' + query,
+            url: '/searchSolicitud?periodo=' + periodo + '&q=' + query,
             success: function(result,status,xhr) {
                 var arr = result.map(function(obj) {
                     var hiddenButton = $('#hiddenButton').clone();
@@ -114,7 +114,7 @@ $(document).ready(function() {
                         ' a ' + result.estatus_solicitud
                     );
                     $('#modalMessage').modal('show');
-                    search($('#search').val());
+                    search($('#search').val(), $('#periodo').val());
 
                 },
                 error: function() {
@@ -129,7 +129,11 @@ $(document).ready(function() {
     });
 
     $('#search').keyup(function() {
-        search($(this).val());
+        search($(this).val(), $('#periodo').val());
+    });
+
+    $('#periodo').change(function() {
+        search($('#search').val(), $(this).val());
     });
 
     var toggleColumns = function() {

@@ -145,6 +145,7 @@ class SolicitudController extends Controller
 
 	public function verSolicitudes(Request $request) {
 		return view('verSolicitudes', [
+            'periodos' => Periodo::all(),
             'columnas' => [
                 (object)['data_column' => 0, 'nombre' => 'Estatus Solicitud'],
                 (object)['data_column' => 1, 'nombre' => 'Folio'],

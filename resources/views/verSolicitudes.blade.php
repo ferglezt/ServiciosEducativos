@@ -13,6 +13,23 @@
       </div>
 
       <div class="row">
+        <div class="col-sm-2">
+          <div class="form-group">
+            <label for="search">Periodo:</label>
+            <select class="form-control" id="periodo" name="periodo">
+              @foreach($periodos as $p)
+                <option value="{{ $p->id }}"
+
+                  @if(($p->anio == date('Y') + 1 && date('n') > 6 && $p->periodo == 1) ||
+                      ($p->anio == date('Y') && date('n') <= 6 && $p->periodo == 2))
+                      selected
+                  @endif
+
+                  >{{ $p->anio . ' - ' . $p->periodo }}</option>
+              @endforeach
+            </select>
+          </div>
+        </div>
       	<div class="col-md-4">
       	  <div class="form-group">
       			<label for="search">Buscar:</label>
