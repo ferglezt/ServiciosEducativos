@@ -4,54 +4,7 @@
 
 @section('content')
 
-  <script type="text/javascript">
-    $(document).ready(function() {
-
-      $('#item-alta-solicitud').addClass('active');
-      $('#item-alta-solicitud').click(function(e) {
-        e.preventDefault();
-      });
-      $('#submenu-becas').addClass('in');
-
-      $('#boleta').keyup(function() {
-        $('#warningBoleta').removeClass();
-        $('#warningBoleta').empty();
-        $('#nombre').val(null);
-        $('#carrera').val(null);
-        $('#curp').val(null);
-        $('#email').val(null);
-        $('#telefono').val(null);
-        $('#oriundo').val(null);
-        $('#genero').val(null);
-        $('#estudiante_id').val(null);
-      });
-
-      $('#boleta').focusout(function() {
-        $('#warningBoleta').removeClass();
-        $('#warningBoleta').empty();
-        $.ajax({
-          url: '/findBoleta/' + $(this).val(),
-          success: function(result,status,xhr) {
-            $('#warningBoleta').addClass('alert alert-success col-sm-3');
-            $('#warningBoleta').html('Estudiante encontrado');
-            $('#nombre').val(result.nombre);
-            $('#carrera').val(result.carrera_id);
-            $('#curp').val(result.curp);
-            $('#email').val(result.email);
-            $('#telefono').val(result.telefono);
-            $('#oriundo').val(result.oriundo);
-            $('#genero').val(result.genero);
-            $('#estudiante_id').val(result.id);
-
-            $('html, body').animate({
-              scrollTop: $("#oriundo").offset().top
-            }, 1000);
-          }
-        });
-      });
-
-    });
-  </script>
+  <script type="text/javascript" src="{{ URL::to('/') }}/js/altaSolicitud.js"></script>
 
   <div class="container-fluid">
 
@@ -147,6 +100,23 @@
                     @for($i = 2010; $i < 2030; $i++)
                       <option value="{{ $i }}" {{ $i == date('Y') ? 'selected' : '' }}>{{ $i }}</option>
                     @endfor
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-2" for="periodo_id">Periodo:</label>
+                <div class="col-sm-6">
+                  <select class="form-control" id="periodo_id" name="periodo_id">
+                    @foreach($periodos as $p)
+                      <option value="{{ $p->id }}"
+
+                        @if(($p->anio == date('Y') + 1 && date('n') > 6 && $p->periodo == 1) ||
+                            ($p->anio == date('Y') && date('n') <= 6 && $p->periodo == 2))
+                            selected
+                        @endif
+
+                        >{{ $p->anio . ' - ' . $p->periodo }}</option>
+                    @endforeach
                   </select>
                 </div>
               </div>

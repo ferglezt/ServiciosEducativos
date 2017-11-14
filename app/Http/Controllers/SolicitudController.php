@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Estudiante;
 use App\Solicitud;
 use App\Carrera;
+use App\Periodo;
 use Illuminate\Database\QueryException;
 use DB;
 
@@ -13,7 +14,8 @@ class SolicitudController extends Controller
 {
     public function altaSolicitud(Request $request) {
         return view('altaSolicitud', [
-            'carreras' => Carrera::all()
+            'carreras' => Carrera::all(),
+            'periodos' => Periodo::all()
         ]);
     }
 
@@ -28,6 +30,7 @@ class SolicitudController extends Controller
 
         $solicitud->estudiante_id = $insertOrUpdateEstudiante->estudiante_id;
         $solicitud->anio = $request->input('anio');
+        $solicitud->periodo_id = $request->input('periodo_id');
         $solicitud->folio = $request->input('folio');
         $solicitud->etiqueta = $request->input('etiqueta');
         $solicitud->semestre = $request->input('semestre');
@@ -50,18 +53,20 @@ class SolicitudController extends Controller
         if(is_null($solicitud->folio) || !is_numeric($solicitud->folio)) {
             return view('altaSolicitud', [
                 'carreras' => Carrera::all(),
+                'periodos' => Periodo::all(),
                 'error' => 'El folio debe ser un dato numérico'
             ]);
         }
 
         $alreadyExists = Solicitud::where([
-            ['folio', '=', $solicitud->folio],
-            ['anio', '=', $solicitud->anio]
+            ['etiqueta', '=', $solicitud->etiqueta],
+            ['periodo_id', '=', $solicitud->periodo_id]
         ])->first();
 
         if($alreadyExists) {
             return view('altaSolicitud', [
                 'carreras' => Carrera::all(),
+                'periodos' => Periodo::all(),
                 'error' => 'Esta solicitud ya existe en la base de datos'
             ]);
         }
@@ -71,12 +76,14 @@ class SolicitudController extends Controller
         } catch(QueryException $e) {
             return view('altaSolicitud', [
                 'carreras' => Carrera::all(),
+                'periodos' => Periodo::all(),
                 'error' => $e->getMessage()
             ]);
         }
 
         return view('altaSolicitud', [
             'carreras' => Carrera::all(),
+            'periodos' => Periodo::all(),
             'successMessage' => 'Solicitud dada de alta satisfactoriamente'
         ]);
 
@@ -99,6 +106,7 @@ class SolicitudController extends Controller
                 'result' => false,
                 'view' => view('altaSolicitud', [
                     'carreras' => Carrera::all(),
+                    'periodos' => Periodo::all(),
                     'error' => 'El campo boleta es obligatorio'
                 ])
             ];
@@ -126,6 +134,7 @@ class SolicitudController extends Controller
                 'result' => false,
                 'view' => view('altaSolicitud', [
                     'carreras' => Carrera::all(),
+                    'periodos' => Periodo::all(),
                     'error' => 'No fue posible dar de alta o actualizar al estudiante'
                 ])
             ];
@@ -176,23 +185,24 @@ class SolicitudController extends Controller
 
     public function searchSolicitud(Request $request) {
     	$data = [];
-    	$anio = $request->input('anio');
+    	$periodo = $request->input('periodo');
     	$q = $request->input('q');
 
-    	if(!is_null($q) && !is_null($anio) && $q != '' && is_numeric($anio)) {
+    	if(!is_null($q) && !is_null($periodo) && $q != '' && is_numeric($periodo)) {
     		$data = DB::table('solicitudes')
     		->join('estudiantes', 'estudiantes.id', '=', 'solicitudes.estudiante_id')
     		->join('carreras', 'carreras.id', '=', 'estudiantes.carrera_id')
+            ->join('periodos', 'periodos.id', '=', 'solicitudes.periodo_id')
     		->where([
-    			['solicitudes.anio', '=', $anio],
+    			['solicitudes.periodo_id', '=', $periodo],
     			['estudiantes.boleta', 'like', '%'.$q.'%']
     		])
     		->orWhere([
-    			['solicitudes.anio', '=', $anio],
+    			['solicitudes.periodo_id', '=', $periodo],
     			['estudiantes.nombre', 'like', '%'.$q.'%']
     		])
     		->orWhere([
-    			['solicitudes.anio', '=', $anio],
+    			['solicitudes.periodo_id', '=', $periodo],
     			['solicitudes.folio', 'like', '%'.$q.'%']
     		])
     		//->limit(100)

@@ -28,7 +28,7 @@ $(document).ready(function() {
 
     var search = function(query) {
         $.ajax({
-            url: '/searchSolicitud?anio=2017&q=' + query,
+            url: '/searchSolicitud?periodo=1&q=' + query,
             success: function(result,status,xhr) {
                 var arr = result.map(function(obj) {
                     var hiddenButton = $('#hiddenButton').clone();
