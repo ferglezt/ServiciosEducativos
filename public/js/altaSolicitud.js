@@ -11,6 +11,43 @@ $(document).ready(function() {
         $('#warningIngresos').empty();
       });
 
+      $('#carga').keyup(function() {
+        $('#warningCarga').removeClass(); 
+        $('#warningCarga').empty();
+      });
+
+      var verificarCargaMedia = function() {
+        $('#warningCarga').removeClass(); 
+        $('#warningCarga').empty();
+
+        var carrera = $('#carrera').val();
+        var carga = parseInt($('#carga').val());
+
+        if(!isNaN(carrera) && !isNaN(carga)) {
+          $.ajax({
+            url: '/findCarga/' + carrera,
+            success: function(result,status,xhr) {
+              if(carga < result.carga_media && carga > result.carga_minima && carga < result.carga_maxima) {
+                $('#warningCarga').addClass('alert alert-danger');
+                $('#warningCarga').html('La carga de materias es menor a la carga media (' + 
+                  result.carga_media + ') de la carrera');
+              } else if(carga < result.carga_minima) {
+                $('#warningCarga').addClass('alert alert-danger');
+                $('#warningCarga').html('La carga de materias es menor a la carga mínima (' + 
+                  result.carga_minima + ') de la carrera');
+              } else if(carga > result.carga_maxima) {
+                $('#warningCarga').addClass('alert alert-danger');
+                $('#warningCarga').html('La carga de materias es mayor a la carga máxima (' + 
+                  result.carga_maxima + ') de la carrera');
+              }
+            }
+          });
+        }
+      };
+
+      $('#carga').focusout(verificarCargaMedia);
+      $('#carrera').change(verificarCargaMedia);
+
       $('#dependientes, #ingresos').focusout(function() {
         $('#warningIngresos').removeClass(); 
         $('#warningIngresos').empty();
