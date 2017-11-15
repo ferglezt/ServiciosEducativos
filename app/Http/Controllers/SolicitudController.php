@@ -86,8 +86,6 @@ class SolicitudController extends Controller
             'periodos' => Periodo::all(),
             'successMessage' => 'Solicitud dada de alta satisfactoriamente'
         ]);
-
-
     }
 
     private function insertOrUpdateEstudiante(Request $request) {
