@@ -6,6 +6,33 @@ $(document).ready(function() {
       });
       $('#submenu-becas').addClass('in');
 
+      $('#dependientes, #ingresos').keyup(function() {
+        $('#warningIngresos').removeClass(); 
+        $('#warningIngresos').empty();
+      });
+
+      $('#dependientes, #ingresos').focusout(function() {
+        $('#warningIngresos').removeClass(); 
+        $('#warningIngresos').empty();
+        
+        var ingresos = parseFloat($('#ingresos').val());
+        var dependientes = parseInt($('#dependientes').val());
+        var ingresoMinimo = parseFloat($('#ingreso_minimo').val());
+        
+        var res = ingresos / dependientes / ingresoMinimo;
+
+        if(!isNaN(res)) {
+          res = res.toFixed(1);
+          if(res > 4.0) {
+            $('#warningIngresos').addClass('alert alert-danger');
+            $('#warningIngresos').html('Los ingresos sobrepasan el límite establecido: ' + res);
+          } else {
+            $('#warningIngresos').addClass('alert alert-success');
+            $('#warningIngresos').html('Los ingresos están dentro de los límites: ' + res);
+          }
+        }
+      });
+
       $('#boleta').keyup(function() {
         $('#warningBoleta').removeClass();
         $('#warningBoleta').empty();

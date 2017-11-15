@@ -15,7 +15,7 @@
       <div class="row">
           @if(isset($error))
             <div class="row">
-              <div class="alert alert-danger col-md-4">
+              <div class="alert alert-danger col-md-4 col-md-offset-1">
                 <strong>Error:</strong> {{ $error }}
               </div>
             </div>
@@ -23,7 +23,7 @@
 
           @if(isset($successMessage))
             <div class="row">
-              <div class="alert alert-success col-md-4">
+              <div class="alert alert-success col-md-4 col-md-offset-1">
                 <strong>Operación exitosa</strong> {{ $successMessage }}
               </div>
             </div>
@@ -230,6 +230,13 @@
                 <label class="control-label col-sm-2" for="dependientes">Dependientes:</label>
                 <div class="col-sm-6">
                   <input type="text" id="dependientes" name="dependientes" placeholder="Dependientes" class="form-control"> 
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-6 col-sm-offset-1">
+                  <div id="warningIngresos">
+                
+                  </div>
                 </div>
               </div>
               <div class="form-group">
