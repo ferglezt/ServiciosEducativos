@@ -14,6 +14,7 @@ $(document).ready(function() {
         "scrollX": true,
         "scrollY": "200px",
         "scrollCollapse": true,
+        "order": [[ 6, "asc" ]], //por nombre
 	    "language": {
 	        "lengthMenu": "Mostrando _MENU_ registros por página",
 	        "zeroRecords": "No se encontraron registros",
