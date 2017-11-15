@@ -16,7 +16,8 @@ class SolicitudController extends Controller
     public function altaSolicitud(Request $request) {
         return view('altaSolicitud', [
             'carreras' => Carrera::all(),
-            'periodos' => Periodo::all()
+            'periodos' => Periodo::all(),
+            'ingreso_minimo' => IngresoMinimo::latest('id')->first()
         ]);
     }
 
@@ -59,6 +60,7 @@ class SolicitudController extends Controller
             return view('altaSolicitud', [
                 'carreras' => Carrera::all(),
                 'periodos' => Periodo::all(),
+                'ingreso_minimo' => IngresoMinimo::latest('id')->first(),
                 'error' => 'El folio debe ser un dato numérico'
             ]);
         }
@@ -72,6 +74,7 @@ class SolicitudController extends Controller
             return view('altaSolicitud', [
                 'carreras' => Carrera::all(),
                 'periodos' => Periodo::all(),
+                'ingreso_minimo' => IngresoMinimo::latest('id')->first(),
                 'error' => 'Esta solicitud ya existe en la base de datos'
             ]);
         }
@@ -82,6 +85,7 @@ class SolicitudController extends Controller
             return view('altaSolicitud', [
                 'carreras' => Carrera::all(),
                 'periodos' => Periodo::all(),
+                'ingreso_minimo' => IngresoMinimo::latest('id')->first(),
                 'error' => $e->getMessage()
             ]);
         }
@@ -89,6 +93,7 @@ class SolicitudController extends Controller
         return view('altaSolicitud', [
             'carreras' => Carrera::all(),
             'periodos' => Periodo::all(),
+            'ingreso_minimo' => IngresoMinimo::latest('id')->first(),
             'successMessage' => 'Solicitud dada de alta satisfactoriamente'
         ]);
     }
@@ -110,6 +115,7 @@ class SolicitudController extends Controller
                 'view' => view('altaSolicitud', [
                     'carreras' => Carrera::all(),
                     'periodos' => Periodo::all(),
+                    'ingreso_minimo' => IngresoMinimo::latest('id')->first(),
                     'error' => 'El campo boleta es obligatorio'
                 ])
             ];
@@ -138,6 +144,7 @@ class SolicitudController extends Controller
                 'view' => view('altaSolicitud', [
                     'carreras' => Carrera::all(),
                     'periodos' => Periodo::all(),
+                    'ingreso_minimo' => IngresoMinimo::latest('id')->first(),
                     'error' => 'No fue posible dar de alta o actualizar al estudiante'
                 ])
             ];
