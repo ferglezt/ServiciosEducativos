@@ -69,7 +69,9 @@ Route::group(['middleware' => ['custom.session']], function() {
 	Route::post('/updateEstatusSolicitud/{id}', 'SolicitudController@updateEstatusSolicitud')
 		->name('updateEstatusSolicitud');
 
-	Route::get('/ingresoMinimo/latest', 'ingresoMinimoController@getLatest');
+	Route::get('/ingresoMinimo/latest', 'IngresoMinimoController@getLatest');
+
+	Route::get('/findCarga/{carga_id}', 'CargaController@findCarga');
 });
 
 Route::get('/login', function() {

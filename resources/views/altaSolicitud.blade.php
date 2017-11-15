@@ -160,6 +160,13 @@
                 </div>
               </div>
               <div class="form-group">
+                <div class="col-sm-6 col-sm-offset-1">
+                  <div id="warningCarga">
+                
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
                 <label class="control-label col-sm-2" for="estatus_becario">Estatus Becario:</label>
                 <div class="col-sm-6">
                   <select id="estatus_becario" name="estatus_becario" class="form-control">
