@@ -17,6 +17,10 @@ class CreateIngresoMinimosTable extends Migration
             $table->increments('id');
             $table->decimal('ingreso_minimo_por_persona', 18, 5);
         });
+
+        DB::table('ingreso_minimo')->insert([
+            ['ingreso_minimo_por_persona' => 643.67]
+        ]);
     }
 
     /**

@@ -7,6 +7,7 @@ use App\Estudiante;
 use App\Solicitud;
 use App\Carrera;
 use App\Periodo;
+use App\IngresoMinimo;
 use Illuminate\Database\QueryException;
 use DB;
 
@@ -49,6 +50,10 @@ class SolicitudController extends Controller
         $solicitud->dependientes = $request->input('dependientes');
         $solicitud->observaciones = $request->input('observaciones');
         $solicitud->usuario_id = $request->session()->get('usuario_id', null);
+
+        if(IngresoMinimo::latest('id')->first()) {
+            $solicitud->ingreso_minimo_id = IngresoMinimo::latest('id')->first()->id;
+        }
 
         if(is_null($solicitud->folio) || !is_numeric($solicitud->folio)) {
             return view('altaSolicitud', [
@@ -192,6 +197,7 @@ class SolicitudController extends Controller
     		->join('estudiantes', 'estudiantes.id', '=', 'solicitudes.estudiante_id')
     		->join('carreras', 'carreras.id', '=', 'estudiantes.carrera_id')
             ->join('periodos', 'periodos.id', '=', 'solicitudes.periodo_id')
+            ->leftJoin('ingreso_minimo', 'ingreso_minimo.id', '=', 'solicitudes.ingreso_minimo_id')
     		->where([
     			['solicitudes.periodo_id', '=', $periodo],
     			['estudiantes.boleta', 'like', '%'.$q.'%']
@@ -232,7 +238,8 @@ class SolicitudController extends Controller
     			'estudiantes.oriundo as oriundo',
     			'estudiantes.email as email',
     			'estudiantes.telefono as telefono',
-    			'solicitudes.observaciones as observaciones'
+    			'solicitudes.observaciones as observaciones',
+                'ingreso_minimo.ingreso_minimo_por_persona as ingreso_minimo'
     		)
             ->get();
     	}
