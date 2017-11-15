@@ -239,6 +239,7 @@
                 </div>
               </div>
               <input type="hidden" name="estudiante_id" id="estudiante_id">
+              <input type="hidden" name="ingreso_minimo" id="ingreso_minimo" value="{{ $ingreso_minimo->ingreso_minimo_por_persona }}">
               <input type="hidden" name="_token" value="{{ csrf_token() }}">
               <div class="form-group">        
                 <div class="col-sm-offset-2 col-sm-10">
