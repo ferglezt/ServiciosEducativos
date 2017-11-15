@@ -18,7 +18,7 @@ class InsertAdminUser extends Migration
             [
                 'nombre' => 'FERNANDO GONZALEZ',
                 'email' => 'fernando.gonzalez.upiicsa@gmail.com',
-                'password' => Hash::make('linkysaria'),
+                'password' => Hash::make('12345'),
                 'rol_id' => 1
             ]
         ]);
