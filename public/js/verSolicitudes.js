@@ -71,9 +71,9 @@ $(document).ready(function() {
                     if(isNaN(relacionIngresosDependientes)) {
                         relacionIngresosDependientes = null;
                     } else if(relacionIngresosDependientes > 4.0) {
-                        hiddenMessage.addClass('alert alert-danger');
+                        hiddenMessage.addClass('alert alert-danger text-center');
                     } else if(relacionIngresosDependientes > 0 && relacionIngresosDependientes <= 4.0) {
-                        hiddenMessage.addClass('alert alert-success');
+                        hiddenMessage.addClass('alert alert-success text-center');
                     }
 
                     hiddenMessage.html(relacionIngresosDependientes);
