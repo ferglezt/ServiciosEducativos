@@ -77,8 +77,9 @@
         </div>
       </div>
 
-      <div id="hiddenButtonDiv">
+      <div id="hiddenDiv">
         <button id="hiddenButton"></button>
+        <div id="hiddenMessage"></div>
       </div>
 
       <!-- Modal Cambio estatus-->

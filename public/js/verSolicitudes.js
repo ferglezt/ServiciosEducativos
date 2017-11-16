@@ -7,7 +7,7 @@ $(document).ready(function() {
 
   	$('#submenu-becas').addClass('in');
 
-    $('#hiddenButtonDiv').hide();
+    $('#hiddenDiv').hide();
 
     var table = $('#becasTable').DataTable({
     	"searching": false,
@@ -54,6 +54,30 @@ $(document).ready(function() {
                     hiddenButton.attr('data-nombre', obj.nombre);
                     hiddenButton.attr('data-estatus', obj.estatus_solicitud);
 
+                    var promedio = parseFloat(obj.promedio).toFixed(2);
+                    var ingresos = parseFloat(obj.ingresos).toFixed(2);
+                    var ingresoMinimo = parseFloat(obj.ingreso_minimo).toFixed(2);
+                    var dependientes = parseInt(obj.dependientes);
+                    var relacionIngresosDependientes = (ingresos / dependientes / ingresoMinimo).toFixed(2); 
+
+                    if(isNaN(promedio)) promedio = null;
+                    if(isNaN(ingresos)) ingresos = null;
+                    if(isNaN(ingresoMinimo)) ingresoMinimo = null;
+                    if(isNaN(dependientes)) dependientes = null;
+
+                    var hiddenMessage = $('#hiddenMessage').clone();
+                    hiddenMessage.removeClass();
+
+                    if(isNaN(relacionIngresosDependientes)) {
+                        relacionIngresosDependientes = null;
+                    } else if(relacionIngresosDependientes > 4.0) {
+                        hiddenMessage.addClass('alert alert-danger');
+                    } else if(relacionIngresosDependientes > 0 && relacionIngresosDependientes <= 4.0) {
+                        hiddenMessage.addClass('alert alert-success');
+                    }
+
+                    hiddenMessage.html(relacionIngresosDependientes);
+
                     return[
                         hiddenButton.get(0).outerHTML,
                         obj.folio,
@@ -64,7 +88,7 @@ $(document).ready(function() {
                         obj.nombre,
                         obj.carrera,
                         obj.semestre,
-                        obj.promedio,
+                        promedio,
                         obj.estatus_estudiante,
                         obj.carga,
                         obj.estatus_becario,
@@ -75,8 +99,10 @@ $(document).ready(function() {
                         obj.mapa,
                         obj.fecha_recibido,
                         obj.comprobante_ingresos,
-                        obj.ingresos,
-                        obj.dependientes,
+                        ingresos,
+                        dependientes,
+                        ingresoMinimo,
+                        hiddenMessage.get(0).outerHTML,
                         obj.oriundo,
                         obj.email,
                         obj.telefono,

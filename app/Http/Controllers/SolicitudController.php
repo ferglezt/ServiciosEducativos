@@ -179,10 +179,12 @@ class SolicitudController extends Controller
                 (object)['data_column' => 19, 'nombre' => 'Comprobante Oficial'],
                 (object)['data_column' => 20, 'nombre' => 'Ingresos'],
                 (object)['data_column' => 21, 'nombre' => 'Dependientes'],
-                (object)['data_column' => 22, 'nombre' => 'Oriundo'],
-                (object)['data_column' => 23, 'nombre' => 'Email'],
-                (object)['data_column' => 24, 'nombre' => 'Teléfono'],
-                (object)['data_column' => 25, 'nombre' => 'Observaciones'],
+                (object)['data_column' => 22, 'nombre' => 'Ingreso Mínimo'],
+                (object)['data_column' => 23, 'nombre' => 'Ingresos/Dependientes'],
+                (object)['data_column' => 24, 'nombre' => 'Oriundo'],
+                (object)['data_column' => 25, 'nombre' => 'Email'],
+                (object)['data_column' => 26, 'nombre' => 'Teléfono'],
+                (object)['data_column' => 27, 'nombre' => 'Observaciones'],
             ]
         ]);
 	}
