@@ -29,6 +29,8 @@ $(document).ready(function() {
         }
     });
 
+    new $.fn.dataTable.FixedColumns(table);
+
     var search = function(query, periodo) {
         $.ajax({
             url: '/searchSolicitud?periodo=' + periodo + '&q=' + query,

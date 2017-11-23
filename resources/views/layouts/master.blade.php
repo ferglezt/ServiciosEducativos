@@ -10,6 +10,7 @@
 	<script src="{{ URL::to('/') }}/js/jquery.js"></script>
 	<script src="{{ URL::to('/') }}/js/bootstrap.js"></script>
 	<script src="{{ URL::to('/') }}/js/datatables.js"></script>
+	<script src="{{ URL::to('/') }}/js/fixedColumns.js"></script>
 	<script src="{{ URL::to('/') }}/js/master.js"></script>
 
 	@stack('scripts')
