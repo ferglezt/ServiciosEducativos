@@ -6,11 +6,13 @@
 	<link rel="stylesheet" href="{{ URL::to('/') }}/css/bootstrap.css">
 	<link rel="stylesheet" href="{{ URL::to('/') }}/css/customnav.css">
 	<link rel="stylesheet" href="{{ URL::to('/') }}/css/datatables.css">
+	<link rel="stylesheet" href="{{ URL::to('/') }}/jquery-ui/jquery-ui.min.css">
 
 	<script src="{{ URL::to('/') }}/js/jquery.js"></script>
 	<script src="{{ URL::to('/') }}/js/bootstrap.js"></script>
 	<script src="{{ URL::to('/') }}/js/datatables.js"></script>
 	<script src="{{ URL::to('/') }}/js/fixedColumns.js"></script>
+	<script src="{{ URL::to('/') }}/jquery-ui/jquery-ui.min.js"></script>
 	<script src="{{ URL::to('/') }}/js/master.js"></script>
 
 	@stack('scripts')

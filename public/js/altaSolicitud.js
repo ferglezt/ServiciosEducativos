@@ -6,6 +6,12 @@ $(document).ready(function() {
   });
   $('#submenu-becas').addClass('in');
 
+  $('#fecha_recibido').datepicker({
+    dateFormat: 'dd/mm/yy'
+  });
+
+  $('#fecha_recibido').datepicker('setDate', new Date());
+
   $('#dependientes, #ingresos').keyup(function() {
     $('#warningIngresos').removeClass(); 
     $('#warningIngresos').empty();
