@@ -15,6 +15,9 @@ $(document).ready(function() {
         "scrollY": "200px",
         "scrollCollapse": true,
         "order": [[ 7, "asc" ]], //por nombre
+        "fixedColumns": {
+            "leftColumns": 2
+        },
 	    "language": {
 	        "lengthMenu": "Mostrando _MENU_ registros por página",
 	        "zeroRecords": "No se encontraron registros",
@@ -28,8 +31,6 @@ $(document).ready(function() {
 	        }
         }
     });
-
-    new $.fn.dataTable.FixedColumns(table);
 
     var search = function(query, periodo) {
         $.ajax({
