@@ -79,6 +79,7 @@
 
       <div id="hiddenDiv">
         <button id="hiddenButton"></button>
+        <button id="editarHiddenButton"></button>
         <div id="hiddenMessage"></div>
       </div>
 

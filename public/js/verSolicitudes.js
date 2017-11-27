@@ -51,18 +51,12 @@ $(document).ready(function() {
 
                     hiddenButton.addClass(btnClass);
                     hiddenButton.html(obj.estatus_solicitud);
+                    hiddenButton.removeAttr('id');
                     hiddenButton.attr('data-toggle', 'modal');
                     hiddenButton.attr('data-target', '#modalCambioEstatus');
                     hiddenButton.attr('data-id', obj.id);
                     hiddenButton.attr('data-nombre', obj.nombre);
                     hiddenButton.attr('data-estatus', obj.estatus_solicitud);
-
-                    var editarButton = $('#hiddenButton').clone();
-                    editarButton.removeClass();
-                    editarButton.empty();
-                    editarButton.html('Editar')
-                    editarButton.addClass('btn btn-xs btn-link editar-solicitud');
-                    editarButton.attr('data-id', obj.id);
 
                     var promedio = parseFloat(obj.promedio).toFixed(2);
                     var ingresos = parseFloat(obj.ingresos).toFixed(2);
@@ -90,7 +84,7 @@ $(document).ready(function() {
 
                     return[
                         hiddenButton.get(0).outerHTML,
-                        editarButton.get(0).outerHTML,
+                        '<a href="editarSolicitud/' + obj.id + '">Editar</a>',
                         obj.folio,
                         obj.etiqueta,
                         obj.boleta,
@@ -122,7 +116,6 @@ $(document).ready(function() {
                 });
                 table.clear();
                 table.rows.add(arr).draw();
-
             }
         });
     };
