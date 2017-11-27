@@ -102,6 +102,10 @@ class SolicitudController extends Controller
         ]);
     }
 
+    public function editarSolicitud(Request $request, $solicitud_id) {
+        return 'Solicitud'.$solicitud_id; 
+    }
+
     private function insertOrUpdateEstudiante(Request $request, $returnViewName = '') {
         $estudiante_id = $request->input('estudiante_id');
         $boleta = $request->input('boleta');
