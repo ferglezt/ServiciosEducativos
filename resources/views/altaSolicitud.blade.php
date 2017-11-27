@@ -189,7 +189,6 @@
                     <option value="REVALIDANTE">INSTITUCIONAL</option>
                     <option value="TELMEX">TELMEX</option>
                     <option value="BECALOS">BECALOS</option>
-                    <option value="TRANSPORTE">TRANSPORTE</option>
                     <option value="MANUTENCION TRANSPORTE">MANUTENCION TRANSPORTE</option>
                     <option value="INCTITUCIONAL TRANSPORTE">INSTITUCIONAL TRANSPORTE</option>
                     <option value="BECALOS TRANSPORTE">BECALOS TRANSPORTE</option>
