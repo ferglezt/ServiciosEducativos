@@ -14,7 +14,7 @@ $(document).ready(function() {
         "scrollX": true,
         "scrollY": "200px",
         "scrollCollapse": true,
-        "order": [[ 6, "asc" ]], //por nombre
+        "order": [[ 7, "asc" ]], //por nombre
 	    "language": {
 	        "lengthMenu": "Mostrando _MENU_ registros por página",
 	        "zeroRecords": "No se encontraron registros",
@@ -56,6 +56,13 @@ $(document).ready(function() {
                     hiddenButton.attr('data-nombre', obj.nombre);
                     hiddenButton.attr('data-estatus', obj.estatus_solicitud);
 
+                    var editarButton = $('#hiddenButton').clone();
+                    editarButton.removeClass();
+                    editarButton.empty();
+                    editarButton.html('Editar')
+                    editarButton.addClass('btn btn-xs btn-link editar-solicitud');
+                    editarButton.attr('data-id', obj.id);
+
                     var promedio = parseFloat(obj.promedio).toFixed(2);
                     var ingresos = parseFloat(obj.ingresos).toFixed(2);
                     var ingresoMinimo = parseFloat(obj.ingreso_minimo).toFixed(2);
@@ -82,6 +89,7 @@ $(document).ready(function() {
 
                     return[
                         hiddenButton.get(0).outerHTML,
+                        editarButton.get(0).outerHTML,
                         obj.folio,
                         obj.etiqueta,
                         obj.boleta,
