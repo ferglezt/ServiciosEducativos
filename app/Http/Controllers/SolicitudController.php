@@ -52,6 +52,10 @@ class SolicitudController extends Controller
         $solicitud->observaciones = $request->input('observaciones');
         $solicitud->usuario_id = $request->session()->get('usuario_id', null);
 
+        if(strcasecmp($solicitud->beca_solicitada, 'INSTITUCIONAL') == 0) {
+            $solicitud->beca_solicitada = 'INSTITUCIONAL '.$request->input('tipo_institucional');
+        }
+
         if(IngresoMinimo::latest('id')->first()) {
             $solicitud->ingreso_minimo_id = IngresoMinimo::latest('id')->first()->id;
         }

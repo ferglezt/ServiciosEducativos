@@ -186,14 +186,21 @@
                 <div class="col-sm-6">
                   <select id="beca_solicitada" name="beca_solicitada" class="form-control">
                     <option value="MANUTENCION">MANUTENCION</option>
-                    <option value="REVALIDANTE">INSTITUCIONAL</option>
+                    <option value="INSTITUCIONAL">INSTITUCIONAL</option>
                     <option value="TELMEX">TELMEX</option>
                     <option value="BECALOS">BECALOS</option>
                     <option value="MANUTENCION TRANSPORTE">MANUTENCION TRANSPORTE</option>
-                    <option value="INCTITUCIONAL TRANSPORTE">INSTITUCIONAL TRANSPORTE</option>
+                    <option value="INSTITUCIONAL TRANSPORTE">INSTITUCIONAL TRANSPORTE</option>
                     <option value="BECALOS TRANSPORTE">BECALOS TRANSPORTE</option>
                     <option value="S/B">S/B</option>
                   </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-6 col-sm-offset-1">
+                  <div id="warningBeca">
+                
+                  </div>
                 </div>
               </div>
               <div class="form-group">
@@ -253,6 +260,7 @@
               </div>
               <input type="hidden" name="estudiante_id" id="estudiante_id">
               <input type="hidden" name="ingreso_minimo" id="ingreso_minimo" value="{{ $ingreso_minimo->ingreso_minimo_por_persona }}">
+              <input type="hidden" name="tipo_institucional" id="tipo_institucional">
               <input type="hidden" name="_token" value="{{ csrf_token() }}">
               <div class="form-group">        
                 <div class="col-sm-offset-2 col-sm-10">

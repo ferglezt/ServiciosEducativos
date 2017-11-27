@@ -22,6 +22,67 @@ $(document).ready(function() {
     $('#warningCarga').empty();
   });
 
+  var validarBeca = function() {
+    $('#warningBeca').removeClass();
+    $('#warningBeca').empty();
+
+    var promedio = parseFloat($('#promedio').val());
+    var carga = parseInt($('#carga').val());
+    var carrera = $('#carrera').val();
+    var semestre = parseInt($('#semestre').val());
+    var beca = $('#beca_solicitada').val();
+    var estatus = $('#estatus_estudiante').val();
+
+    if(isNaN(promedio) || isNaN(carga) || isNaN(semestre)) {
+      $('#warningBeca').addClass('alert alert-danger');
+      $('#warningBeca').html('El promedio, la carga y el semestre deben ser datos numéricos');
+      return;
+    }
+
+    $.ajax({
+      url: '/findCarreraConCargas/' + carrera,
+      success: function(result,status,xhr) {
+        if(beca == 'MANUTENCION') {
+          if(estatus == 'IRREGULAR') {
+              $('#warningBeca').addClass('alert alert-danger');
+              $('#warningBeca').html('Para solicitar Manutención es necesario' +
+                          ' ser alumno regular');
+          } else if(semestre >= 5) {
+            if(carga < result.carga_media) {
+              $('#warningBeca').addClass('alert alert-danger');
+              $('#warningBeca').html('Para solicitar Manutención es necesario tener' +
+                          ' inscrita la carga media de materias después de 5to semestre');
+            } else if(promedio < 8.0) {
+              $('#warningBeca').addClass('alert alert-danger');
+              $('#warningBeca').html('Para solicitar Manutención es necesario tener' +
+                          ' promedio mayor a 8.0 después de 5to semestre');
+            } 
+          }
+        }
+
+        if(beca == 'INSTITUCIONAL') {
+          if(promedio >= 6.0 && promedio <= 7.99) {
+            $('#warningBeca').addClass('alert alert-info');
+            $('#warningBeca').html('Promedio: ' + promedio + '. Tipo A');
+            $('#tipo_institucional').val('A');
+          } else if(promedio >= 8.0 && promedio <= 9.49) {
+            $('#warningBeca').addClass('alert alert-info');
+            $('#warningBeca').html('Promedio: ' + promedio + '. Tipo B');
+            $('#tipo_institucional').val('B');
+          } else if(promedio >= 9.5 && promedio <= 10.0) {
+            $('#warningBeca').addClass('alert alert-info');
+            $('#warningBeca').html('Promedio: ' + promedio + '. Tipo C');
+            $('#tipo_institucional').val('C');
+          } else {
+            $('#warningBeca').addClass('alert alert-danger');
+            $('#warningBeca').html('Promedio fuera de rango: ' + promedio);
+            $('#tipo_institucional').val('');
+          }
+        }
+      }
+    });
+  };
+
   var verificarCargaMedia = function() {
     $('#warningCarga').removeClass(); 
     $('#warningCarga').empty();
@@ -53,6 +114,14 @@ $(document).ready(function() {
 
   $('#carga').focusout(verificarCargaMedia);
   $('#carrera').change(verificarCargaMedia);
+
+  $('#carga').focusout(validarBeca);
+  $('#carrera').change(validarBeca);
+  $('#semestre').focusout(validarBeca);
+  $('#beca_solicitada').change(validarBeca);
+  $('#promedio').focusout(validarBeca);
+  $('#estatus_estudiante').change(validarBeca);
+
 
   $('#dependientes, #ingresos').focusout(function() {
     $('#warningIngresos').removeClass(); 

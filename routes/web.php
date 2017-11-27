@@ -72,6 +72,8 @@ Route::group(['middleware' => ['custom.session']], function() {
 	Route::get('/ingresoMinimo/latest', 'IngresoMinimoController@getLatest');
 
 	Route::get('/findCarga/{carga_id}', 'CargaController@findCarga');
+
+	Route::get('/findCarreraConCargas/{carrera_id}', 'CargaController@joinCarrerasCargas');
 });
 
 Route::get('/login', function() {
