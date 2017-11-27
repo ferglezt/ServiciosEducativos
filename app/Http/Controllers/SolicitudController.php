@@ -22,7 +22,7 @@ class SolicitudController extends Controller
     }
 
     public function attemptAltaSolicitud(Request $request) {
-        $insertOrUpdateEstudiante = self::insertOrUpdateEstudiante($request);
+        $insertOrUpdateEstudiante = self::insertOrUpdateEstudiante($request, 'altaSolicitud');
 
         if(!$insertOrUpdateEstudiante->result) {
             return $insertOrUpdateEstudiante->view;
@@ -102,7 +102,7 @@ class SolicitudController extends Controller
         ]);
     }
 
-    private function insertOrUpdateEstudiante(Request $request) {
+    private function insertOrUpdateEstudiante(Request $request, $returnViewName = '') {
         $estudiante_id = $request->input('estudiante_id');
         $boleta = $request->input('boleta');
         $nombre = $request->input('nombre');
@@ -116,7 +116,7 @@ class SolicitudController extends Controller
         if(!isset($boleta) || $boleta == '') {
             return (object)[
                 'result' => false,
-                'view' => view('altaSolicitud', [
+                'view' => view($returnViewName, [
                     'carreras' => Carrera::all(),
                     'periodos' => Periodo::all(),
                     'ingreso_minimo' => IngresoMinimo::latest('id')->first(),
@@ -145,7 +145,7 @@ class SolicitudController extends Controller
         } catch(QueryException $e) {
             return (object)[
                 'result' => false,
-                'view' => view('altaSolicitud', [
+                'view' => view($returnViewName, [
                     'carreras' => Carrera::all(),
                     'periodos' => Periodo::all(),
                     'ingreso_minimo' => IngresoMinimo::latest('id')->first(),
