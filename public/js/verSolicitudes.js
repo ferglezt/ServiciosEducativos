@@ -84,7 +84,7 @@ $(document).ready(function() {
 
                     return[
                         hiddenButton.get(0).outerHTML,
-                        '<a href="editarSolicitud/' + obj.id + '">Editar</a>',
+                        '<a href="editarSolicitud/' + obj.id + '" target="_blank">Editar</a>',
                         obj.folio,
                         obj.etiqueta,
                         obj.boleta,
