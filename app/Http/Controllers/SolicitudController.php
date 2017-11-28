@@ -103,7 +103,15 @@ class SolicitudController extends Controller
     }
 
     public function editarSolicitud(Request $request, $solicitud_id) {
-        return 'Solicitud'.$solicitud_id; 
+        $solicitud = Solicitud::findOrFail($solicitud_id);
+        $estudiante = Estudiante::findOrFail($solicitud->estudiante_id);
+
+        return view('editarSolicitud', [
+            'carreras' => Carrera::all(),
+            'periodos' => Periodo::all(),
+            'estudiante' => $estudiante,
+            'solicitud' => $solicitud
+        ]);
     }
 
     private function insertOrUpdateEstudiante(Request $request, $returnViewName = '') {
