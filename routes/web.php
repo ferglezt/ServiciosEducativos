@@ -76,6 +76,8 @@ Route::group(['middleware' => ['custom.session']], function() {
 	Route::get('/findCarreraConCargas/{carrera_id}', 'CargaController@joinCarrerasCargas');
 
 	Route::get('/editarSolicitud/{solicitud_id}', 'SolicitudController@editarSolicitud');
+
+	Route::post('/attemptEdicionSolicitud', 'SolicitudController@attemptEdicionSolicitud');
 });
 
 Route::get('/login', function() {

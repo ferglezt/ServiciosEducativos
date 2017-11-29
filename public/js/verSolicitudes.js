@@ -165,10 +165,6 @@ $(document).ready(function() {
         search($('#search').val(), $('#periodo').val());
     });
 
-    $('#periodo').change(function() {
-        search($('#search').val(), $(this).val());
-    });
-
     var toggleColumns = function() {
         $('.toggle-column').each(function() {
             var column = table.column($(this).attr('data-column'));

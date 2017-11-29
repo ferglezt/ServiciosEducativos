@@ -22,10 +22,15 @@ class SolicitudController extends Controller
     }
 
     public function attemptAltaSolicitud(Request $request) {
-        $insertOrUpdateEstudiante = self::insertOrUpdateEstudiante($request, 'altaSolicitud');
+        $insertOrUpdateEstudiante = self::insertOrUpdateEstudiante($request);
 
         if(!$insertOrUpdateEstudiante->result) {
-            return $insertOrUpdateEstudiante->view;
+            return view('altaSolicitud', [
+                'error' => $insertOrUpdateEstudiante->error,
+                'carreras' => Carrera::all(),
+                'periodos' => Periodo::all(),
+                'ingreso_minimo' => IngresoMinimo::latest('id')->first()
+            ]);
         }
 
         $solicitud = new Solicitud;
@@ -114,7 +119,77 @@ class SolicitudController extends Controller
         ]);
     }
 
-    private function insertOrUpdateEstudiante(Request $request, $returnViewName = '') {
+    public function attemptEdicionSolicitud(Request $request) {
+        $solicitud = Solicitud::findOrFail($request->input('solicitud_id'));
+        $estudiante = Estudiante::findOrFail($request->input('estudiante_id'));
+
+        $insertOrUpdateEstudiante = self::insertOrUpdateEstudiante($request);
+
+        if(!$insertOrUpdateEstudiante->result) {
+            return view('editarSolicitud', [
+                'carreras' => Carrera::all(),
+                'periodos' => Periodo::all(),
+                'estudiante' => $estudiante,
+                'solicitud' => $solicitud,
+                'error' => $insertOrUpdateEstudiante->error
+            ]);
+        }
+
+        $solicitud->estudiante_id = $insertOrUpdateEstudiante->estudiante_id;
+        $solicitud->anio = $request->input('anio');
+        $solicitud->periodo_id = $request->input('periodo_id');
+        $solicitud->folio = $request->input('folio');
+        $solicitud->etiqueta = $request->input('etiqueta');
+        $solicitud->semestre = $request->input('semestre');
+        $solicitud->promedio = $request->input('promedio');
+        $solicitud->estatus_estudiante = $request->input('estatus_estudiante');
+        $solicitud->carga = $request->input('carga');
+        $solicitud->estatus_becario = $request->input('estatus_becario');
+        $solicitud->beca_anterior = $request->input('beca_anterior');
+        $solicitud->beca_solicitada = $request->input('beca_solicitada');
+        $solicitud->folio_manutencion = $request->input('folio_manutencion');
+        $solicitud->folio_transporte = $request->input('folio_transporte');
+        $solicitud->comprobante_ingresos = $request->input('comprobante_ingresos');
+        $solicitud->mapa = $request->input('mapa');
+        $solicitud->fecha_recibido = $request->input('fecha_recibido');
+        $solicitud->ingresos = $request->input('ingresos');
+        $solicitud->dependientes = $request->input('dependientes');
+        $solicitud->observaciones = $request->input('observaciones');
+        $solicitud->usuario_id = $request->session()->get('usuario_id', null);
+
+        if(is_null($solicitud->folio) || !is_numeric($solicitud->folio)) {
+            return view('editarSolicitud', [
+                'carreras' => Carrera::all(),
+                'periodos' => Periodo::all(),
+                'estudiante' => $estudiante,
+                'solicitud' => $solicitud,
+                'error' => 'El folio debe ser un dato numérico'
+            ]);
+        }
+
+        try {
+            $solicitud->save();
+        } catch(QueryException $e) {
+            return view('editarSolicitud', [
+                'carreras' => Carrera::all(),
+                'periodos' => Periodo::all(),
+                'estudiante' => $estudiante,
+                'solicitud' => $solicitud,
+                'error' => $e->getMessage()
+            ]);
+        }
+
+        return view('editarSolicitud', [
+            'carreras' => Carrera::all(),
+            'periodos' => Periodo::all(),
+            'estudiante' => $estudiante,
+            'solicitud' => $solicitud,
+            'successMessage' => 'Solicitud editada satisfactoriamente'
+        ]);
+
+    }
+
+    private function insertOrUpdateEstudiante(Request $request) {
         $estudiante_id = $request->input('estudiante_id');
         $boleta = $request->input('boleta');
         $nombre = $request->input('nombre');
@@ -128,12 +203,7 @@ class SolicitudController extends Controller
         if(!isset($boleta) || $boleta == '') {
             return (object)[
                 'result' => false,
-                'view' => view($returnViewName, [
-                    'carreras' => Carrera::all(),
-                    'periodos' => Periodo::all(),
-                    'ingreso_minimo' => IngresoMinimo::latest('id')->first(),
-                    'error' => 'El campo boleta es obligatorio'
-                ])
+                'error' => 'El campo boleta es obligatorio'
             ];
         }
 
@@ -157,16 +227,11 @@ class SolicitudController extends Controller
         } catch(QueryException $e) {
             return (object)[
                 'result' => false,
-                'view' => view($returnViewName, [
-                    'carreras' => Carrera::all(),
-                    'periodos' => Periodo::all(),
-                    'ingreso_minimo' => IngresoMinimo::latest('id')->first(),
-                    'error' => 'No fue posible dar de alta o actualizar al estudiante'
-                ])
+                'error' => 'No fue posible dar de alta o actualizar al estudiante'
             ];
         }
 
-        return (object)['result' => true, 'view' => null, 'estudiante_id' => $estudiante->id];
+        return (object)['result' => true, 'error' => null, 'estudiante_id' => $estudiante->id];
     }
 
 	public function verSolicitudes(Request $request) {

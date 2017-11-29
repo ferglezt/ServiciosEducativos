@@ -36,7 +36,7 @@
             </div>
           @endif
 
-          <form class="form-horizontal" action="#" method="post">
+          <form class="form-horizontal" action="{{ action('SolicitudController@attemptEdicionSolicitud') }}" method="post">
               
               <div id="datos-estudiante">
                 <div class="form-group">
@@ -259,7 +259,7 @@
               <div class="form-group">
                 <label class="control-label col-sm-2" for="fecha_recibido">Fecha Recibido:</label>
                 <div class="col-sm-6">
-                  <input type="text" id="fecha_recibido" value="{{ date_format(date_create($solicitud->fecha_recibido), "d/m/Y") }}" name="fecha_recibido" placeholder="Fecha Recibido" class="form-control"> 
+                  <input type="text" id="fecha_recibido" value="{{ $solicitud->fecha_recibido }}" name="fecha_recibido" placeholder="Fecha Recibido" class="form-control"> 
                 </div>
               </div>
               <div class="form-group">
