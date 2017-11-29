@@ -78,6 +78,8 @@ Route::group(['middleware' => ['custom.session']], function() {
 	Route::get('/editarSolicitud/{solicitud_id}', 'SolicitudController@editarSolicitud');
 
 	Route::post('/attemptEdicionSolicitud', 'SolicitudController@attemptEdicionSolicitud');
+
+	Route::get('/estadisticas/{periodo}', 'SolicitudController@estadisticas');
 });
 
 Route::get('/login', function() {

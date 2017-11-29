@@ -13,6 +13,53 @@ use DB;
 
 class SolicitudController extends Controller
 {
+    public function estadisticas(Request $request, $periodo) {
+        $solicitadas = DB::table('solicitudes')
+            ->select(DB::raw(
+                'COUNT(*) as total,'.
+                "SUM(CASE WHEN estatus_solicitud='PENDIENTE' THEN 1 ELSE 0 END) as pendientes,".
+                "SUM(CASE WHEN estatus_solicitud='ACEPTADO' THEN 1 ELSE 0 END) as aceptados,".
+                "SUM(CASE WHEN estatus_solicitud='LISTA DE ESPERA' THEN 1 ELSE 0 END) as lista_de_espera,".
+                "SUM(CASE WHEN estatus_solicitud='RECHAZADO' THEN 1 ELSE 0 END) as rechazados"
+            ))
+            ->where('periodo_id', '=', $periodo)
+            ->orderBy('total', 'desc')
+            ->get();
+
+        $porBeca = DB::table('solicitudes')
+            ->select(DB::raw(
+                'beca_solicitada, COUNT(*) as total,'.
+                "SUM(CASE WHEN estatus_solicitud='PENDIENTE' THEN 1 ELSE 0 END) as pendientes,".
+                "SUM(CASE WHEN estatus_solicitud='ACEPTADO' THEN 1 ELSE 0 END) as aceptados,".
+                "SUM(CASE WHEN estatus_solicitud='LISTA DE ESPERA' THEN 1 ELSE 0 END) as lista_de_espera,".
+                "SUM(CASE WHEN estatus_solicitud='RECHAZADO' THEN 1 ELSE 0 END) as rechazados"
+            ))
+            ->where('periodo_id', '=', $periodo)
+            ->groupBy('beca_solicitada')
+            ->orderBy('total', 'desc')
+            ->get();
+
+        $porGenero = DB::table('solicitudes')
+            ->join('estudiantes', 'estudiantes.id', '=', 'solicitudes.estudiante_id')
+            ->select(DB::raw(
+                'COUNT(solicitudes.id) as total,'.
+                "SUM(CASE WHEN genero='F' THEN 1 ELSE 0 END) as mujeres,".
+                "SUM(CASE WHEN genero='M' THEN 1 ELSE 0 END) as hombres"
+            ))
+            ->where('periodo_id', '=', $periodo)
+            ->orderBy('total', 'desc')
+            ->get();
+
+        $data = (object)[
+            'solicitadas' => $solicitadas,
+            'porBeca' => $porBeca,
+            'porGenero' => $porGenero
+        ];
+
+        return response()->json($data, 200, ['Content-type'=> 'application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
+
+    }
+
     public function altaSolicitud(Request $request) {
         return view('altaSolicitud', [
             'carreras' => Carrera::all(),
