@@ -278,8 +278,8 @@
                   <input type="text" id="observaciones" value="{{ $solicitud->observaciones }}" name="observaciones" placeholder="Observaciones" class="form-control"> 
                 </div>
               </div>
-              <input type="hidden" name="estudiante_id" id="estudiante_id">
-              <input type="hidden" name="tipo_institucional" id="tipo_institucional">
+              <input type="hidden" name="estudiante_id" id="estudiante_id" value="{{ $estudiante->id }}">
+              <input type="hidden" name="solicitud_id" id="solicitud_id" value="{{ $solicitud->id }}">
               <input type="hidden" name="_token" value="{{ csrf_token() }}">
               <div class="form-group">        
                 <div class="col-sm-offset-2 col-sm-10">

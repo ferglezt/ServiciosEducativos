@@ -30,10 +30,19 @@
             </select>
           </div>
         </div>
-      	<div class="col-md-4">
+      	<div class="col-md-8">
       	  <div class="form-group">
       			<label for="search">Buscar:</label>
-      			<input type="text" class="form-control" id="search" placeholder="Nombre, Boleta o Folio">
+            <div class="row">
+              <div class="col-sm-6">
+                <input type="text" class="form-control" id="search" placeholder="Nombre, Boleta o Folio">
+              </div>
+              <div class="col-sm-2">
+                <button class="btn btn-default btn-md form-control" id="btnBuscar">Buscar</button>
+              </div>
+              
+            </div>
+      			
       		</div>
       	</div>
       </div>

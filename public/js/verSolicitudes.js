@@ -161,8 +161,8 @@ $(document).ready(function() {
         });
     });
 
-    $('#search').keyup(function() {
-        search($(this).val(), $('#periodo').val());
+    $('#btnBuscar').click(function() {
+        search($('#search').val(), $('#periodo').val());
     });
 
     $('#periodo').change(function() {
