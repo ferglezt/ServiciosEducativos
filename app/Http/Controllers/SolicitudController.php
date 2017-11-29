@@ -13,6 +13,13 @@ use DB;
 
 class SolicitudController extends Controller
 {
+
+    public function verEstadisticas(Request $request) {
+        return view('verEstadisticas', [
+            'periodos' => Periodo::all()
+        ]);
+    }
+
     public function estadisticas(Request $request, $periodo) {
         $solicitadas = DB::table('solicitudes')
             ->select(DB::raw(

@@ -43,7 +43,6 @@ $(document).ready(function() {
     			});
     			table.clear();
     			table.rows.add(arr).draw();
-
     		}
     	});
     });

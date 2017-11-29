@@ -43,8 +43,8 @@
     <li id="item-ver-becas">
       <a href="{{ URL::to('/verSolicitudes') }}">Ver Solicitudes</a>
     </li>
-    <li id="item-estadisticas-becas">
-      <a href="#">Estadísticas</a>
+    <li id="item-ver-estadisticas">
+      <a href="{{ URL::to('/verEstadisticas') }}">Estadísticas</a>
     </li>
   </ul>
 </li>
