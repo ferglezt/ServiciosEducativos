@@ -61,11 +61,11 @@
 
       <div class="row">
         <div class="col-md-12">
-          <div class="col-md-12">
-          @foreach($columnas as $c)
-            <label class="checkbox-inline"><input class="toggle-column" type="checkbox" data-column="{{ $c->data_column }}" checked>{{ $c->nombre }}</label>
-          @endforeach
-        </div>
+
+          @for($i = 0; $i < count($columnas); $i++)
+            <label class="checkbox-inline"><input class="toggle-column" type="checkbox" data-column="{{ $i }}" checked>{{ $columnas[$i] }}</label>
+          @endfor
+        
         </div>
       </div>
 
@@ -76,7 +76,7 @@
           <table id="becasTable" class="cell-border" width="100%" style="font-size: 12px;">
           	<thead>
           	  @foreach($columnas as $c)
-                <th>{{ $c->nombre }}</th>
+                <th>{{ $c }}</th>
               @endforeach
           	</thead>
           	<tbody>
