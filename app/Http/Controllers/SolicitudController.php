@@ -243,6 +243,19 @@ class SolicitudController extends Controller
 
     }
 
+    public function findSolicitud(Request $request) {
+        $solicitud = Solicitud::where([['periodo_id', '=', $request->input('periodo')],
+                            ['etiqueta', '=', $request->input('etiqueta')]])->firstOrFail();
+        $estudiante = Estudiante::findOrFail($solicitud->estudiante_id);
+
+        $data = (object)[
+            'solicitud' => $solicitud,
+            'estudiante' => $estudiante
+        ];
+
+        return response()->json($data, 200, ['Content-type'=> 'application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
+    }
+
     private function insertOrUpdateEstudiante(Request $request) {
         $estudiante_id = $request->input('estudiante_id');
         $boleta = $request->input('boleta');

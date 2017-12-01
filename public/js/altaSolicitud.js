@@ -25,11 +25,36 @@ $(document).ready(function() {
   $('#etiqueta').val('IPN/O2M503/3S.8/');
 
   $('#etiqueta').keyup(function() {
+    $('#warningEtiqueta').removeClass();
+    $('#warningEtiqueta').empty();
+
     var current = $(this).val().replace('IPN/O2M503/3S.8/', '');
+
     if(!current.includes('IPN'))
       $(this).val('IPN/O2M503/3S.8/' + current);
     else
       $(this).val('IPN/O2M503/3S.8/');
+  });
+
+  var findSolicitud = function() {
+    $('#warningEtiqueta').removeClass();
+    $('#warningEtiqueta').empty();
+
+    $.ajax({
+      url: '/findSolicitud?periodo=' + $('#periodo_id').val() + '&etiqueta=' + $('#etiqueta').val(),
+      success: function(result,status,xhr) {
+        $('#warningEtiqueta').addClass('alert alert-danger');
+        $('#warningEtiqueta').html('Esta solicitud ya ha sido dada de alta a nombre de ' + result.estudiante.nombre);
+      }
+    });
+  };
+
+  $('#etiqueta').focusout(function () {
+    findSolicitud();
+  });
+
+  $('#periodo_id').change(function() {
+    findSolicitud();
   });
 
   var validarBeca = function() {

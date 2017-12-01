@@ -133,6 +133,13 @@
                 </div>
               </div>
               <div class="form-group">
+                <div class="col-sm-6 col-sm-offset-1">
+                  <div id="warningEtiqueta">
+                
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
                 <label class="control-label col-sm-2" for="semestre">Semestre:</label>
                 <div class="col-sm-6">
                   <input type="text" class="form-control" name="semestre" id="semestre" placeholder="Semestre">
