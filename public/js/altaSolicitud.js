@@ -22,6 +22,16 @@ $(document).ready(function() {
     $('#warningCarga').empty();
   });
 
+  $('#etiqueta').val('IPN/O2M503/3S.8/');
+
+  $('#etiqueta').keyup(function() {
+    var current = $(this).val().replace('IPN/O2M503/3S.8/', '');
+    if(!current.includes('IPN'))
+      $(this).val('IPN/O2M503/3S.8/' + current);
+    else
+      $(this).val('IPN/O2M503/3S.8/');
+  });
+
   var validarBeca = function() {
     $('#warningBeca').removeClass();
     $('#warningBeca').empty();
