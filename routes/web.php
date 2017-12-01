@@ -85,6 +85,8 @@ Route::group(['middleware' => ['custom.session']], function() {
 		->name('verEstadisticas');
 
 	Route::get('/findSolicitud', 'SolicitudController@findSolicitud');
+
+	Route::get('/eliminarSolicitud/{solicitud_id}', 'SolicitudController@eliminarSolicitud');
 });
 
 Route::get('/login', function() {

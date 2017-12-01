@@ -119,6 +119,26 @@
         </div>
       </div>
 
+      <!-- Modal Cambio estatus-->
+      <div id="modalEliminar" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Eliminar Solicitud</h4>
+            </div>
+            <div class="modal-body">
+              <p>¿Desea eliminar la solicitud con folio <span id="folio"></span> y etiqueta <span id="etiqueta"></span>?</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+              <button id="btnEliminar" type="button" class="btn btn-danger">Aceptar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- Modal Éxito-->
       <div id="modalMessage" class="modal fade" role="dialog">
         <div class="modal-dialog">

@@ -14,9 +14,9 @@ $(document).ready(function() {
         "scrollX": true,
         "scrollY": "200px",
         "scrollCollapse": true,
-        "order": [[ 7, "asc" ]], //por nombre
+        "order": [[ 8, "asc" ]], //por nombre
         "fixedColumns": {
-            "leftColumns": 2
+            "leftColumns": 3
         },
 	    "language": {
 	        "lengthMenu": "Mostrando _MENU_ registros por página",
@@ -82,9 +82,22 @@ $(document).ready(function() {
 
                     hiddenMessage.html(relacionIngresosDependientes);
 
+                    var eliminar = $('#hiddenButton').clone();
+                    eliminar.empty();
+                    eliminar.removeClass();
+                    eliminar.addClass('btn btn-xs btn-link');
+                    eliminar.html('Eliminar');
+                    eliminar.removeAttr('id');
+                    eliminar.attr('data-toggle', 'modal');
+                    eliminar.attr('data-target', '#modalEliminar');
+                    eliminar.attr('data-id', obj.id);
+                    eliminar.attr('data-etiqueta', obj.etiqueta);
+                    eliminar.attr('data-folio', obj.folio);
+
                     return[
                         hiddenButton.get(0).outerHTML,
                         '<a href="editarSolicitud/' + obj.id + '" target="_blank">Editar</a>',
+                        eliminar.get(0).outerHTML,
                         obj.folio,
                         obj.etiqueta,
                         obj.boleta,
@@ -119,6 +132,57 @@ $(document).ready(function() {
             }
         });
     };
+
+    $('#modalEliminar').on('show.bs.modal', function(e) {
+        var etiqueta = e.relatedTarget.dataset.etiqueta;
+        var folio = e.relatedTarget.dataset.folio;
+        var id = e.relatedTarget.dataset.id;
+
+        $('#modalEliminar #etiqueta').text(etiqueta);
+        $('#modalEliminar #folio').text(folio);
+        $('#btnEliminar').removeAttr('disabled');
+
+        $('#btnEliminar').unbind('click').click(function (e) {
+            $(this).attr('disabled', 'disabled');
+            $.ajax({
+                url: '/eliminarSolicitud/' + id,
+                success: function(result,status,xhr) {
+                    $('#modalEliminar').modal('hide');
+                    $('#modalMessage #message').removeClass('alert-danger');
+                    $('#modalMessage #message').addClass('alert-success');
+                    $('#modalMessage #message').html(
+                        'Se ha eliminado la solicitud con folio ' + folio +
+                        ' y etiqueta ' + etiqueta
+                    );
+                    $('#modalMessage').modal('show');
+                    search($('#search').val(), $('#periodo').val());
+                },
+                statusCode: {
+                    404: function() {
+                        $('#modalEliminar').modal('hide');
+                        $('#modalMessage #message').removeClass('alert-success');
+                        $('#modalMessage #message').addClass('alert-danger');
+                        $('#modalMessage #message').html('No pudo eliminarse la solicitud porque no fue encontrada');
+                        $('#modalMessage').modal('show');
+                    },
+                    500: function() {
+                        $('#modalEliminar').modal('hide');
+                        $('#modalMessage #message').removeClass('alert-success');
+                        $('#modalMessage #message').addClass('alert-danger');
+                        $('#modalMessage #message').html('No pudo eliminarse la solicitud por un error de servidor');
+                        $('#modalMessage').modal('show');
+                    },
+                    401: function() {
+                        $('#modalEliminar').modal('hide');
+                        $('#modalMessage #message').removeClass('alert-success');
+                        $('#modalMessage #message').addClass('alert-danger');
+                        $('#modalMessage #message').html('No tiene permisos para realizar esta acción. Contacte al administrador');
+                        $('#modalMessage').modal('show');
+                    }
+                }
+            });
+        });
+    });
 
     $('#modalCambioEstatus').on('show.bs.modal', function(e) {
         var nombre = e.relatedTarget.dataset.nombre;

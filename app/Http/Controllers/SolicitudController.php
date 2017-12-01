@@ -13,6 +13,7 @@ use DB;
 
 class SolicitudController extends Controller
 {
+    const ADMIN = 1;
 
     public function verEstadisticas(Request $request) {
         return view('verEstadisticas', [
@@ -173,6 +174,16 @@ class SolicitudController extends Controller
         ]);
     }
 
+    public function eliminarSolicitud(Request $request, $solicitud_id) {
+        if($request->session()->get('rol_id', 0) != self::ADMIN) {
+            abort(401);
+        }
+
+        $solicitud = Solicitud::findOrFail($solicitud_id);
+        $solicitud->delete();
+
+    }
+
     public function attemptEdicionSolicitud(Request $request) {
         $solicitud = Solicitud::findOrFail($request->input('solicitud_id'));
         $estudiante = Estudiante::findOrFail($request->input('estudiante_id'));
@@ -307,6 +318,7 @@ class SolicitudController extends Controller
             'columnas' => [
                 'Estatus Solicitud',
                 'Editar',
+                'Eliminar',
                 'Folio',
                 'Etiqueta',
                 'Boleta',
