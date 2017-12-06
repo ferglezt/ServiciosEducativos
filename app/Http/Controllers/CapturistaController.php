@@ -15,7 +15,7 @@ class CapturistaController extends Controller
     public function cambiarContrasenaCapturista(Request $request, $id) {
         //Esta función está reservada únicamente para el administrador
         if(!self::isAdmin($request)) {
-           return redirect()->route('home');    
+           abort(401);
         }
 
         $password = $request->input('password');
@@ -62,7 +62,7 @@ class CapturistaController extends Controller
     public function verCapturistas(Request $request) {
         //Esta función está reservada únicamente para el administrador
         if(!self::isAdmin($request)) {
-           return redirect()->route('home');    
+           abort(401);  
         }
 
         return view('verCapturistas', [
@@ -85,7 +85,7 @@ class CapturistaController extends Controller
     public function attemptAltaCapturista(Request $request) {
     	//Esta función está reservada únicamente para el administrador
         if(!self::isAdmin($request)) {
-            return redirect()->route('home');
+            abort(401);
         }
     	
 		$nombre = $request->input('nombre');
