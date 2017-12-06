@@ -1,6 +1,6 @@
 @extends('dashboard')
 
-@section('title', 'Ver Capturistas')
+@section('title', 'Ver Becas')
 
 @section('content')
 
