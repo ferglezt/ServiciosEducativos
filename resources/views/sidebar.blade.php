@@ -37,6 +37,11 @@
     <span class="caret"></span> 
   </a>
   <ul class="nav collapse" id="submenu-becas" role="menu">
+    @if(Session::get('rol_id', 0) == 1) {{-- ADMIN --}}
+      <li id="item-ver-becas">
+      <a href="{{ URL::to('/verBecas') }}">Ver Becas</a>
+    </li>
+    @endif
     <li id="item-alta-solicitud">
       <a href="{{ URL::to('/altaSolicitud') }}">Nueva Solicitud</a>
     </li>

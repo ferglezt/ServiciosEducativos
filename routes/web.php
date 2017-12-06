@@ -86,7 +86,11 @@ Route::group(['middleware' => ['custom.session']], function() {
 
 	Route::get('/findSolicitud', 'SolicitudController@findSolicitud');
 
-	Route::get('/eliminarSolicitud/{solicitud_id}', 'SolicitudController@eliminarSolicitud');
+	Route::post('/eliminarSolicitud/{solicitud_id}', 'SolicitudController@eliminarSolicitud');
+
+	Route::get('/verBecas', 'BecaController@verBecas');
+
+	Route::post('/eliminarBeca/{id}', 'BecaController@eliminarBeca');
 });
 
 Route::get('/login', function() {

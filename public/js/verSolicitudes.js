@@ -146,6 +146,10 @@ $(document).ready(function() {
             $(this).attr('disabled', 'disabled');
             $.ajax({
                 url: '/eliminarSolicitud/' + id,
+                type: 'POST',
+                data: {
+                    '_token': $('#modalCambioEstatus #_token').val()
+                },
                 success: function(result,status,xhr) {
                     $('#modalEliminar').modal('hide');
                     $('#modalMessage #message').removeClass('alert-danger');
