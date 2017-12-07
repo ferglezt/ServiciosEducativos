@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Estudiante;
 use App\Solicitud;
 use App\Carrera;
+use App\Beca;
 use App\Periodo;
 use App\IngresoMinimo;
 use Illuminate\Database\QueryException;
@@ -72,7 +73,8 @@ class SolicitudController extends Controller
         return view('altaSolicitud', [
             'carreras' => Carrera::all(),
             'periodos' => Periodo::all(),
-            'ingreso_minimo' => IngresoMinimo::latest('id')->first()
+            'ingreso_minimo' => IngresoMinimo::latest('id')->first(),
+            'becas' => Beca::all()
         ]);
     }
 
@@ -84,7 +86,8 @@ class SolicitudController extends Controller
                 'error' => $insertOrUpdateEstudiante->error,
                 'carreras' => Carrera::all(),
                 'periodos' => Periodo::all(),
-                'ingreso_minimo' => IngresoMinimo::latest('id')->first()
+                'ingreso_minimo' => IngresoMinimo::latest('id')->first(),
+                'becas' => Beca::all()
             ]);
         }
 
@@ -101,7 +104,6 @@ class SolicitudController extends Controller
         $solicitud->carga = $request->input('carga');
         $solicitud->estatus_becario = $request->input('estatus_becario');
         $solicitud->beca_anterior = $request->input('beca_anterior');
-        $solicitud->beca_solicitada = $request->input('beca_solicitada');
         $solicitud->folio_manutencion = $request->input('folio_manutencion');
         $solicitud->folio_transporte = $request->input('folio_transporte');
         $solicitud->comprobante_ingresos = $request->input('comprobante_ingresos');
@@ -111,6 +113,8 @@ class SolicitudController extends Controller
         $solicitud->dependientes = $request->input('dependientes');
         $solicitud->observaciones = $request->input('observaciones');
         $solicitud->usuario_id = $request->session()->get('usuario_id', null);
+        $solicitud->beca_id = $request->input('beca_id');
+        $solicitud->beca_solicitada = Beca::find($solicitud->beca_id)->nombre;
 
         if(strcasecmp($solicitud->beca_solicitada, 'INSTITUCIONAL') == 0) {
             $solicitud->beca_solicitada = 'INSTITUCIONAL '.$request->input('tipo_institucional');
@@ -125,6 +129,7 @@ class SolicitudController extends Controller
                 'carreras' => Carrera::all(),
                 'periodos' => Periodo::all(),
                 'ingreso_minimo' => IngresoMinimo::latest('id')->first(),
+                'becas' => Beca::all(),
                 'error' => 'El folio debe ser un dato numérico'
             ]);
         }
@@ -139,6 +144,7 @@ class SolicitudController extends Controller
                 'carreras' => Carrera::all(),
                 'periodos' => Periodo::all(),
                 'ingreso_minimo' => IngresoMinimo::latest('id')->first(),
+                'becas' => Beca::all(),
                 'error' => 'Esta solicitud ya existe en la base de datos'
             ]);
         }
@@ -150,6 +156,7 @@ class SolicitudController extends Controller
                 'carreras' => Carrera::all(),
                 'periodos' => Periodo::all(),
                 'ingreso_minimo' => IngresoMinimo::latest('id')->first(),
+                'becas' => Beca::all(),
                 'error' => $e->getMessage()
             ]);
         }
@@ -158,6 +165,7 @@ class SolicitudController extends Controller
             'carreras' => Carrera::all(),
             'periodos' => Periodo::all(),
             'ingreso_minimo' => IngresoMinimo::latest('id')->first(),
+            'becas' => Beca::all(),
             'successMessage' => 'Solicitud dada de alta satisfactoriamente'
         ]);
     }
@@ -169,6 +177,7 @@ class SolicitudController extends Controller
         return view('editarSolicitud', [
             'carreras' => Carrera::all(),
             'periodos' => Periodo::all(),
+            'becas' => Beca::all(),
             'estudiante' => $estudiante,
             'solicitud' => $solicitud
         ]);
@@ -194,6 +203,7 @@ class SolicitudController extends Controller
             return view('editarSolicitud', [
                 'carreras' => Carrera::all(),
                 'periodos' => Periodo::all(),
+                'becas' => Beca::all(),
                 'estudiante' => $estudiante,
                 'solicitud' => $solicitud,
                 'error' => $insertOrUpdateEstudiante->error
@@ -211,7 +221,6 @@ class SolicitudController extends Controller
         $solicitud->carga = $request->input('carga');
         $solicitud->estatus_becario = $request->input('estatus_becario');
         $solicitud->beca_anterior = $request->input('beca_anterior');
-        $solicitud->beca_solicitada = $request->input('beca_solicitada');
         $solicitud->folio_manutencion = $request->input('folio_manutencion');
         $solicitud->folio_transporte = $request->input('folio_transporte');
         $solicitud->comprobante_ingresos = $request->input('comprobante_ingresos');
@@ -222,10 +231,14 @@ class SolicitudController extends Controller
         $solicitud->observaciones = $request->input('observaciones');
         $solicitud->usuario_id = $request->session()->get('usuario_id', null);
 
+        $solicitud->beca_id = $request->input('beca_id');
+        $solicitud->beca_solicitada = Beca::find($solicitud->beca_id)->nombre;
+
         if(is_null($solicitud->folio) || !is_numeric($solicitud->folio)) {
             return view('editarSolicitud', [
                 'carreras' => Carrera::all(),
                 'periodos' => Periodo::all(),
+                'becas' => Beca::all(),
                 'estudiante' => $estudiante,
                 'solicitud' => $solicitud,
                 'error' => 'El folio debe ser un dato numérico'
@@ -238,6 +251,7 @@ class SolicitudController extends Controller
             return view('editarSolicitud', [
                 'carreras' => Carrera::all(),
                 'periodos' => Periodo::all(),
+                'becas' => Beca::all(),
                 'estudiante' => $estudiante,
                 'solicitud' => $solicitud,
                 'error' => $e->getMessage()
@@ -247,6 +261,7 @@ class SolicitudController extends Controller
         return view('editarSolicitud', [
             'carreras' => Carrera::all(),
             'periodos' => Periodo::all(),
+            'becas' => Beca::all(),
             'estudiante' => $estudiante,
             'solicitud' => $solicitud,
             'successMessage' => 'Solicitud editada satisfactoriamente'

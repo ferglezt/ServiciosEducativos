@@ -189,17 +189,14 @@
                 </div>
               </div>
               <div class="form-group">
-                <label class="control-label col-sm-2" for="beca_solicitada">Beca Solicitada</label>
+                <label class="control-label col-sm-2" for="beca_id">Beca Solicitada</label>
                 <div class="col-sm-6">
-                  <select id="beca_solicitada" name="beca_solicitada" class="form-control">
-                    <option value="MANUTENCION">MANUTENCION</option>
-                    <option value="INSTITUCIONAL">INSTITUCIONAL</option>
-                    <option value="TELMEX">TELMEX</option>
-                    <option value="BECALOS">BECALOS</option>
-                    <option value="MANUTENCION TRANSPORTE">MANUTENCION TRANSPORTE</option>
-                    <option value="INSTITUCIONAL TRANSPORTE">INSTITUCIONAL TRANSPORTE</option>
-                    <option value="BECALOS TRANSPORTE">BECALOS TRANSPORTE</option>
-                    <option value="S/B">S/B</option>
+                  <select id="beca_id" name="beca_id" class="form-control">
+                    @foreach($becas as $beca)
+                      @if($beca->activa == 1)
+                        <option value="{{ $beca->id }}">{{ $beca->nombre }}</option>
+                      @endif
+                    @endforeach
                   </select>
                 </div>
               </div>

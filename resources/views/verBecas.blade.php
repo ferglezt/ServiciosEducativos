@@ -48,7 +48,7 @@
               <tr>
                 <td></td>
                 <td></td>
-                <td><button class="btn btn-sm btn-success" id="nuevaBeca">Nueva Beca</button></td>
+                <td><button class="btn btn-sm btn-success" data-toggle="modal" data-target="#modalNuevaBeca">Nueva Beca</button></td>
               </tr>
             </tfoot>
           </table>
@@ -70,6 +70,27 @@
             <div class="modal-footer">
               <button type="button" class="btn btn-info" data-dismiss="modal">Cancelar</button>
               <button id="borrarBeca" type="button" class="btn btn-danger">Borrar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal Nueva Beca-->
+      <div id="modalNuevaBeca" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Dar de alta una nueva opción de beca</h4>
+            </div>
+            <div class="modal-body">
+              <label>Nombre de la Beca:</label>
+              <input type="text" id="nombreBeca" class="form-control" placeholder="Nombre de la Beca">
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn" data-dismiss="modal">Cancelar</button>
+              <button id="btnAceptar" type="button" class="btn btn-info">Aceptar</button>
             </div>
           </div>
         </div>

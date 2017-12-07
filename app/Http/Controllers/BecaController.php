@@ -28,4 +28,14 @@ class BecaController extends Controller
     	$beca = Beca::findOrFail($id);
     	$beca->delete();
     }
+
+    public function attemptAltaBeca(Request $request) {
+        if($request->session()->get('rol_id', 0) != self::ADMIN) {
+            abort(401);
+        }
+
+        $beca = new Beca;
+        $beca->nombre = $request->input('nombre');
+        $beca->save();
+    }
 }

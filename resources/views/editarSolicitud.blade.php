@@ -220,16 +220,28 @@
                 </div>
               </div>
               <div class="form-group">
-                <label class="control-label col-sm-2" for="beca_solicitada">Beca Solicitada</label>
+                <label class="control-label col-sm-2" for="beca_id">Beca Solicitada</label>
                 <div class="col-sm-6">
-                  <input type="text" name="beca_solicitada" value="{{ $solicitud->beca_solicitada }}" id="beca_solicitada" class="form-control" placeholder="Beca Solicitada">
+                  <select id="beca_id" name="beca_id" class="form-control">
+                    @foreach($becas as $beca)
+                      @if($beca->activa == 1)
+                        <option value="{{ $beca->id }}" 
+                          @if($estudiante->beca_id == $beca->id)
+                            selected
+                          @endif
+                        >{{ $beca->nombre }}</option>
+                      @endif
+                    @endforeach
+                  </select>
                 </div>
               </div>
               <div class="form-group">
                 <div class="col-sm-6 col-sm-offset-1">
-                  <div id="warningBeca">
-                
+                  @if(is_null($solicitud->beca_id))
+                  <div id="warningBeca" class="alert alert-danger">
+                    <p>La beca está registrada como texto: '{{ $solicitud->beca_solicitada }}'. Hay que corregir seleccionando una de las opciones de arriba</p>
                   </div>
+                  @endif
                 </div>
               </div>
               <div class="form-group">

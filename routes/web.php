@@ -91,6 +91,8 @@ Route::group(['middleware' => ['custom.session']], function() {
 	Route::get('/verBecas', 'BecaController@verBecas');
 
 	Route::post('/eliminarBeca/{id}', 'BecaController@eliminarBeca');
+
+	Route::post('/attemptAltaBeca', 'BecaController@attemptAltaBeca');
 });
 
 Route::get('/login', function() {

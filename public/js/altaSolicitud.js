@@ -65,7 +65,7 @@ $(document).ready(function() {
     var carga = parseInt($('#carga').val());
     var carrera = $('#carrera').val();
     var semestre = parseInt($('#semestre').val());
-    var beca = $('#beca_solicitada').val();
+    var beca = $('#beca_id option:selected').text();
     var estatus = $('#estatus_estudiante').val();
 
     if(isNaN(promedio) || isNaN(carga) || isNaN(semestre)) {
@@ -153,7 +153,7 @@ $(document).ready(function() {
   $('#carga').focusout(validarBeca);
   $('#carrera').change(validarBeca);
   $('#semestre').focusout(validarBeca);
-  $('#beca_solicitada').change(validarBeca);
+  $('#beca_id').change(validarBeca);
   $('#promedio').focusout(validarBeca);
   $('#estatus_estudiante').change(validarBeca);
 
