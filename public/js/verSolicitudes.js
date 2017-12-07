@@ -1,7 +1,7 @@
 $(document).ready(function() {
-	$('#item-ver-becas').addClass('active');
+	$('#item-ver-solicitudes').addClass('active');
 
-    $('#item-ver-becas').click(function(e) {
+    $('#item-ver-solicitudes').click(function(e) {
     	e.preventDefault();
     });
 

@@ -45,7 +45,7 @@
     <li id="item-alta-solicitud">
       <a href="{{ URL::to('/altaSolicitud') }}">Nueva Solicitud</a>
     </li>
-    <li id="item-ver-becas">
+    <li id="item-ver-solicitudes">
       <a href="{{ URL::to('/verSolicitudes') }}">Ver Solicitudes</a>
     </li>
     <li id="item-ver-estadisticas">
