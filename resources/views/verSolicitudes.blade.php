@@ -12,13 +12,15 @@
         <h3>Solicitudes</h3>      
       </div>
 
-      <div class="row">
-        <div class="col-md-12">
-          <button id="btnDescargarExcel" class="btn btn-info">Descargar Excel de este periodo</button>
+      @if(Session::get('rol_id', 0) == 1) {{-- ADMIN --}}
+        <div class="row">
+          <div class="col-md-12">
+            <button id="btnDescargarExcel" class="btn btn-info">Descargar Excel de este periodo</button>
+          </div>
         </div>
-      </div>
 
-      <br>
+        <br>
+      @endif
 
       <div class="row">
         <div class="col-sm-2">
