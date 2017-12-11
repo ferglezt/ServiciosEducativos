@@ -93,6 +93,8 @@ Route::group(['middleware' => ['custom.session']], function() {
 	Route::post('/eliminarBeca/{id}', 'BecaController@eliminarBeca');
 
 	Route::post('/attemptAltaBeca', 'BecaController@attemptAltaBeca');
+
+	Route::get('/excel/descargarBecas', 'ExcelController@descargarBecas');
 });
 
 Route::get('/login', function() {

@@ -13,6 +13,14 @@
       </div>
 
       <div class="row">
+        <div class="col-md-12">
+          <button id="btnDescargarExcel" class="btn btn-info">Descargar Excel de este periodo</button>
+        </div>
+      </div>
+
+      <br>
+
+      <div class="row">
         <div class="col-sm-2">
           <div class="form-group">
             <label for="search">Periodo:</label>

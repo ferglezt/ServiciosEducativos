@@ -258,5 +258,9 @@ $(document).ready(function() {
         $('.toggle-column').prop('checked', false);
         toggleColumns();
     });
+
+    $('#btnDescargarExcel').click(function() {
+        window.open('/excel/descargarBecas?periodo=' + $('#periodo').val(), '_blank');
+    });
 	
 });
