@@ -16,11 +16,18 @@ class InsertAdminUser extends Migration
     {
         DB::table('usuarios')->insert([
             [
-                'nombre' => 'FERNANDO GONZALEZ',
-                'email' => 'fernando.gonzalez.upiicsa@gmail.com',
+                'nombre' => 'LORENA',
+                'email' => 'sloren_77@hotmail.com',
+                'password' => Hash::make('12345'),
+                'rol_id' => 1
+            ],
+            [
+                'nombre' => 'MARCELA ROJAS',
+                'email' => 'marce_rojas2004@yahoo.com.mx',
                 'password' => Hash::make('12345'),
                 'rol_id' => 1
             ]
+
         ]);
     }
 
