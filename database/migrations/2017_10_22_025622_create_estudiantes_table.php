@@ -17,7 +17,7 @@ class CreateEstudiantesTable extends Migration
             $table->increments('id');
             $table->string('boleta', 100)->unique();
             $table->string('nombre', 300);
-            $table->integer('carrera_id')->unsigned();
+            $table->integer('carrera_id')->unsigned()->nullable();
             $table->string('curp', 20);
             $table->string('email', 191)->nullable();
             $table->string('telefono', 20)->nullable();
@@ -27,7 +27,7 @@ class CreateEstudiantesTable extends Migration
         });
 
         Schema::table('estudiantes', function ($table) {
-            $table->foreign('carrera_id')->references('id')->on('carreras')->onDelete('cascade');
+            $table->foreign('carrera_id')->references('id')->on('carreras')->onDelete('set null');
         });
     }
 
