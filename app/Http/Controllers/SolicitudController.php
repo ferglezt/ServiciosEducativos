@@ -135,7 +135,7 @@ class SolicitudController extends Controller
         }
 
         $alreadyExists = Solicitud::where([
-            ['etiqueta', '=', $solicitud->etiqueta],
+            ['estudiante_id', '=', $solicitud->estudiante_id],
             ['periodo_id', '=', $solicitud->periodo_id]
         ])->first();
 
