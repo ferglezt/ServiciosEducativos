@@ -16,41 +16,42 @@
   </li>
 @endif
 
-<li id="menu-estudiantes">
-  <a href="#" data-toggle="collapse" data-target="#submenu-estudiantes" aria-expanded="false">
-    Estudiantes
-    <span class="caret"></span> 
-  </a>
-  <ul class="nav collapse" id="submenu-estudiantes" role="menu">
-    <li id="item-alta-estudiante">
-      <a href="{{ URL::to('/altaEstudiante') }}">Nuevo Estudiante</a>
-    </li>
-    <li id="item-ver-estudiantes">
-      <a href="{{ URL::to('/verEstudiantes') }}">Ver estudiantes</a>
-    </li>
-  </ul>
-</li>
+@if(Session::get('rol_id', 0) == 1 || Session::get('rol_id', 0) == 2) {{-- ADMIN o CAPTURISTA BECAS --}}
+  <li id="menu-estudiantes">
+    <a href="#" data-toggle="collapse" data-target="#submenu-estudiantes" aria-expanded="false">
+      Estudiantes
+      <span class="caret"></span> 
+    </a>
+    <ul class="nav collapse" id="submenu-estudiantes" role="menu">
+      <li id="item-alta-estudiante">
+        <a href="{{ URL::to('/altaEstudiante') }}">Nuevo Estudiante</a>
+      </li>
+      <li id="item-ver-estudiantes">
+        <a href="{{ URL::to('/verEstudiantes') }}">Ver estudiantes</a>
+      </li>
+    </ul>
+  </li>
 
-<li id="menu-becas">
-  <a href="#" data-toggle="collapse" data-target="#submenu-becas" aria-expanded="false">
-    Becas
-    <span class="caret"></span> 
-  </a>
-  <ul class="nav collapse" id="submenu-becas" role="menu">
-    @if(Session::get('rol_id', 0) == 1) {{-- ADMIN --}}
-      <li id="item-ver-becas">
-      <a href="{{ URL::to('/verBecas') }}">Ver Becas</a>
-    </li>
-    @endif
-    <li id="item-alta-solicitud">
-      <a href="{{ URL::to('/altaSolicitud') }}">Nueva Solicitud</a>
-    </li>
-    <li id="item-ver-solicitudes">
-      <a href="{{ URL::to('/verSolicitudes') }}">Ver Solicitudes</a>
-    </li>
-    <li id="item-ver-estadisticas">
-      <a href="{{ URL::to('/verEstadisticas') }}">Estadísticas</a>
-    </li>
-  </ul>
-</li>
-
+  <li id="menu-becas">
+    <a href="#" data-toggle="collapse" data-target="#submenu-becas" aria-expanded="false">
+      Becas
+      <span class="caret"></span> 
+    </a>
+    <ul class="nav collapse" id="submenu-becas" role="menu">
+      @if(Session::get('rol_id', 0) == 1) {{-- ADMIN --}}
+        <li id="item-ver-becas">
+        <a href="{{ URL::to('/verBecas') }}">Ver Becas</a>
+      </li>
+      @endif
+      <li id="item-alta-solicitud">
+        <a href="{{ URL::to('/altaSolicitud') }}">Nueva Solicitud</a>
+      </li>
+      <li id="item-ver-solicitudes">
+        <a href="{{ URL::to('/verSolicitudes') }}">Ver Solicitudes</a>
+      </li>
+      <li id="item-ver-estadisticas">
+        <a href="{{ URL::to('/verEstadisticas') }}">Estadísticas</a>
+      </li>
+    </ul>
+  </li>
+@endif
