@@ -23,6 +23,9 @@ class CreateRolsTable extends Migration
             ),
             array(
                 'nombre' => 'CAPTURISTA BECAS'
+            ),
+            array(
+                'nombre' => 'CAPTURISTA SERVICIO SOCIAL'
             )
         ));
     }
