@@ -55,3 +55,17 @@
     </ul>
   </li>
 @endif
+
+@if(Session::get('rol_id', 0) == 1 || Session::get('rol_id', 0) == 3) {{-- ADMIN o SERVICIO SOCIAL --}}
+  <li id="menu-servicio-social">
+    <a href="#" data-toggle="collapse" data-target="#submenu-servicio-social" aria-expanded="false">
+      Servicio Social
+      <span class="caret"></span> 
+    </a>
+    <ul class="nav collapse" id="submenu-servicio-social" role="menu">
+      <li id="item-servicio-social">
+        <a href="#">Item Servicio Social</a>
+      </li>
+    </ul>
+  </li>
+@endif
