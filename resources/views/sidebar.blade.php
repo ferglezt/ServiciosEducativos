@@ -63,8 +63,8 @@
       <span class="caret"></span> 
     </a>
     <ul class="nav collapse" id="submenu-servicio-social" role="menu">
-      <li id="item-servicio-social">
-        <a href="#">Item Servicio Social</a>
+      <li id="item-alta-servicio-social">
+        <a href="{{ URL::to('/altaServicioSocial') }}">Alta Servicio Social</a>
       </li>
     </ul>
   </li>
