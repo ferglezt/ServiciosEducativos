@@ -4,4 +4,8 @@ $(document).ready(function() {
     e.preventDefault();
   });
   $('#submenu-servicio-social').addClass('in');
+
+  $('#fecha_recepcion').datepicker({
+    dateFormat: 'dd/mm/yy'
+  });
 });
