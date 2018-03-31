@@ -66,6 +66,9 @@
       <li id="item-alta-servicio-social">
         <a href="{{ URL::to('/altaServicioSocial') }}">Alta Servicio Social</a>
       </li>
+      <li id="item-ver-solicitudes-servicio-social">
+        <a href="{{ URL::to('/verSolicitudesServicioSocial') }}">Ver Registros</a>
+      </li>
     </ul>
   </li>
 @endif

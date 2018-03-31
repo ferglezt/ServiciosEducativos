@@ -48,4 +48,26 @@ class ServicioSocialController extends Controller
     		'successMessage' => 'Registro dado de alta satisfactoriamente'
     	]);
     }
+
+    public function verSolicitudesServicioSocial(Request $request) {
+    	return view('verSolicitudesServicioSocial', [
+    		'columnas' => [
+    			'Registro',
+    			'Consecutivo',
+    			'Boleta', 
+    			'Nombre',
+    			'Carrera',
+    			'Género',
+    			'Prestatario',
+    			'Programa',
+    			'Profesor',
+    			'Periodo',
+    			'Tipo Servicio Social',
+    			'Créditos',
+    			'Horario',
+    			'Fecha Recepción',
+    			'Observaciones'
+    		]
+    	]);
+    }
 }

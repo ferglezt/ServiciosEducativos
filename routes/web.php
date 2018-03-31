@@ -99,6 +99,8 @@ Route::group(['middleware' => ['custom.session']], function() {
 	Route::get('/altaServicioSocial', 'ServicioSocialController@altaServicioSocial');
 
 	Route::post('/attemptAltaSolicitudServicioSocial', 'ServicioSocialController@attemptAltaSolicitudServicioSocial');
+
+	Route::get('/verSolicitudesServicioSocial', 'ServicioSocialController@verSolicitudesServicioSocial');
 });
 
 Route::get('/login', function() {
