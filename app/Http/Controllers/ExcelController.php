@@ -27,6 +27,7 @@ class ExcelController extends Controller
             ->join('estudiantes', 'estudiantes.id', '=', 'solicitudes.estudiante_id')
             ->join('carreras', 'carreras.id', '=', 'estudiantes.carrera_id')
             ->join('periodos', 'periodos.id', '=', 'solicitudes.periodo_id')
+            ->leftJoin('usuarios', 'usuarios.id', '=', 'solicitudes.usuario_id')
             ->leftJoin('ingreso_minimo', 'ingreso_minimo.id', '=', 'solicitudes.ingreso_minimo_id')
             ->select(
                 'solicitudes.anio as anio',
@@ -56,7 +57,9 @@ class ExcelController extends Controller
                 'estudiantes.oriundo as oriundo',
                 'estudiantes.email as email',
                 'estudiantes.telefono as telefono',
-                'solicitudes.observaciones as observaciones'
+                'solicitudes.observaciones as observaciones',
+                'solicitudes.numero_caja as numero_caja',
+                'usuarios.nombre as usuario_nombre'
             )
             ->where('solicitudes.periodo_id', '=', $periodo)
             ->orderBy('folio')
@@ -95,7 +98,7 @@ class ExcelController extends Controller
     		'Estatus Becario', 'Beca Anterior', 'Beca Solicitada', 'Folio Manutención',
     		'Folio Transporte', 'Mapa', 'Fecha Recibido', 'Comprobante de Ingresos',
     		'Ingresos', 'Dependientes', 'Ingreso Mínimo', '', 'Oriundo', 'Email',
-    		'Teléfono', 'Observaciones'
+    		'Teléfono', 'Observaciones', 'Número de caja', 'Capturó'
     	], $styleHeader);
 
     	$writer->addRowsWithStyle($data, $styleRows);

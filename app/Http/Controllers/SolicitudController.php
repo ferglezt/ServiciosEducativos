@@ -362,7 +362,9 @@ class SolicitudController extends Controller
                 'Oriundo',
                 'Email',
                 'Teléfono',
-                'Observaciones'
+                'Observaciones',
+                'Número de caja',
+                'Capturó'
             ]
         ]);
 	}
@@ -385,6 +387,7 @@ class SolicitudController extends Controller
             ->join('carreras', 'carreras.id', '=', 'estudiantes.carrera_id')
             ->join('periodos', 'periodos.id', '=', 'solicitudes.periodo_id')
             ->leftJoin('ingreso_minimo', 'ingreso_minimo.id', '=', 'solicitudes.ingreso_minimo_id')
+            ->leftJoin('usuarios', 'usuarios.id', '=', 'solicitudes.usuario_id')
             ->select(
                 'solicitudes.id as id',
                 'solicitudes.estatus_solicitud as estatus_solicitud',
@@ -413,6 +416,8 @@ class SolicitudController extends Controller
                 'estudiantes.email as email',
                 'estudiantes.telefono as telefono',
                 'solicitudes.observaciones as observaciones',
+                'usuarios.nombre as usuario',
+                'solicitudes.numero_caja as numero_caja',
                 'ingreso_minimo.ingreso_minimo_por_persona as ingreso_minimo'
             );
 

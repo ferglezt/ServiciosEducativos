@@ -1,16 +1,16 @@
 $(document).ready(function() {
-	$('#item-ver-solicitudes').addClass('active');
+    $('#item-ver-solicitudes').addClass('active');
 
     $('#item-ver-solicitudes').click(function(e) {
-    	e.preventDefault();
+        e.preventDefault();
     });
 
-  	$('#submenu-becas').addClass('in');
+    $('#submenu-becas').addClass('in');
 
     $('#hiddenDiv').hide();
 
     var table = $('#becasTable').DataTable({
-    	"searching": false,
+        "searching": false,
         "scrollX": true,
         "scrollY": "200px",
         "scrollCollapse": true,
@@ -18,17 +18,17 @@ $(document).ready(function() {
         "fixedColumns": {
             "leftColumns": 3
         },
-	    "language": {
-	        "lengthMenu": "Mostrando _MENU_ registros por página",
-	        "zeroRecords": "No se encontraron registros",
-	        "info": "Mostrando página _PAGE_ de _PAGES_",
-	        "infoEmpty": "No hay registros disponibles",
-	        "infoFiltered": "(de _MAX_ registros totales)",
-	        "search": "Buscar",
-	        "paginate": {
-	          "previous": "Anterior",
-	          "next": "Siguiente"
-	        }
+        "language": {
+            "lengthMenu": "Mostrando _MENU_ registros por página",
+            "zeroRecords": "No se encontraron registros",
+            "info": "Mostrando página _PAGE_ de _PAGES_",
+            "infoEmpty": "No hay registros disponibles",
+            "infoFiltered": "(de _MAX_ registros totales)",
+            "search": "Buscar",
+            "paginate": {
+              "previous": "Anterior",
+              "next": "Siguiente"
+            }
         }
     });
 
@@ -124,7 +124,9 @@ $(document).ready(function() {
                         obj.oriundo,
                         obj.email,
                         obj.telefono,
-                        obj.observaciones
+                        obj.observaciones,
+                        obj.numero_caja,
+                        obj.usuario
                     ];
                 });
                 table.clear();
@@ -262,5 +264,5 @@ $(document).ready(function() {
     $('#btnDescargarExcel').click(function() {
         window.open('/excel/descargarBecas?periodo=' + $('#periodo').val(), '_blank');
     });
-	
+    
 });
