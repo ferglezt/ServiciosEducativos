@@ -299,6 +299,12 @@
                   <input type="text" id="observaciones" value="{{ $solicitud->observaciones }}" name="observaciones" placeholder="Observaciones" class="form-control"> 
                 </div>
               </div>
+              <div class="form-group">
+                <label class="control-label col-sm-2" for="numero_caja">Número de caja:</label>
+                <div class="col-sm-6">
+                  <input type="number" id="numero_caja" value="{{ $solicitud->numero_caja }}" name="numero_caja" placeholder="Número de caja" class="form-control"> 
+                </div>
+              </div>
               <input type="hidden" name="estudiante_id" id="estudiante_id" value="{{ $estudiante->id }}">
               <input type="hidden" name="solicitud_id" id="solicitud_id" value="{{ $solicitud->id }}">
               <input type="hidden" name="_token" value="{{ csrf_token() }}">
