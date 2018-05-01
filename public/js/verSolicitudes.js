@@ -32,6 +32,27 @@ $(document).ready(function() {
         }
     });
 
+    var commonErrorStatusCodes = {
+        404: function() {
+            $('#modalMessage #message').removeClass('alert-success');
+            $('#modalMessage #message').addClass('alert-danger');
+            $('#modalMessage #message').html('Dirección no encontrada');
+            $('#modalMessage').modal('show');
+        },
+        500: function(xhr) {
+            $('#modalMessage #message').removeClass('alert-success');
+            $('#modalMessage #message').addClass('alert-danger');
+            $('#modalMessage #message').html('Error de servidor');
+            $('#modalMessage').modal('show');
+        },
+        401: function() {
+            $('#modalMessage #message').removeClass('alert-success');
+            $('#modalMessage #message').addClass('alert-danger');
+            $('#modalMessage #message').html('No tiene permisos para realizar esta acción');
+            $('#modalMessage').modal('show');
+        }   
+    };
+
     var search = function(query, periodo) {
         $.ajax({
             url: '/searchSolicitud?periodo=' + periodo + '&q=' + query,
@@ -94,10 +115,30 @@ $(document).ready(function() {
                     eliminar.attr('data-etiqueta', obj.etiqueta);
                     eliminar.attr('data-folio', obj.folio);
 
+                    var transporteInstCheckbox = $('#hiddenCheckbox').clone(true);
+                    transporteInstCheckbox.removeAttr('id');
+                    transporteInstCheckbox.addClass('transporteInstitucionalCheckbox');
+                    transporteInstCheckbox.attr('solicitud_id', obj.id);
+
+                    if(obj.transporte_institucional == 1) {
+                        transporteInstCheckbox.attr('checked', 'checked');
+                    }
+
+                    var transporteManCheckbox = $('#hiddenCheckbox').clone(true);
+                    transporteManCheckbox.removeAttr('id');
+                    transporteManCheckbox.addClass('transporteManutencionCheckbox');
+                    transporteManCheckbox.attr('solicitud_id', obj.id);
+
+                    if(obj.transporte_manutencion == 1) {
+                        transporteManCheckbox.attr('checked', 'checked');
+                    }
+                   
                     return[
                         hiddenButton.get(0).outerHTML,
                         '<a href="editarSolicitud/' + obj.id + '" target="_blank">Editar</a>',
                         eliminar.get(0).outerHTML,
+                        transporteInstCheckbox.get(0).outerHTML,
+                        transporteManCheckbox.get(0).outerHTML,
                         obj.folio,
                         obj.etiqueta,
                         obj.boleta,
@@ -163,29 +204,7 @@ $(document).ready(function() {
                     $('#modalMessage').modal('show');
                     search($('#search').val(), $('#periodo').val());
                 },
-                statusCode: {
-                    404: function() {
-                        $('#modalEliminar').modal('hide');
-                        $('#modalMessage #message').removeClass('alert-success');
-                        $('#modalMessage #message').addClass('alert-danger');
-                        $('#modalMessage #message').html('No pudo eliminarse la solicitud porque no fue encontrada');
-                        $('#modalMessage').modal('show');
-                    },
-                    500: function() {
-                        $('#modalEliminar').modal('hide');
-                        $('#modalMessage #message').removeClass('alert-success');
-                        $('#modalMessage #message').addClass('alert-danger');
-                        $('#modalMessage #message').html('No pudo eliminarse la solicitud por un error de servidor');
-                        $('#modalMessage').modal('show');
-                    },
-                    401: function() {
-                        $('#modalEliminar').modal('hide');
-                        $('#modalMessage #message').removeClass('alert-success');
-                        $('#modalMessage #message').addClass('alert-danger');
-                        $('#modalMessage #message').html('No tiene permisos para realizar esta acción. Contacte al administrador');
-                        $('#modalMessage').modal('show');
-                    }
-                }
+                statusCode: commonErrorStatusCodes
             });
         });
     });
@@ -263,6 +282,34 @@ $(document).ready(function() {
 
     $('#btnDescargarExcel').click(function() {
         window.open('/excel/descargarBecas?periodo=' + $('#periodo').val(), '_blank');
+    });
+
+    var changeBecaTransporte = function(url, checkbox) {
+        var checked = checkbox.is(':checked');
+        checkbox.prop('checked', !checked);
+        checkbox.prop('disabled', true);
+
+        var solicitud_id = checkbox.attr('solicitud_id');
+        var value = checked ? 1 : 0;
+
+        $.ajax({
+            url: url + '/' + solicitud_id + '/' + value,
+            success: function(result,status,xhr) {
+                checkbox.prop('checked', checked);
+            },
+            complete: function(xhr,status) {
+                checkbox.prop('disabled', false);
+            },
+            statusCode: commonErrorStatusCodes    
+        });
+    };
+
+    $('#becasTable').on('click', '.transporteInstitucionalCheckbox', function() {
+        changeBecaTransporte('/aceptarTransporteInstitucional', $(this));
+    });
+
+    $('#becasTable').on('click', '.transporteManutencionCheckbox', function() {
+        changeBecaTransporte('/aceptarTransporteManutencion', $(this));
     });
     
 });

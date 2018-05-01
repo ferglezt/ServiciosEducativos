@@ -75,7 +75,6 @@
           @for($i = 0; $i < count($columnas); $i++)
             <label class="checkbox-inline"><input class="toggle-column" type="checkbox" data-column="{{ $i }}" checked>{{ $columnas[$i] }}</label>
           @endfor
-        
         </div>
       </div>
 
@@ -98,6 +97,7 @@
 
       <div id="hiddenDiv">
         <button id="hiddenButton"></button>
+        <input type="checkbox" id="hiddenCheckbox">
         <button id="editarHiddenButton"></button>
         <div id="hiddenMessage"></div>
       </div>

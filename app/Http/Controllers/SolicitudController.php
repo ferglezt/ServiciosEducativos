@@ -184,6 +184,18 @@ class SolicitudController extends Controller
         ]);
     }
 
+    public function aceptarTransporteInstitucional(Request $request, $solicitud_id, $value = 1) {
+        $solicitud = Solicitud::findOrFail($solicitud_id);
+        $solicitud->transporte_institucional = ($value == 1);
+        $solicitud->save();
+    } 
+
+    public function aceptarTransporteManutencion(Request $request, $solicitud_id, $value = 1) {
+        $solicitud = Solicitud::findOrFail($solicitud_id);
+        $solicitud->transporte_manutencion = ($value == 1);
+        $solicitud->save();
+    }
+
     public function eliminarSolicitud(Request $request, $solicitud_id) {
         if($request->session()->get('rol_id', 0) != self::ADMIN) {
             abort(401);
@@ -336,6 +348,8 @@ class SolicitudController extends Controller
                 'Estatus Solicitud',
                 'Editar',
                 'Eliminar',
+                'Transporte Institucional',
+                'Transporte Manutención',
                 'Folio',
                 'Etiqueta',
                 'Boleta',
@@ -418,7 +432,9 @@ class SolicitudController extends Controller
                 'solicitudes.observaciones as observaciones',
                 'usuarios.nombre as usuario',
                 'solicitudes.numero_caja as numero_caja',
-                'ingreso_minimo.ingreso_minimo_por_persona as ingreso_minimo'
+                'ingreso_minimo.ingreso_minimo_por_persona as ingreso_minimo',
+                'solicitudes.transporte_institucional as transporte_institucional',
+                'solicitudes.transporte_manutencion as transporte_manutencion'
             );
 
             if(!is_null($q) && $q != '') {

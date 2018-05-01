@@ -77,6 +77,10 @@ Route::group(['middleware' => ['custom.session']], function() {
 
 	Route::get('/editarSolicitud/{solicitud_id}', 'SolicitudController@editarSolicitud');
 
+	Route::get('/aceptarTransporteInstitucional/{solicitud_id}/{value}', 'SolicitudController@aceptarTransporteInstitucional');
+
+	Route::get('/aceptarTransporteManutencion/{solicitud_id}/{value}', 'SolicitudController@aceptarTransporteManutencion');
+
 	Route::post('/attemptEdicionSolicitud', 'SolicitudController@attemptEdicionSolicitud');
 
 	Route::get('/estadisticas/{periodo}', 'SolicitudController@estadisticas');
