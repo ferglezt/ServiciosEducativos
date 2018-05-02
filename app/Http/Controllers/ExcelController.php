@@ -45,6 +45,8 @@ class ExcelController extends Controller
                 'solicitudes.estatus_becario as estatus_becario',
                 'solicitudes.beca_anterior as beca_anterior',
                 'solicitudes.beca_solicitada as beca_solicitada',
+                DB::raw("IF (solicitudes.transporte_institucional=1, 'SI', 'NO') as institucional"),
+                DB::raw("IF (solicitudes.transporte_manutencion=1, 'SI', 'NO') as manutencion"),
                 'solicitudes.folio_manutencion as folio_manutencion',
                 'solicitudes.folio_transporte as folio_transporte',
                 'solicitudes.mapa as mapa',
@@ -95,10 +97,11 @@ class ExcelController extends Controller
     	$writer->addRowWithStyle([
     		'Año', 'Folio', 'Etiqueta', 'Boleta', 'Curp', 'Género', 'Nombre',
     		'Carrera', 'Semestre', 'Promedio', 'Estatus Académico', 'Carga',
-    		'Estatus Becario', 'Beca Anterior', 'Beca Solicitada', 'Folio Manutención',
-    		'Folio Transporte', 'Mapa', 'Fecha Recibido', 'Comprobante de Ingresos',
-    		'Ingresos', 'Dependientes', 'Ingreso Mínimo', '', 'Oriundo', 'Email',
-    		'Teléfono', 'Observaciones', 'Número de caja', 'Capturó'
+    		'Estatus Becario', 'Beca Anterior', 'Beca Solicitada', 'Transporte Institucional', 
+            'Transporte Manutención', 'Folio Manutención','Folio Transporte', 'Mapa', 
+            'Fecha Recibido', 'Comprobante de Ingresos', 'Ingresos', 'Dependientes', 
+            'Ingreso Mínimo', '', 'Oriundo', 'Email','Teléfono', 'Observaciones', 
+            'Número de caja', 'Capturó'
     	], $styleHeader);
 
     	$writer->addRowsWithStyle($data, $styleRows);
