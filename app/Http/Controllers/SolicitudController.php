@@ -96,7 +96,6 @@ class SolicitudController extends Controller
         $solicitud->estudiante_id = $insertOrUpdateEstudiante->estudiante_id;
         $solicitud->anio = $request->input('anio');
         $solicitud->periodo_id = $request->input('periodo_id');
-        $solicitud->folio = $request->input('folio');
         $solicitud->etiqueta = $request->input('etiqueta');
         $solicitud->semestre = $request->input('semestre');
         $solicitud->promedio = $request->input('promedio');
@@ -117,22 +116,21 @@ class SolicitudController extends Controller
         $solicitud->beca_id = $request->input('beca_id');
         $solicitud->beca_solicitada = Beca::find($solicitud->beca_id)->nombre;
 
+        $folio = 1;
+
+        $latest_solicitud = Solicitud::where('periodo_id', '=', $request->input('periodo_id'))->orderBy('folio', 'desc')->first();
+        if($latest_solicitud && isset($latest_solicitud->folio) && is_numeric($latest_solicitud->folio)) {
+           $folio = $latest_solicitud->folio + 1;
+        }
+
+        $solicitud->folio = $folio;
+
         if(strcasecmp($solicitud->beca_solicitada, 'INSTITUCIONAL') == 0) {
             $solicitud->beca_solicitada = 'INSTITUCIONAL '.$request->input('tipo_institucional');
         }
 
         if(IngresoMinimo::latest('id')->first()) {
             $solicitud->ingreso_minimo_id = IngresoMinimo::latest('id')->first()->id;
-        }
-
-        if(is_null($solicitud->folio) || !is_numeric($solicitud->folio)) {
-            return view('altaSolicitud', [
-                'carreras' => Carrera::all(),
-                'periodos' => Periodo::all()->sortBy('anio'),
-                'ingreso_minimo' => IngresoMinimo::latest('id')->first(),
-                'becas' => Beca::all(),
-                'error' => 'El folio debe ser un dato numérico'
-            ]);
         }
 
         $alreadyExists = Solicitud::where([
@@ -167,7 +165,7 @@ class SolicitudController extends Controller
             'periodos' => Periodo::all()->sortBy('anio'),
             'ingreso_minimo' => IngresoMinimo::latest('id')->first(),
             'becas' => Beca::all(),
-            'successMessage' => 'Solicitud dada de alta satisfactoriamente'
+            'successMessage' => 'Solicitud dada de alta satisfactoriamente con el folio: '.$folio
         ]);
     }
 

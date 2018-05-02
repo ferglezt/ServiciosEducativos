@@ -121,12 +121,6 @@
                 </div>
               </div>
               <div class="form-group">
-                <label class="control-label col-sm-2" for="folio">Folio:</label>
-                <div class="col-sm-6">
-                  <input type="text" class="form-control" name="folio" id="folio" placeholder="Folio">
-                </div>
-              </div>
-              <div class="form-group">
                 <label class="control-label col-sm-2" for="etiqueta">Etiqueta:</label>
                 <div class="col-sm-6">
                   <input type="text" class="form-control" name="etiqueta" id="etiqueta" placeholder="Etiqueta">
