@@ -59,10 +59,26 @@ class SolicitudController extends Controller
             ->orderBy('total', 'desc')
             ->get();
 
+        $transporteManutencion = DB::table('solicitudes')
+            ->select(DB::raw(
+                'COUNT(solicitudes.id) as total'
+            ))
+            ->where([['periodo_id', '=', $periodo], ['solicitudes.transporte_manutencion', '=', 1]])
+            ->get();
+
+        $transporteInstitucional = DB::table('solicitudes')
+            ->select(DB::raw(
+                'COUNT(solicitudes.id) as total'
+            ))
+            ->where([['periodo_id', '=', $periodo], ['solicitudes.transporte_institucional', '=', 1]])
+            ->get();
+
         $data = (object)[
             'solicitadas' => $solicitadas,
             'porBeca' => $porBeca,
-            'porGenero' => $porGenero
+            'porGenero' => $porGenero,
+            'transporteInstitucional' => $transporteInstitucional,
+            'transporteManutencion' => $transporteManutencion
         ];
 
         return response()->json($data, 200, ['Content-type'=> 'application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);

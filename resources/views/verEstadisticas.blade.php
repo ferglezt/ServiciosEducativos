@@ -82,6 +82,22 @@
         </div>
       </div>
 
+      <div class="row">
+        <h4>Transporte</h4>
+      </div>
+      <div class="row">
+        <div class="col-md-8">
+          <table id="transporteTable" class="cell-border" width="100%">
+            <thead>
+              <th>Institucional</th>
+              <th>Manutención</th>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>  
+        </div>
+      </div>
+
 
   	</div>
 

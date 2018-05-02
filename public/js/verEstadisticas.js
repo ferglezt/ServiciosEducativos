@@ -57,6 +57,23 @@ $(document).ready(function() {
         }
     });
 
+    var transporteTable = $('#transporteTable').DataTable({
+    	"searching": false,
+        "scrollX": true,
+	    "language": {
+	        "lengthMenu": "Mostrando _MENU_ registros por página",
+	        "zeroRecords": "No se encontraron registros",
+	        "info": "Mostrando página _PAGE_ de _PAGES_",
+	        "infoEmpty": "No hay registros disponibles",
+	        "infoFiltered": "(de _MAX_ registros totales)",
+	        "search": "Buscar",
+	        "paginate": {
+	          "previous": "Anterior",
+	          "next": "Siguiente"
+	        }
+        }
+    });
+
     $('#periodo').change(function() {
     	$.ajax({
     		url: '/estadisticas/' + $(this).val(),
@@ -64,6 +81,7 @@ $(document).ready(function() {
     			solicitadasTable.clear().draw();
     			porBecaTable.clear().draw();
     			porGeneroTable.clear().draw();
+    			transporteTable.clear().draw();
 
     			if(result.solicitadas.length != 0 && result.solicitadas[0].total != 0) {
     				var solicitadas = result.solicitadas.map(function(obj) {
@@ -104,6 +122,15 @@ $(document).ready(function() {
 	    			});
 
 	    			porGeneroTable.rows.add(porGenero).draw();
+    			}
+
+    			if(result.transporteManutencion.length != 0 && result.transporteInstitucional.length != 0) {
+    				var becasTransporte = [
+    					result.transporteInstitucional[0].total + '', 
+    					result.transporteManutencion[0].total + ''
+    				];
+
+    				transporteTable.row.add(becasTransporte).draw();
     			}
 
     		}
