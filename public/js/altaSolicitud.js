@@ -17,6 +17,24 @@ $(document).ready(function() {
     $('#warningIngresos').empty();
   });
 
+  $('#seccionFolio').hide();
+
+  $('#btnIngresarFolioManual').click(function() {
+    var isFolioVisible = $('#seccionFolio').is(':visible');
+    if(isFolioVisible) {
+      $('#seccionFolio').hide(300);
+      $(this).removeClass('btn-success');
+      $(this).addClass('btn-info');
+      $(this).val('Ingresar Manualmente');
+      $('#folio').val('');
+    } else {
+      $('#seccionFolio').show(300);
+      $(this).removeClass('btn-info');
+      $(this).addClass('btn-success');
+      $(this).val('Regresar a Autoincrementable');
+    }
+  });
+
   $('#carga').keyup(function() {
     $('#warningCarga').removeClass(); 
     $('#warningCarga').empty();

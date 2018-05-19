@@ -121,6 +121,18 @@
                 </div>
               </div>
               <div class="form-group">
+                <label class="control-label col-sm-2">Folio:</label>
+                <div class="col-sm-4">
+                  <input type="button" class="form-control btn-info" value="Ingresar Folio Manualmente" id="btnIngresarFolioManual">
+                </div>
+              </div>
+              <div class="form-group" id="seccionFolio">
+                <label class="control-label col-sm-2">Ingresar Folio:</label>
+                <div class="col-sm-4">
+                  <input type="number" class="form-control" name="folio" id="folio" placeholder="Autoincrementable si se deja vacío">
+                </div>
+              </div>
+              <div class="form-group">
                 <label class="control-label col-sm-2" for="etiqueta">Etiqueta:</label>
                 <div class="col-sm-6">
                   <input type="text" class="form-control" name="etiqueta" id="etiqueta" placeholder="Etiqueta">
