@@ -168,7 +168,8 @@ $(document).ready(function() {
                         obj.telefono,
                         obj.observaciones,
                         obj.numero_caja,
-                        obj.usuario
+                        obj.usuario,
+                        obj.fecha_cierre
                     ];
                 });
                 table.clear();

@@ -261,6 +261,7 @@ class SolicitudController extends Controller
         $solicitud->observaciones = $request->input('observaciones');
         $solicitud->numero_caja = $request->input('numero_caja');
         $solicitud->usuario_id = $request->session()->get('usuario_id', null);
+        $solicitud->fecha_cierre = $request->input('fecha_cierre');
 
         $solicitud->beca_id = $request->input('beca_id');
         $solicitud->beca_solicitada = Beca::find($solicitud->beca_id)->nombre;
@@ -398,7 +399,8 @@ class SolicitudController extends Controller
                 'Teléfono',
                 'Observaciones',
                 'Número de caja',
-                'Capturó'
+                'Capturó',
+                'Fecha de Cierre'
             ]
         ]);
 	}
@@ -455,7 +457,8 @@ class SolicitudController extends Controller
             'solicitudes.transporte_institucional as transporte_institucional',
             'solicitudes.transporte_manutencion as transporte_manutencion',
             'periodos.anio as anio',
-            'periodos.periodo as periodo'
+            'periodos.periodo as periodo',
+            'solicitudes.fecha_cierre'
         );
 
         $isValidPeriodo = !is_null($periodo) && is_numeric($periodo);

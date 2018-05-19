@@ -9,6 +9,9 @@
       $('#fecha_recibido').datepicker({
         dateFormat: 'dd/mm/yy'
       });
+      $('#fecha_cierre').datepicker({
+        dateFormat: 'dd/mm/yy'
+      });
 
     });
   </script>
@@ -303,6 +306,12 @@
                 <label class="control-label col-sm-2" for="numero_caja">Número de caja:</label>
                 <div class="col-sm-6">
                   <input type="number" id="numero_caja" value="{{ $solicitud->numero_caja }}" name="numero_caja" placeholder="Número de caja" class="form-control"> 
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-2" for="fecha_cierre">Fecha de Cierre:</label>
+                <div class="col-sm-6">
+                  <input type="text" id="fecha_cierre" value="{{ $solicitud->fecha_cierre }}" name="fecha_cierre" placeholder="Fecha de Cierre" class="form-control"> 
                 </div>
               </div>
               <input type="hidden" name="estudiante_id" id="estudiante_id" value="{{ $estudiante->id }}">
