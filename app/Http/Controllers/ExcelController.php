@@ -9,6 +9,7 @@ use Box\Spout\Writer\Style\StyleBuilder;
 use Box\Spout\Writer\Style\Color;
 use Box\Spout\Common\Type;
 use DB;
+use App\Periodo;
 
 class ExcelController extends Controller
 {
@@ -20,53 +21,54 @@ class ExcelController extends Controller
         }
 
         $data = [];
-    	$periodo = $request->input('periodo');
+    	$periodo_id = $request->input('periodo');
+        $periodo = Periodo::findOrFail($periodo_id);
 
-    	if(!is_null($periodo) && is_numeric($periodo)) {
-            $data = DB::table('solicitudes')
-            ->join('estudiantes', 'estudiantes.id', '=', 'solicitudes.estudiante_id')
-            ->join('carreras', 'carreras.id', '=', 'estudiantes.carrera_id')
-            ->join('periodos', 'periodos.id', '=', 'solicitudes.periodo_id')
-            ->leftJoin('usuarios', 'usuarios.id', '=', 'solicitudes.usuario_id')
-            ->leftJoin('ingreso_minimo', 'ingreso_minimo.id', '=', 'solicitudes.ingreso_minimo_id')
-            ->select(
-                'solicitudes.anio as anio',
-                'solicitudes.folio as folio',
-                'solicitudes.etiqueta as etiqueta',
-                'estudiantes.boleta as boleta',
-                'estudiantes.curp as curp',
-                'estudiantes.genero as genero',
-                'estudiantes.nombre as nombre',
-                'carreras.nombre as carrera',
-                'solicitudes.semestre as semestre',
-                'solicitudes.promedio as promedio',
-                'solicitudes.estatus_estudiante as estatus_estudiante',
-                'solicitudes.carga as carga',
-                'solicitudes.estatus_becario as estatus_becario',
-                'solicitudes.beca_anterior as beca_anterior',
-                'solicitudes.beca_solicitada as beca_solicitada',
-                DB::raw("IF (solicitudes.transporte_institucional=1, 'SI', 'NO') as institucional"),
-                DB::raw("IF (solicitudes.transporte_manutencion=1, 'SI', 'NO') as manutencion"),
-                'solicitudes.folio_manutencion as folio_manutencion',
-                'solicitudes.folio_transporte as folio_transporte',
-                'solicitudes.mapa as mapa',
-                'solicitudes.fecha_recibido as fecha_recibido',
-                'solicitudes.comprobante_ingresos as comprobante_ingresos',
-                'solicitudes.ingresos as ingresos',
-                'solicitudes.dependientes as dependientes',
-                'ingreso_minimo.ingreso_minimo_por_persona as ingreso_minimo',
-                DB::raw('(ingresos / dependientes / ingreso_minimo_por_persona) as x'),
-                'estudiantes.oriundo as oriundo',
-                'estudiantes.email as email',
-                'estudiantes.telefono as telefono',
-                'solicitudes.observaciones as observaciones',
-                'solicitudes.numero_caja as numero_caja',
-                'usuarios.nombre as usuario_nombre'
-            )
-            ->where('solicitudes.periodo_id', '=', $periodo)
-            ->orderBy('folio')
-            ->get();
-    	}
+        $data = DB::table('solicitudes')
+        ->join('estudiantes', 'estudiantes.id', '=', 'solicitudes.estudiante_id')
+        ->join('carreras', 'carreras.id', '=', 'estudiantes.carrera_id')
+        ->join('periodos', 'periodos.id', '=', 'solicitudes.periodo_id')
+        ->leftJoin('usuarios', 'usuarios.id', '=', 'solicitudes.usuario_id')
+        ->leftJoin('ingreso_minimo', 'ingreso_minimo.id', '=', 'solicitudes.ingreso_minimo_id')
+        ->select(
+            'solicitudes.anio as anio',
+            'solicitudes.folio as folio',
+            'solicitudes.etiqueta as etiqueta',
+            'estudiantes.boleta as boleta',
+            'estudiantes.curp as curp',
+            'estudiantes.genero as genero',
+            'estudiantes.nombre as nombre',
+            'carreras.nombre as carrera',
+            'solicitudes.semestre as semestre',
+            'solicitudes.promedio as promedio',
+            'solicitudes.estatus_estudiante as estatus_estudiante',
+            'solicitudes.carga as carga',
+            'solicitudes.estatus_becario as estatus_becario',
+            'solicitudes.beca_anterior as beca_anterior',
+            'solicitudes.beca_solicitada as beca_solicitada',
+            DB::raw("IF (solicitudes.transporte_institucional=1, 'SI', 'NO') as institucional"),
+            DB::raw("IF (solicitudes.transporte_manutencion=1, 'SI', 'NO') as manutencion"),
+            'solicitudes.folio_manutencion as folio_manutencion',
+            'solicitudes.folio_transporte as folio_transporte',
+            'solicitudes.mapa as mapa',
+            'solicitudes.fecha_recibido as fecha_recibido',
+            'solicitudes.comprobante_ingresos as comprobante_ingresos',
+            'solicitudes.ingresos as ingresos',
+            'solicitudes.dependientes as dependientes',
+            'ingreso_minimo.ingreso_minimo_por_persona as ingreso_minimo',
+            DB::raw('(ingresos / dependientes / ingreso_minimo_por_persona) as x'),
+            'estudiantes.oriundo as oriundo',
+            'estudiantes.email as email',
+            'estudiantes.telefono as telefono',
+            'solicitudes.observaciones as observaciones',
+            'solicitudes.numero_caja as numero_caja',
+            'usuarios.nombre as usuario_nombre'
+        )
+        ->where('periodos.anio', '=', $periodo->anio)
+        ->orderBy('periodos.periodo')
+        ->orderBy('folio')
+        ->get();
+    	
 
     	if(empty($data)) {
     		abort(404);
