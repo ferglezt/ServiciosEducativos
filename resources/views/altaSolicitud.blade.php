@@ -133,16 +133,16 @@
                 </div>
               </div>
               <div class="form-group">
-                <label class="control-label col-sm-2" for="etiqueta">Etiqueta:</label>
-                <div class="col-sm-6">
-                  <input type="text" class="form-control" name="etiqueta" id="etiqueta" placeholder="Etiqueta">
+                <div class="col-sm-6 col-sm-offset-1">
+                  <div id="warningFolio">
+                
+                  </div>
                 </div>
               </div>
               <div class="form-group">
-                <div class="col-sm-6 col-sm-offset-1">
-                  <div id="warningEtiqueta">
-                
-                  </div>
+                <label class="control-label col-sm-2" for="etiqueta">Etiqueta:</label>
+                <div class="col-sm-6">
+                  <input type="text" class="form-control" name="etiqueta" id="etiqueta" placeholder="Etiqueta">
                 </div>
               </div>
               <div class="form-group">

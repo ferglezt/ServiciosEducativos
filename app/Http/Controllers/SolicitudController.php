@@ -132,11 +132,14 @@ class SolicitudController extends Controller
         $solicitud->beca_id = $request->input('beca_id');
         $solicitud->beca_solicitada = Beca::find($solicitud->beca_id)->nombre;
 
-        $folio = 1;
-
-        $latest_solicitud = Solicitud::where('periodo_id', '=', $request->input('periodo_id'))->orderBy('folio', 'desc')->first();
-        if($latest_solicitud && isset($latest_solicitud->folio) && is_numeric($latest_solicitud->folio)) {
-           $folio = $latest_solicitud->folio + 1;
+        $folio = $request->input('folio');
+        //If null or not int make it autoinc
+        if(is_null($folio) || !is_numeric($folio)) { 
+            $folio = 1;
+            $latest_solicitud = Solicitud::where('periodo_id', '=', $request->input('periodo_id'))->orderBy('folio', 'desc')->first();
+            if($latest_solicitud && isset($latest_solicitud->folio) && is_numeric($latest_solicitud->folio)) {
+               $folio = $latest_solicitud->folio + 1;
+            }
         }
 
         $solicitud->folio = $folio;
@@ -298,8 +301,10 @@ class SolicitudController extends Controller
     }
 
     public function findSolicitud(Request $request) {
-        $solicitud = Solicitud::where([['periodo_id', '=', $request->input('periodo')],
-                            ['etiqueta', '=', $request->input('etiqueta')]])->firstOrFail();
+        $solicitud = Solicitud::where([
+            ['periodo_id', '=', $request->input('periodo')],
+            ['folio', '=', $request->input('folio')]]
+        )->firstOrFail();
         $estudiante = Estudiante::findOrFail($solicitud->estudiante_id);
 
         $data = (object)[
