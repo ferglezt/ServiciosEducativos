@@ -27,6 +27,7 @@
           <div class="form-group">
             <label for="search">Periodo:</label>
             <select class="form-control" id="periodo" name="periodo">
+              <option value="">Buscar en Todos</option>
               @foreach($periodos as $p)
                 <option value="{{ $p->id }}"
 

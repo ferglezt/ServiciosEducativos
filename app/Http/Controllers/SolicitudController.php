@@ -367,6 +367,7 @@ class SolicitudController extends Controller
                 'Estatus Solicitud',
                 'Editar',
                 'Eliminar',
+                'Periodo',
                 'Transporte Institucional',
                 'Transporte Manutención',
                 'Folio',
@@ -414,68 +415,77 @@ class SolicitudController extends Controller
     	$periodo = $request->input('periodo');
     	$q = $request->input('q');
 
-    	if(!is_null($periodo) && is_numeric($periodo)) {
-            $data = DB::table('solicitudes')
-            ->join('estudiantes', 'estudiantes.id', '=', 'solicitudes.estudiante_id')
-            ->join('carreras', 'carreras.id', '=', 'estudiantes.carrera_id')
-            ->join('periodos', 'periodos.id', '=', 'solicitudes.periodo_id')
-            ->leftJoin('ingreso_minimo', 'ingreso_minimo.id', '=', 'solicitudes.ingreso_minimo_id')
-            ->leftJoin('usuarios', 'usuarios.id', '=', 'solicitudes.usuario_id')
-            ->select(
-                'solicitudes.id as id',
-                'solicitudes.estatus_solicitud as estatus_solicitud',
-                'solicitudes.folio as folio',
-                'solicitudes.etiqueta as etiqueta',
-                'estudiantes.boleta as boleta',
-                'estudiantes.curp as curp',
-                'estudiantes.genero as genero',
-                'estudiantes.nombre as nombre',
-                'carreras.nombre as carrera',
-                'solicitudes.semestre as semestre',
-                'solicitudes.promedio as promedio',
-                'solicitudes.estatus_estudiante as estatus_estudiante',
-                'solicitudes.carga as carga',
-                'solicitudes.estatus_becario as estatus_becario',
-                'solicitudes.beca_anterior as beca_anterior',
-                'solicitudes.beca_solicitada as beca_solicitada',
-                'solicitudes.folio_manutencion as folio_manutencion',
-                'solicitudes.folio_transporte as folio_transporte',
-                'solicitudes.mapa as mapa',
-                'solicitudes.fecha_recibido as fecha_recibido',
-                'solicitudes.comprobante_ingresos as comprobante_ingresos',
-                'solicitudes.ingresos as ingresos',
-                'solicitudes.dependientes as dependientes',
-                'estudiantes.oriundo as oriundo',
-                'estudiantes.email as email',
-                'estudiantes.telefono as telefono',
-                'solicitudes.observaciones as observaciones',
-                'usuarios.nombre as usuario',
-                'solicitudes.numero_caja as numero_caja',
-                'ingreso_minimo.ingreso_minimo_por_persona as ingreso_minimo',
-                'solicitudes.transporte_institucional as transporte_institucional',
-                'solicitudes.transporte_manutencion as transporte_manutencion'
-            );
+        $data = DB::table('solicitudes')
+        ->join('estudiantes', 'estudiantes.id', '=', 'solicitudes.estudiante_id')
+        ->join('carreras', 'carreras.id', '=', 'estudiantes.carrera_id')
+        ->join('periodos', 'periodos.id', '=', 'solicitudes.periodo_id')
+        ->leftJoin('ingreso_minimo', 'ingreso_minimo.id', '=', 'solicitudes.ingreso_minimo_id')
+        ->leftJoin('usuarios', 'usuarios.id', '=', 'solicitudes.usuario_id')
+        ->select(
+            'solicitudes.id as id',
+            'solicitudes.estatus_solicitud as estatus_solicitud',
+            'solicitudes.folio as folio',
+            'solicitudes.etiqueta as etiqueta',
+            'estudiantes.boleta as boleta',
+            'estudiantes.curp as curp',
+            'estudiantes.genero as genero',
+            'estudiantes.nombre as nombre',
+            'carreras.nombre as carrera',
+            'solicitudes.semestre as semestre',
+            'solicitudes.promedio as promedio',
+            'solicitudes.estatus_estudiante as estatus_estudiante',
+            'solicitudes.carga as carga',
+            'solicitudes.estatus_becario as estatus_becario',
+            'solicitudes.beca_anterior as beca_anterior',
+            'solicitudes.beca_solicitada as beca_solicitada',
+            'solicitudes.folio_manutencion as folio_manutencion',
+            'solicitudes.folio_transporte as folio_transporte',
+            'solicitudes.mapa as mapa',
+            'solicitudes.fecha_recibido as fecha_recibido',
+            'solicitudes.comprobante_ingresos as comprobante_ingresos',
+            'solicitudes.ingresos as ingresos',
+            'solicitudes.dependientes as dependientes',
+            'estudiantes.oriundo as oriundo',
+            'estudiantes.email as email',
+            'estudiantes.telefono as telefono',
+            'solicitudes.observaciones as observaciones',
+            'usuarios.nombre as usuario',
+            'solicitudes.numero_caja as numero_caja',
+            'ingreso_minimo.ingreso_minimo_por_persona as ingreso_minimo',
+            'solicitudes.transporte_institucional as transporte_institucional',
+            'solicitudes.transporte_manutencion as transporte_manutencion',
+            'periodos.anio as anio',
+            'periodos.periodo as periodo'
+        );
 
-            if(!is_null($q) && $q != '') {
-                $data = $data->where([
-                    ['solicitudes.periodo_id', '=', $periodo],
-                    ['estudiantes.boleta', 'like', '%'.$q.'%']
-                ])
-                ->orWhere([
-                    ['solicitudes.periodo_id', '=', $periodo],
-                    ['estudiantes.nombre', 'like', '%'.$q.'%']
-                ])
-                ->orWhere([
-                    ['solicitudes.periodo_id', '=', $periodo],
-                    ['solicitudes.folio', 'like', '%'.$q.'%']
-                ]);
-            } else {
-                $data = $data->where('solicitudes.periodo_id', '=', $periodo);
-            }
-    		
-            $data = $data->get();
-    	}
+        $isValidPeriodo = !is_null($periodo) && is_numeric($periodo);
+        $isValidQuery = !is_null($q) && $q != '';
 
+        if($isValidPeriodo && $isValidQuery) {
+            $data = $data
+            ->where([
+                ['estudiantes.boleta', 'like', '%'.$q.'%'],
+                ['solicitudes.periodo_id', '=', $periodo]
+            ])
+            ->orWhere([
+                ['estudiantes.nombre', 'like', '%'.$q.'%'],
+                ['solicitudes.periodo_id', '=', $periodo]
+            ])
+            ->orWhere([
+                ['solicitudes.folio', 'like', '%'.$q.'%'],
+                ['solicitudes.periodo_id', '=', $periodo]
+            ]);
+        } else if($isValidQuery) {
+            $data = $data
+            ->where('estudiantes.boleta', 'like', '%'.$q.'%')
+            ->orWhere('estudiantes.nombre', 'like', '%'.$q.'%')
+            ->orWhere('solicitudes.folio', 'like', '%'.$q.'%');
+        } else if($isValidPeriodo) {
+            $data = $data->where('solicitudes.periodo_id', '=', $periodo);
+        }
+
+        $data = $data->get();
+    
     	return response()->json($data, 200, ['Content-type'=> 'application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
     } 
 }

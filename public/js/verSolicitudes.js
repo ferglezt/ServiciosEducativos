@@ -137,6 +137,7 @@ $(document).ready(function() {
                         hiddenButton.get(0).outerHTML,
                         '<a href="editarSolicitud/' + obj.id + '" target="_blank">Editar</a>',
                         eliminar.get(0).outerHTML,
+                        obj.anio.toString() + ' - ' + obj.periodo.toString(),
                         transporteInstCheckbox.get(0).outerHTML,
                         transporteManCheckbox.get(0).outerHTML,
                         obj.folio,
