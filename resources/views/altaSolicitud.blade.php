@@ -97,7 +97,7 @@
                 <label class="control-label col-sm-2" for="folio">Año:</label>
                 <div class="col-sm-6">
                   <select class="form-control" id="anio" name="anio">
-                    @for($i = 2010; $i < 2030; $i++)
+                    @for($i = 2000; $i < 2030; $i++)
                       <option value="{{ $i }}" {{ $i == date('Y') ? 'selected' : '' }}>{{ $i }}</option>
                     @endfor
                   </select>
