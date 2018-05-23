@@ -100,6 +100,8 @@ Route::group(['middleware' => ['custom.session']], function() {
 
 	Route::get('/excel/descargarBecas', 'ExcelController@descargarBecas');
 
+	Route::get('/findLatestFolio/{periodo}', 'SolicitudController@findLatestFolio');
+
 	Route::get('/altaServicioSocial', 'ServicioSocialController@altaServicioSocial');
 
 	Route::post('/attemptAltaSolicitudServicioSocial', 'ServicioSocialController@attemptAltaSolicitudServicioSocial');

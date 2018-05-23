@@ -301,6 +301,11 @@ class SolicitudController extends Controller
 
     }
 
+    public function findLatestFolio(Request $request, $periodo) {
+        $solicitud = Solicitud::where('periodo_id', '=', $periodo)->orderBy('folio', 'desc')->firstOrFail();
+        return response()->json($solicitud, 200, ['Content-type'=> 'application/json; charset=utf-8'], JSON_UNESCAPED_UNICODE);
+    } 
+
     public function findSolicitud(Request $request) {
         $solicitud = Solicitud::where([
             ['periodo_id', '=', $request->input('periodo')],

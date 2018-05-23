@@ -125,6 +125,9 @@
                 <div class="col-sm-4">
                   <input type="button" class="form-control btn-info" value="Ingresar Folio Manualmente" id="btnIngresarFolioManual">
                 </div>
+                <div class="col-sm-2" id="seccionLatestFolio">
+                  <p>Último folio conocido en este periodo: <span id="latestFolio"></span></p>
+                </div>
               </div>
               <div class="form-group" id="seccionFolio">
                 <label class="control-label col-sm-2">Ingresar Folio:</label>

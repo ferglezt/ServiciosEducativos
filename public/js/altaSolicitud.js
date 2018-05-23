@@ -19,6 +19,17 @@ $(document).ready(function() {
 
   $('#seccionFolio').hide();
 
+  var findLatestFolio = function() {
+    $.ajax({
+      url: '/findLatestFolio/' + $('#periodo_id').val(),
+      success: function(result,status,xhr) {
+        $('#latestFolio').text(result.folio);
+      }
+    });
+  };
+
+  findLatestFolio();
+
   $('#btnIngresarFolioManual').click(function() {
     var isFolioVisible = $('#seccionFolio').is(':visible');
     if(isFolioVisible) {
@@ -79,6 +90,7 @@ $(document).ready(function() {
 
   $('#periodo_id').change(function() {
     findSolicitud();
+    findLatestFolio();
   });
 
   var validarBeca = function() {
