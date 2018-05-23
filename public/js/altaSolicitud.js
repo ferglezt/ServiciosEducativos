@@ -24,6 +24,9 @@ $(document).ready(function() {
       url: '/findLatestFolio/' + $('#periodo_id').val(),
       success: function(result,status,xhr) {
         $('#latestFolio').text(result.folio);
+      },
+      error: function(xhr,status,error) {
+        $('#latestFolio').text('No se encontraron registros');
       }
     });
   };

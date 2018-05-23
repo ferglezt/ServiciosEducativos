@@ -18,7 +18,7 @@ class SolicitudController extends Controller
 
     public function verEstadisticas(Request $request) {
         return view('verEstadisticas', [
-            'periodos' => Periodo::all()->sortBy('anio')
+            'periodos' => Periodo::orderBy('anio')->orderBy('periodo')->get()
         ]);
     }
 
@@ -88,7 +88,7 @@ class SolicitudController extends Controller
     public function altaSolicitud(Request $request) {
         return view('altaSolicitud', [
             'carreras' => Carrera::all(),
-            'periodos' => Periodo::all()->sortBy('anio'),
+            'periodos' => Periodo::orderBy('anio')->orderBy('periodo')->get(),
             'ingreso_minimo' => IngresoMinimo::latest('id')->first(),
             'becas' => Beca::all()
         ]);
@@ -101,7 +101,7 @@ class SolicitudController extends Controller
             return view('altaSolicitud', [
                 'error' => $insertOrUpdateEstudiante->error,
                 'carreras' => Carrera::all(),
-                'periodos' => Periodo::all()->sortBy('anio'),
+                'periodos' => Periodo::orderBy('anio')->orderBy('periodo')->get(),
                 'ingreso_minimo' => IngresoMinimo::latest('id')->first(),
                 'becas' => Beca::all()
             ]);
@@ -160,7 +160,7 @@ class SolicitudController extends Controller
         if($alreadyExists) {
             return view('altaSolicitud', [
                 'carreras' => Carrera::all(),
-                'periodos' => Periodo::all()->sortBy('anio'),
+                'periodos' => Periodo::orderBy('anio')->orderBy('periodo')->get(),
                 'ingreso_minimo' => IngresoMinimo::latest('id')->first(),
                 'becas' => Beca::all(),
                 'error' => 'Esta solicitud ya existe en la base de datos'
@@ -172,7 +172,7 @@ class SolicitudController extends Controller
         } catch(QueryException $e) {
             return view('altaSolicitud', [
                 'carreras' => Carrera::all(),
-                'periodos' => Periodo::all()->sortBy('anio'),
+                'periodos' => Periodo::orderBy('anio')->orderBy('periodo')->get(),
                 'ingreso_minimo' => IngresoMinimo::latest('id')->first(),
                 'becas' => Beca::all(),
                 'error' => $e->getMessage()
@@ -181,7 +181,7 @@ class SolicitudController extends Controller
 
         return view('altaSolicitud', [
             'carreras' => Carrera::all(),
-            'periodos' => Periodo::all()->sortBy('anio'),
+            'periodos' => Periodo::orderBy('anio')->orderBy('periodo')->get(),
             'ingreso_minimo' => IngresoMinimo::latest('id')->first(),
             'becas' => Beca::all(),
             'successMessage' => 'Solicitud dada de alta satisfactoriamente con el folio: '.$folio
@@ -194,7 +194,7 @@ class SolicitudController extends Controller
 
         return view('editarSolicitud', [
             'carreras' => Carrera::all(),
-            'periodos' => Periodo::all()->sortBy('anio'),
+            'periodos' => Periodo::orderBy('anio')->orderBy('periodo')->get(),
             'becas' => Beca::all(),
             'estudiante' => $estudiante,
             'solicitud' => $solicitud
@@ -232,7 +232,7 @@ class SolicitudController extends Controller
         if(!$insertOrUpdateEstudiante->result) {
             return view('editarSolicitud', [
                 'carreras' => Carrera::all(),
-                'periodos' => Periodo::all()->sortBy('anio'),
+                'periodos' => Periodo::orderBy('anio')->orderBy('periodo')->get(),
                 'becas' => Beca::all(),
                 'estudiante' => $estudiante,
                 'solicitud' => $solicitud,
@@ -269,7 +269,7 @@ class SolicitudController extends Controller
         if(is_null($solicitud->folio) || !is_numeric($solicitud->folio)) {
             return view('editarSolicitud', [
                 'carreras' => Carrera::all(),
-                'periodos' => Periodo::all()->sortBy('anio'),
+                'periodos' => Periodo::orderBy('anio')->orderBy('periodo')->get(),
                 'becas' => Beca::all(),
                 'estudiante' => $estudiante,
                 'solicitud' => $solicitud,
@@ -282,7 +282,7 @@ class SolicitudController extends Controller
         } catch(QueryException $e) {
             return view('editarSolicitud', [
                 'carreras' => Carrera::all(),
-                'periodos' => Periodo::all()->sortBy('anio'),
+                'periodos' => Periodo::orderBy('anio')->orderBy('periodo')->get(),
                 'becas' => Beca::all(),
                 'estudiante' => $estudiante,
                 'solicitud' => $solicitud,
@@ -292,7 +292,7 @@ class SolicitudController extends Controller
 
         return view('editarSolicitud', [
             'carreras' => Carrera::all(),
-            'periodos' => Periodo::all()->sortBy('anio'),
+            'periodos' => Periodo::orderBy('anio')->orderBy('periodo')->get(),
             'becas' => Beca::all(),
             'estudiante' => $estudiante,
             'solicitud' => $solicitud,
@@ -368,7 +368,7 @@ class SolicitudController extends Controller
 
 	public function verSolicitudes(Request $request) {
 		return view('verSolicitudes', [
-            'periodos' => Periodo::all()->sortBy('anio'),
+            'periodos' => Periodo::orderBy('anio')->orderBy('periodo')->get(),
             'columnas' => [
                 'Estatus Solicitud',
                 'Editar',
