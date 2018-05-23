@@ -15,10 +15,10 @@
       @if(Session::get('rol_id', 0) == 1) {{-- ADMIN --}}
         <div class="row">
           <div class="col-md-12">
-            <button id="btnDescargarExcel" class="btn btn-info">Descargar Excel de este periodo</button>
+            <button id="btnDescargarExcelPeriodo" class="btn btn-info">Descargar Excel de este periodo</button>
+            <button id="btnDescargarExcelAnio" class="btn btn-success">Descargar Excel de este Año</button>
           </div>
         </div>
-
         <br>
       @endif
 
@@ -29,7 +29,7 @@
             <select class="form-control" id="periodo" name="periodo">
               <option value="">Buscar en Todos</option>
               @foreach($periodos as $p)
-                <option value="{{ $p->id }}"
+                <option value="{{ $p->id }}" data-anio="{{ $p->anio }}"
 
                   @if(($p->anio == date('Y') + 1 && date('n') > 6 && $p->periodo == 1) ||
                       ($p->anio == date('Y') && date('n') <= 6 && $p->periodo == 2))
@@ -72,7 +72,6 @@
 
       <div class="row">
         <div class="col-md-12">
-
           @for($i = 0; $i < count($columnas); $i++)
             <label class="checkbox-inline"><input class="toggle-column" type="checkbox" data-column="{{ $i }}" checked>{{ $columnas[$i] }}</label>
           @endfor

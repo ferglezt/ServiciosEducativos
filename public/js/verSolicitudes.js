@@ -282,8 +282,13 @@ $(document).ready(function() {
         toggleColumns();
     });
 
-    $('#btnDescargarExcel').click(function() {
+    $('#btnDescargarExcelPeriodo').click(function() {
         window.open('/excel/descargarBecas?periodo=' + $('#periodo').val(), '_blank');
+    });
+
+    $('#btnDescargarExcelAnio').click(function() {
+        var anio = $('#periodo').find('option:selected').data('anio');
+        window.open('/excel/descargarBecas?anio=' + anio, '_blank');
     });
 
     var changeBecaTransporte = function(url, checkbox) {

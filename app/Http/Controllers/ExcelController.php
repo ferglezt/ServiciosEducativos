@@ -21,13 +21,12 @@ class ExcelController extends Controller
         }
 
         $data = [];
-    	$periodo_id = $request->input('periodo');
-        $periodo = Periodo::findOrFail($periodo_id);
+    	$periodo = $request->input('periodo');
+        $anio = $request->input('anio');
 
         $data = DB::table('solicitudes')
         ->join('estudiantes', 'estudiantes.id', '=', 'solicitudes.estudiante_id')
         ->join('carreras', 'carreras.id', '=', 'estudiantes.carrera_id')
-        ->join('periodos', 'periodos.id', '=', 'solicitudes.periodo_id')
         ->leftJoin('usuarios', 'usuarios.id', '=', 'solicitudes.usuario_id')
         ->leftJoin('ingreso_minimo', 'ingreso_minimo.id', '=', 'solicitudes.ingreso_minimo_id')
         ->select(
@@ -62,14 +61,25 @@ class ExcelController extends Controller
             'estudiantes.telefono as telefono',
             'solicitudes.observaciones as observaciones',
             'solicitudes.numero_caja as numero_caja',
-            'usuarios.nombre as usuario_nombre'
-        )
-        ->where('periodos.anio', '=', $periodo->anio)
-        ->orderBy('periodos.periodo')
-        ->orderBy('folio')
-        ->get();
-    	
+            'usuarios.nombre as usuario_nombre',
+            'solicitudes.fecha_cierre'
+        );
 
+        if(!is_null($periodo) && is_numeric($periodo)) {
+            $data = $data
+            ->where('solicitudes.periodo_id', '=', $periodo)
+            ->orderBy('folio')
+            ->get();
+        } else if(!is_null($anio) && is_numeric($anio)) {
+            $data = $data
+            ->where('anio', '=', $anio)
+            ->orderBy('anio')
+            ->orderBy('folio')
+            ->get();
+        } else {
+            $data = [];
+        }
+    	
     	if(empty($data)) {
     		abort(404);
     	}
@@ -103,7 +113,7 @@ class ExcelController extends Controller
             'Transporte Manutención', 'Folio Manutención','Folio Transporte', 'Mapa', 
             'Fecha Recibido', 'Comprobante de Ingresos', 'Ingresos', 'Dependientes', 
             'Ingreso Mínimo', '', 'Oriundo', 'Email','Teléfono', 'Observaciones', 
-            'Número de caja', 'Capturó'
+            'Número de caja', 'Capturó', 'Fecha de Cierre'
     	], $styleHeader);
 
     	$writer->addRowsWithStyle($data, $styleRows);
