@@ -83,7 +83,7 @@ $(document).ready(function() {
                     var ingresos = parseFloat(obj.ingresos).toFixed(2);
                     var ingresoMinimo = parseFloat(obj.ingreso_minimo).toFixed(2);
                     var dependientes = parseInt(obj.dependientes);
-                    var dependientesMaximos = parseInt(obj.dependienes_maximos);
+                    var dependientesMaximos = parseInt(obj.dependientes_maximos);
                     var relacionIngresosDependientes = (ingresos / dependientes / ingresoMinimo).toFixed(2); 
 
                     if(isNaN(promedio)) promedio = null;
