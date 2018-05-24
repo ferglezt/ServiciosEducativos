@@ -259,6 +259,20 @@
                 </div>
               </div>
               <div class="form-group">
+                <label class="control-label col-sm-2" for="ingreso_minimo">Ingreso mínimo por persona:</label>
+                <div class="col-sm-2">
+                  <select id="ingreso_minimo" name="ingreso_minimo" class="form-control">
+                    @foreach($ingreso_minimo as $im)
+                        <option value="{{ $im->id }}" 
+                          data-ingreso_minimo_por_persona="{{ $im->ingreso_minimo_por_persona }}" data-dependientes_maximos="{{ $im->dependientes_maximos }}"
+                        >
+                          {{ number_format($im->ingreso_minimo_por_persona, 2, '.', '') }}
+                        </option>
+                    @endforeach
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
                 <div class="col-sm-6 col-sm-offset-1">
                   <div id="warningIngresos">
                 
@@ -278,7 +292,6 @@
                 </div>
               </div>
               <input type="hidden" name="estudiante_id" id="estudiante_id">
-              <input type="hidden" name="ingreso_minimo" id="ingreso_minimo" value="{{ $ingreso_minimo->ingreso_minimo_por_persona }}">
               <input type="hidden" name="tipo_institucional" id="tipo_institucional">
               <input type="hidden" name="_token" value="{{ csrf_token() }}">
               <div class="form-group">        

@@ -196,28 +196,31 @@ $(document).ready(function() {
   $('#promedio').focusout(validarBeca);
   $('#estatus_estudiante').change(validarBeca);
 
-
-  $('#dependientes, #ingresos').focusout(function() {
+  var validarIngresos = function() {
     $('#warningIngresos').removeClass(); 
     $('#warningIngresos').empty();
     
     var ingresos = parseFloat($('#ingresos').val());
     var dependientes = parseInt($('#dependientes').val());
-    var ingresoMinimo = parseFloat($('#ingreso_minimo').val());
-    
+    var ingresoMinimo = parseFloat($('#ingreso_minimo').find('option:selected').data('ingreso_minimo_por_persona'));
+    var dependientesMaximos = parseInt($('#ingreso_minimo').find('option:selected').data('dependientes_maximos'));
+
     var res = ingresos / dependientes / ingresoMinimo;
 
     if(!isNaN(res)) {
       res = res.toFixed(1);
-      if(res > 4.0) {
+      if(res > dependientesMaximos) {
         $('#warningIngresos').addClass('alert alert-danger');
-        $('#warningIngresos').html('Los ingresos sobrepasan el límite establecido: ' + res);
+        $('#warningIngresos').html('Los ingresos sobrepasan el límite establecido: ' + res + ' (max: ' + dependientesMaximos + ')');
       } else {
         $('#warningIngresos').addClass('alert alert-success');
-        $('#warningIngresos').html('Los ingresos están dentro de los límites: ' + res);
+        $('#warningIngresos').html('Los ingresos están dentro de los límites: ' + res + ' (max: ' + dependientesMaximos + ')');
       }
     }
-  });
+  };
+
+  $('#dependientes, #ingresos').focusout(validarIngresos);
+  $('#ingreso_minimo').change(validarIngresos);
 
   $('#boleta').keyup(function() {
     $('#warningBoleta').removeClass();

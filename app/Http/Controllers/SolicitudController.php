@@ -89,7 +89,7 @@ class SolicitudController extends Controller
         return view('altaSolicitud', [
             'carreras' => Carrera::all(),
             'periodos' => Periodo::orderBy('anio')->orderBy('periodo')->get(),
-            'ingreso_minimo' => IngresoMinimo::latest('id')->first(),
+            'ingreso_minimo' => IngresoMinimo::orderBy('id', 'desc')->get(),
             'becas' => Beca::all()
         ]);
     }
@@ -102,7 +102,7 @@ class SolicitudController extends Controller
                 'error' => $insertOrUpdateEstudiante->error,
                 'carreras' => Carrera::all(),
                 'periodos' => Periodo::orderBy('anio')->orderBy('periodo')->get(),
-                'ingreso_minimo' => IngresoMinimo::latest('id')->first(),
+                'ingreso_minimo' => IngresoMinimo::orderBy('id', 'desc')->get(),
                 'becas' => Beca::all()
             ]);
         }
@@ -148,9 +148,7 @@ class SolicitudController extends Controller
             $solicitud->beca_solicitada = 'INSTITUCIONAL '.$request->input('tipo_institucional');
         }
 
-        if(IngresoMinimo::latest('id')->first()) {
-            $solicitud->ingreso_minimo_id = IngresoMinimo::latest('id')->first()->id;
-        }
+        $solicitud->ingreso_minimo_id = $request->input('ingreso_minimo');        
 
         $alreadyExists = Solicitud::where([
             ['estudiante_id', '=', $solicitud->estudiante_id],
@@ -161,7 +159,7 @@ class SolicitudController extends Controller
             return view('altaSolicitud', [
                 'carreras' => Carrera::all(),
                 'periodos' => Periodo::orderBy('anio')->orderBy('periodo')->get(),
-                'ingreso_minimo' => IngresoMinimo::latest('id')->first(),
+                'ingreso_minimo' => IngresoMinimo::orderBy('id', 'desc')->get(),
                 'becas' => Beca::all(),
                 'error' => 'Esta solicitud ya existe en la base de datos'
             ]);
@@ -173,7 +171,7 @@ class SolicitudController extends Controller
             return view('altaSolicitud', [
                 'carreras' => Carrera::all(),
                 'periodos' => Periodo::orderBy('anio')->orderBy('periodo')->get(),
-                'ingreso_minimo' => IngresoMinimo::latest('id')->first(),
+                'ingreso_minimo' => IngresoMinimo::orderBy('id', 'desc')->get(),
                 'becas' => Beca::all(),
                 'error' => $e->getMessage()
             ]);
@@ -182,7 +180,7 @@ class SolicitudController extends Controller
         return view('altaSolicitud', [
             'carreras' => Carrera::all(),
             'periodos' => Periodo::orderBy('anio')->orderBy('periodo')->get(),
-            'ingreso_minimo' => IngresoMinimo::latest('id')->first(),
+            'ingreso_minimo' => IngresoMinimo::orderBy('id', 'desc')->get(),
             'becas' => Beca::all(),
             'successMessage' => 'Solicitud dada de alta satisfactoriamente con el folio: '.$folio
         ]);
