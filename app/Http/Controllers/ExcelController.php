@@ -27,10 +27,12 @@ class ExcelController extends Controller
         $data = DB::table('solicitudes')
         ->join('estudiantes', 'estudiantes.id', '=', 'solicitudes.estudiante_id')
         ->join('carreras', 'carreras.id', '=', 'estudiantes.carrera_id')
+        ->join('periodos', 'periodos.id', '=', 'solicitudes.periodo_id')
         ->leftJoin('usuarios', 'usuarios.id', '=', 'solicitudes.usuario_id')
         ->leftJoin('ingreso_minimo', 'ingreso_minimo.id', '=', 'solicitudes.ingreso_minimo_id')
         ->select(
             'solicitudes.anio as anio',
+            DB::raw("CONCAT(periodos.anio, ' - ', periodos.periodo) as periodo"),
             'solicitudes.folio as folio',
             'solicitudes.etiqueta as etiqueta',
             'estudiantes.boleta as boleta',
@@ -72,9 +74,10 @@ class ExcelController extends Controller
             ->get();
         } else if(!is_null($anio) && is_numeric($anio)) {
             $data = $data
-            ->where('anio', '=', $anio)
-            ->orderBy('anio')
-            ->orderBy('folio')
+            ->where('solicitudes.anio', '=', $anio)
+            ->orderBy('periodos.anio')
+            ->orderBy('periodos.periodo')
+            ->orderBy('solicitudes.folio')
             ->get();
         } else {
             $data = [];
@@ -107,7 +110,7 @@ class ExcelController extends Controller
     	$writer->openToFile($tmpfname);
 
     	$writer->addRowWithStyle([
-    		'Año', 'Folio', 'Etiqueta', 'Boleta', 'Curp', 'Género', 'Nombre',
+    		'Año', 'Periodo', 'Folio', 'Etiqueta', 'Boleta', 'Curp', 'Género', 'Nombre',
     		'Carrera', 'Semestre', 'Promedio', 'Estatus Académico', 'Carga',
     		'Estatus Becario', 'Beca Anterior', 'Beca Solicitada', 'Transporte Institucional', 
             'Transporte Manutención', 'Folio Manutención','Folio Transporte', 'Mapa', 
