@@ -459,6 +459,7 @@ class SolicitudController extends Controller
             'usuarios.nombre as usuario',
             'solicitudes.numero_caja as numero_caja',
             'ingreso_minimo.ingreso_minimo_por_persona as ingreso_minimo',
+            'ingreso_minimo.dependientes_maximos as dependientes_maximos',
             'solicitudes.transporte_institucional as transporte_institucional',
             'solicitudes.transporte_manutencion as transporte_manutencion',
             'periodos.anio as anio',

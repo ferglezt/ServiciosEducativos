@@ -83,6 +83,7 @@ $(document).ready(function() {
                     var ingresos = parseFloat(obj.ingresos).toFixed(2);
                     var ingresoMinimo = parseFloat(obj.ingreso_minimo).toFixed(2);
                     var dependientes = parseInt(obj.dependientes);
+                    var dependientesMaximos = parseInt(obj.dependienes_maximos);
                     var relacionIngresosDependientes = (ingresos / dependientes / ingresoMinimo).toFixed(2); 
 
                     if(isNaN(promedio)) promedio = null;
@@ -95,9 +96,9 @@ $(document).ready(function() {
 
                     if(isNaN(relacionIngresosDependientes)) {
                         relacionIngresosDependientes = null;
-                    } else if(relacionIngresosDependientes > 4.0) {
+                    } else if(relacionIngresosDependientes > dependientesMaximos) {
                         hiddenMessage.addClass('alert alert-danger text-center');
-                    } else if(relacionIngresosDependientes > 0 && relacionIngresosDependientes <= 4.0) {
+                    } else if(relacionIngresosDependientes > 0 && relacionIngresosDependientes <= dependientesMaximos) {
                         hiddenMessage.addClass('alert alert-success text-center');
                     }
 
