@@ -40,8 +40,11 @@
     <ul class="nav collapse" id="submenu-becas" role="menu">
       @if(Session::get('rol_id', 0) == 1) {{-- ADMIN --}}
         <li id="item-ver-becas">
-        <a href="{{ URL::to('/verBecas') }}">Ver Becas</a>
-      </li>
+          <a href="{{ URL::to('/verBecas') }}">Ver Becas</a>
+        </li>
+        <li id="item-nuevo-ingreso-minimo">
+          <a href="{{ URL::to('/ingresoMinimo/nuevo') }}">Nuevo Ingreso Mínimo</a>
+        </li>
       @endif
       <li id="item-alta-solicitud">
         <a href="{{ URL::to('/altaSolicitud') }}">Nueva Solicitud</a>

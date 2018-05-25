@@ -71,6 +71,10 @@ Route::group(['middleware' => ['custom.session']], function() {
 
 	Route::get('/ingresoMinimo/latest', 'IngresoMinimoController@getLatest');
 
+	Route::get('/ingresoMinimo/nuevo', 'IngresoMinimoController@nuevoIngresoMinimo');
+
+	Route::post('/ingresoMinimo/insert', 'IngresoMinimoController@insert');
+
 	Route::get('/findCarga/{carga_id}', 'CargaController@findCarga');
 
 	Route::get('/findCarreraConCargas/{carrera_id}', 'CargaController@joinCarrerasCargas');
