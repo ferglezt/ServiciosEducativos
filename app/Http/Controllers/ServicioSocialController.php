@@ -27,7 +27,10 @@ class ServicioSocialController extends Controller
     	$solicitud->prestatario = $request->input('prestatario');
     	$solicitud->programa = $request->input('programa');
     	$solicitud->profesor = $request->input('profesor');
-    	$solicitud->periodo = $request->input('periodo');
+        $periodo_inicio = $request->input('periodo_inicio');
+        $periodo_fin = $request->input('periodo_fin');
+        $periodo = $periodo_inicio.' - '.$periodo_fin;
+    	$solicitud->periodo = $periodo;
     	$solicitud->tipo_ss = $request->input('tipo_ss');
     	$solicitud->creditos = $request->input('creditos');
     	$solicitud->horario = $request->input('horario');

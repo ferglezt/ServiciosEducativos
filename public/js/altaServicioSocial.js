@@ -9,6 +9,14 @@ $(document).ready(function() {
     dateFormat: 'dd/mm/yy'
   });
 
+  $('#periodo_inicio').datepicker({
+    dateFormat: 'dd/mm/yy'
+  });
+
+  $('#periodo_fin').datepicker({
+    dateFormat: 'dd/mm/yy'
+  });
+
   $('#consecutivo').val('IPN/O2M503/3S.8/');
 
   $('#consecutivo').keyup(function() {

@@ -57,7 +57,7 @@
       </div>
       <div class="form-group">
         <label class="control-label col-sm-2" for="carrera">Carrera:</label>
-        <div class="col-sm-6">
+        <div class="col-sm-3">
           <select class="form-control" id="carrera" name="carrera">
             @foreach($carreras as $carrera)
               <option value="{{ $carrera->id }}">{{ $carrera->nombre }}</option>
@@ -67,7 +67,7 @@
       </div>
       <div class="form-group">
         <label class="control-label col-sm-2" for="genero">Género:</label>
-        <div class="col-sm-6">
+        <div class="col-sm-2">
           <select class="form-control" id="genero" name="genero">
             <option value="M">Masculino</option>
             <option value="F">Femenino</option>
@@ -94,13 +94,16 @@
       </div>
       <div class="form-group">
         <label class="control-label col-sm-2" for="periodo">Periodo:</label>
-        <div class="col-sm-6">
-          <input type="text" name="periodo" placeholder="Periodo" class="form-control">
+        <div class="col-sm-2">
+          <input type="text" id="periodo_inicio" name="periodo_inicio" placeholder="Inicio" class="form-control">
+        </div>
+        <div class="col-sm-2">
+          <input type="text" id="periodo_fin" name="periodo_fin" placeholder="Fin" class="form-control">
         </div>
       </div>
       <div class="form-group">
         <label class="control-label col-sm-2" for="tipo_ss">Tipo Servicio Social:</label>
-        <div class="col-sm-6">
+        <div class="col-sm-2">
           <select class="form-control" id="tipo_ss" name="tipo_ss">
             <option value="SS">SS</option>
             <option value="SP">SP</option>
@@ -112,7 +115,7 @@
       </div>
       <div class="form-group">
         <label class="control-label col-sm-2" for="creditos">Créditos:</label>
-        <div class="col-sm-6">
+        <div class="col-sm-3">
           <input type="number" name="creditos" placeholder="Créditos" class="form-control">
         </div>
       </div>
