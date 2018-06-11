@@ -17,6 +17,21 @@ $(document).ready(function() {
     dateFormat: 'dd/mm/yy'
   });
 
+  $('#registro').keyup(function() {
+    $('#warningRegistro').empty();
+    $('#warningRegistro').removeClass();
+  });
+
+  $('#registro').focusout(function() {
+    $.ajax({
+      url: '/servicioSocial/findByRegistro/' + $('#registro').val(),
+      success: function(result,status,xhr) {
+        $('#warningRegistro').addClass('alert alert-danger');
+        $('#warningRegistro').html('Este registro ya existe a nombre de ' + result.nombre);
+      }
+    });
+  });
+
   $('#consecutivo').val('IPN/O2M503/3S.8/');
 
   $('#consecutivo').keyup(function() {

@@ -111,6 +111,16 @@ Route::group(['middleware' => ['custom.session']], function() {
 	Route::post('/attemptAltaSolicitudServicioSocial', 'ServicioSocialController@attemptAltaSolicitudServicioSocial');
 
 	Route::get('/verSolicitudesServicioSocial', 'ServicioSocialController@verSolicitudesServicioSocial');
+
+	Route::get('/servicioSocial/buscar', 'ServicioSocialController@buscar');
+
+	Route::post('/servicioSocial/eliminar/{id}', 'ServicioSocialController@eliminar');
+
+	Route::get('/servicioSocial/findByRegistro/{registro}', 'ServicioSocialController@findByRegistro');
+
+	Route::get('/servicioSocial/editar/{id}', 'ServicioSocialController@editar');
+
+	Route::post('/servicioSocial/attemptEdit', 'ServicioSocialController@attemptEdit');
 });
 
 Route::get('/login', function() {
