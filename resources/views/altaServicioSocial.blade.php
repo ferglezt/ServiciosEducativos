@@ -39,12 +39,6 @@
       </div>
       <div id="warningRegistro"></div>
       <div class="form-group">
-        <label class="control-label col-sm-2" for="consecutivo">Consecutivo:</label>
-        <div class="col-sm-6">
-          <input type="text" name="consecutivo" id="consecutivo" placeholder="Consecutivo" class="form-control">
-        </div>
-      </div>
-      <div class="form-group">
         <label class="control-label col-sm-2" for="boleta">Boleta:</label>
         <div class="col-sm-6">
           <input type="text" name="boleta" placeholder="Boleta" class="form-control">

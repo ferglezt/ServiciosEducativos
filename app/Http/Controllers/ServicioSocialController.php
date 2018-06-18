@@ -71,7 +71,6 @@ class ServicioSocialController extends Controller
     public function attemptAltaSolicitudServicioSocial(Request $request) {
     	$solicitud = new ServicioSocial;
     	$solicitud->registro = $request->input('registro');
-    	$solicitud->consecutivo = $request->input('consecutivo');
     	$solicitud->boleta = $request->input('boleta');
     	$solicitud->nombre = $request->input('nombre');
     	$solicitud->carrera_id = $request->input('carrera');
@@ -88,6 +87,18 @@ class ServicioSocialController extends Controller
     	$solicitud->horario = $request->input('horario');
     	$solicitud->fecha_recepcion = $request->input('fecha_recepcion');
     	$solicitud->observaciones = $request->input('observaciones');
+        $solicitud->anio = date('Y');
+
+        $consecutivo = 1;
+
+        $latest_solicitud = ServicioSocial::where('anio', '=', $solicitud->anio)->orderBy('anio_consecutivo', 'desc')->first();
+
+        if($latest_solicitud && isset($latest_solicitud->anio_consecutivo)) {
+            $consecutivo = $latest_solicitud->anio_consecutivo + 1;
+        }
+
+        $solicitud->anio_consecutivo = $consecutivo;
+        $solicitud->consecutivo = 'IPN/O2M503/3S.9/'.sprintf('%04d', $consecutivo);
 
         if(is_null($solicitud->registro) || $solicitud->registro == '') {
             return view('altaServicioSocial', [
