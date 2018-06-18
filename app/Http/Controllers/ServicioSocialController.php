@@ -71,6 +71,14 @@ class ServicioSocialController extends Controller
     public function attemptAltaSolicitudServicioSocial(Request $request) {
     	$solicitud = new ServicioSocial;
     	$solicitud->registro = $request->input('registro');
+
+        if(is_null($solicitud->registro) || $solicitud->registro == '') {
+            return view('altaServicioSocial', [
+                'carreras' => Carrera::all(),
+                'error' => 'El campo registro es obligatorio'
+            ]);
+        }
+
     	$solicitud->boleta = $request->input('boleta');
     	$solicitud->nombre = $request->input('nombre');
     	$solicitud->carrera_id = $request->input('carrera');
@@ -99,13 +107,7 @@ class ServicioSocialController extends Controller
 
         $solicitud->anio_consecutivo = $consecutivo;
         $solicitud->consecutivo = 'IPN/O2M503/3S.9/'.sprintf('%04d', $consecutivo);
-
-        if(is_null($solicitud->registro) || $solicitud->registro == '') {
-            return view('altaServicioSocial', [
-                'carreras' => Carrera::all(),
-                'error' => 'El campo registro es obligatorio'
-            ]);
-        }
+        $solicitud->usuario_id = $request->session()->get('usuario_id', null);
 
     	try {
     		$solicitud->save();
