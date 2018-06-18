@@ -143,7 +143,8 @@ class ServicioSocialController extends Controller
     			'Créditos',
     			'Horario',
     			'Fecha Recepción',
-    			'Observaciones'
+    			'Observaciones', 
+                'Capturó'
     		]
     	]);
     }
@@ -164,6 +165,7 @@ class ServicioSocialController extends Controller
 
         $data = DB::table('servicio_social')
         ->join('carreras', 'carreras.id', '=', 'servicio_social.carrera_id')
+        ->leftJoin('usuarios', 'usuarios.id', '=', 'servicio_social.usuario_id')
         ->select(
             'servicio_social.id',
             'servicio_social.registro',
@@ -180,7 +182,8 @@ class ServicioSocialController extends Controller
             'servicio_social.creditos',
             'servicio_social.horario',
             'servicio_social.fecha_recepcion',
-            'servicio_social.observaciones'
+            'servicio_social.observaciones',
+            'usuarios.nombre as usuario'
         );
         
         if(!is_null($q) && $q != '') {

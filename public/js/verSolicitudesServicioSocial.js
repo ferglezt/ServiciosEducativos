@@ -76,7 +76,8 @@ $(document).ready(function() {
                         obj.creditos,
                         obj.horario,
                         obj.fecha_recepcion,
-                        obj.observaciones
+                        obj.observaciones,
+                        obj.usuario
                     ];
                 });
                 table.clear();
