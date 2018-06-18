@@ -45,6 +45,20 @@
         </div>
       </div>
       <div class="form-group">
+        <label class="control-label col-sm-2" for="folio">Año:</label>
+        <div class="col-sm-2">
+          <select class="form-control" id="anio" name="anio">
+            @for($i = 2000; $i < 2030; $i++)
+              <option value="{{ $i }}" 
+                @if($solicitud->anio == $i)
+                  selected
+                @endif 
+              >{{ $i }}</option>
+            @endfor
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
         <label class="control-label col-sm-2" for="boleta">Boleta:</label>
         <div class="col-sm-6">
           <input type="text" name="boleta" placeholder="Boleta" class="form-control" value="{{ $solicitud->boleta }}">

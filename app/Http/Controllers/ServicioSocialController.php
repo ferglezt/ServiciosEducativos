@@ -42,6 +42,7 @@ class ServicioSocialController extends Controller
         $solicitud->horario = $request->input('horario');
         $solicitud->fecha_recepcion = $request->input('fecha_recepcion');
         $solicitud->observaciones = $request->input('observaciones');
+        $solicitud->anio = $request->input('anio');
 
         if(is_null($solicitud->registro) || $solicitud->registro == '') {
             return view('editarServicioSocial', [
@@ -129,6 +130,7 @@ class ServicioSocialController extends Controller
     		'columnas' => [
                 'Editar',
                 'Eliminar',
+                'Año',
     			'Registro',
     			'Consecutivo',
     			'Boleta', 
@@ -183,7 +185,8 @@ class ServicioSocialController extends Controller
             'servicio_social.horario',
             'servicio_social.fecha_recepcion',
             'servicio_social.observaciones',
-            'usuarios.nombre as usuario'
+            'usuarios.nombre as usuario',
+            'servicio_social.anio'
         );
         
         if(!is_null($q) && $q != '') {

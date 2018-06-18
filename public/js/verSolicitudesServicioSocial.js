@@ -62,6 +62,7 @@ $(document).ready(function() {
                     return [
                         '<a href="/servicioSocial/editar/' + obj.id + '" target="_blank">Editar</a>',
                         eliminar.get(0).outerHTML,
+                        obj.anio,
                         obj.registro,
                         obj.consecutivo,
                         obj.boleta,
