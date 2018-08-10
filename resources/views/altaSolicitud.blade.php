@@ -95,7 +95,7 @@
 
               <div class="form-group">
                 <label class="control-label col-sm-2" for="folio">Año:</label>
-                <div class="col-sm-6">
+                <div class="col-sm-3">
                   <select class="form-control" id="anio" name="anio">
                     @for($i = 2000; $i < 2030; $i++)
                       <option value="{{ $i }}" {{ $i == date('Y') ? 'selected' : '' }}>{{ $i }}</option>
@@ -105,7 +105,7 @@
               </div>
               <div class="form-group">
                 <label class="control-label col-sm-2" for="periodo_id">Periodo:</label>
-                <div class="col-sm-6">
+                <div class="col-sm-3">
                   <select class="form-control" id="periodo_id" name="periodo_id">
                     @foreach($periodos as $p)
                       <option value="{{ $p->id }}"
@@ -150,19 +150,19 @@
               </div>
               <div class="form-group">
                 <label class="control-label col-sm-2" for="semestre">Semestre:</label>
-                <div class="col-sm-6">
+                <div class="col-sm-3">
                   <input type="text" class="form-control" name="semestre" id="semestre" placeholder="Semestre">
                 </div>
               </div>
               <div class="form-group">
                 <label class="control-label col-sm-2" for="promedio">Promedio:</label>
-                <div class="col-sm-6">
+                <div class="col-sm-3">
                   <input type="text" class="form-control" name="promedio" id="promedio" placeholder="Promedio">
                 </div>
               </div>
               <div class="form-group">
                 <label class="control-label col-sm-2" for="estatus_estudiante">Estatus Académico:</label>
-                <div class="col-sm-6">
+                <div class="col-sm-3">
                   <select id="estatus_estudiante" name="estatus_estudiante" class="form-control">
                     <option value="REGULAR">REGULAR</option>
                     <option value="IRREGULAR">IRREGULAR</option>
@@ -171,7 +171,7 @@
               </div>
               <div class="form-group">
                 <label class="control-label col-sm-2" for="carga">Carga:</label>
-                <div class="col-sm-6">
+                <div class="col-sm-3">
                   <input type="text" class="form-control" name="carga" id="carga" placeholder="Carga">
                 </div>
               </div>
@@ -184,7 +184,7 @@
               </div>
               <div class="form-group">
                 <label class="control-label col-sm-2" for="estatus_becario">Estatus Becario:</label>
-                <div class="col-sm-6">
+                <div class="col-sm-3">
                   <select id="estatus_becario" name="estatus_becario" class="form-control">
                     <option value="ASPIRANTE">ASPIRANTE</option>
                     <option value="REVALIDANTE">REVALIDANTE</option>
@@ -193,13 +193,13 @@
               </div>
               <div class="form-group">
                 <label class="control-label col-sm-2" for="beca_anterior">Beca Anterior:</label>
-                <div class="col-sm-6">
+                <div class="col-sm-3">
                   <input type="text" id="beca_anterior" name="beca_anterior" placeholder="Beca Anterior" class="form-control"> 
                 </div>
               </div>
               <div class="form-group">
                 <label class="control-label col-sm-2" for="beca_id">Beca Solicitada</label>
-                <div class="col-sm-6">
+                <div class="col-sm-3">
                   <select id="beca_id" name="beca_id" class="form-control">
                     @foreach($becas as $beca)
                       @if($beca->activa == 1)
@@ -207,6 +207,12 @@
                       @endif
                     @endforeach
                   </select>
+                </div>
+              </div>
+              <div class="form-group" id="seccionReprobadas">
+                <label class="control-label col-sm-2" for="reprobadas">Reprobadas:</label>
+                <div class="col-sm-3">
+                  <input type="number" class="form-control" name="reprobadas" id="reprobadas" placeholder="Reprobadas">
                 </div>
               </div>
               <div class="form-group">
@@ -218,43 +224,43 @@
               </div>
               <div class="form-group">
                 <label class="control-label col-sm-2" for="folio_manutencion">Folio Manutención:</label>
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                   <input type="text" id="folio_manutencion" name="folio_manutencion" placeholder="Folio Manutención" class="form-control"> 
                 </div>
               </div>
               <div class="form-group">
                 <label class="control-label col-sm-2" for="folio_transporte">Folio Transporte:</label>
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                   <input type="text" id="folio_manutencion" name="folio_transporte" placeholder="Folio Transporte" class="form-control"> 
                 </div>
               </div>
               <div class="form-group">
                 <label class="control-label col-sm-2" for="comprobante_ingresos">Tipo de Comprobante de Ingresos:</label>
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                   <input type="text" id="comprobante_ingresos" name="comprobante_ingresos" placeholder="Comprobante de Ingresos" class="form-control"> 
                 </div>
               </div>
               <div class="form-group">
                 <label class="control-label col-sm-2" for="mapa">Mapa:</label>
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                   <input type="text" id="mapa" name="mapa" placeholder="Mapa" class="form-control"> 
                 </div>
               </div>
               <div class="form-group">
                 <label class="control-label col-sm-2" for="fecha_recibido">Fecha Recibido:</label>
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                   <input type="text" id="fecha_recibido" name="fecha_recibido" placeholder="Fecha Recibido" class="form-control"> 
                 </div>
               </div>
               <div class="form-group">
                 <label class="control-label col-sm-2" for="ingresos">Ingresos:</label>
-                <div class="col-sm-6">
+                <div class="col-sm-3">
                   <input type="text" id="ingresos" name="ingresos" placeholder="Ingresos" class="form-control"> 
                 </div>
               </div>
               <div class="form-group">
                 <label class="control-label col-sm-2" for="dependientes">Dependientes:</label>
-                <div class="col-sm-6">
+                <div class="col-sm-3">
                   <input type="text" id="dependientes" name="dependientes" placeholder="Dependientes" class="form-control"> 
                 </div>
               </div>
