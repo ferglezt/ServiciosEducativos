@@ -139,14 +139,10 @@ $(document).ready(function() {
             $('#warningBeca').addClass('alert alert-info');
             $('#warningBeca').html('Promedio: ' + promedio + '. Tipo A');
             $('#tipo_institucional').val('A');
-          } else if(promedio >= 8.0 && promedio <= 9.49) {
+          } else if(promedio >= 8.0) {
             $('#warningBeca').addClass('alert alert-info');
             $('#warningBeca').html('Promedio: ' + promedio + '. Tipo B');
             $('#tipo_institucional').val('B');
-          } else if(promedio >= 9.5 && promedio <= 10.0) {
-            $('#warningBeca').addClass('alert alert-info');
-            $('#warningBeca').html('Promedio: ' + promedio + '. Tipo C');
-            $('#tipo_institucional').val('C');
           } else {
             $('#warningBeca').addClass('alert alert-danger');
             $('#warningBeca').html('Promedio fuera de rango: ' + promedio);
