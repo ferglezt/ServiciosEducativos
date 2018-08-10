@@ -18,6 +18,7 @@ $(document).ready(function() {
   });
 
   $('#seccionFolio').hide();
+  $('#seccionReprobadas').hide();
 
   var findLatestFolio = function() {
     $.ajax({
