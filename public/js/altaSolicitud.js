@@ -107,6 +107,7 @@ $(document).ready(function() {
     var semestre = parseInt($('#semestre').val());
     var beca = $('#beca_id option:selected').text();
     var estatus = $('#estatus_estudiante').val();
+    var reprobadas = $('#reprobadas').val();
 
     if(isNaN(promedio) || isNaN(carga) || isNaN(semestre)) {
       $('#warningBeca').addClass('alert alert-danger');
@@ -114,6 +115,39 @@ $(document).ready(function() {
       return;
     }
 
+    //Validacion de beca institucional por promedios
+    if(beca == 'INSTITUCIONAL') {
+      if(promedio >= 6.0 && promedio <= 7.99) {
+        $('#warningBeca').addClass('alert alert-info');
+        $('#warningBeca').html('Promedio: ' + promedio + '. Tipo A');
+        $('#tipo_institucional').val('A');
+      } else if(promedio >= 8.0 && promedio <= 10.0) {
+        $('#warningBeca').addClass('alert alert-info');
+        $('#warningBeca').html('Promedio: ' + promedio + '. Tipo B');
+        $('#tipo_institucional').val('B');
+      } else {
+        $('#warningBeca').addClass('alert alert-danger');
+        $('#warningBeca').html('Promedio fuera de rango: ' + promedio);
+        $('#tipo_institucional').val('');
+      }
+      return;
+    }
+
+    //Validacion de beca para la aprobación por número de materias reprobadas
+    if(beca == 'PARA LA APROBACION') {
+      $('#seccionReprobadas').show(300);
+      if(isNaN(reprobadas)) {
+        $('#warningBeca').addClass('alert alert-danger');
+        $('#warningBeca').html('Ingrese el número de materias reprobadas');
+      } else if (reprobadas > 1) {
+        $('#warningBeca').addClass('alert alert-danger');
+        $('#warningBeca').html('Esta beca permite cuando mucho 1 materia reprobada');
+      }
+      return;
+    }
+    $('#seccionReprobadas').hide(300);
+
+    //Manutencion requiere saber las cargas para poder ser validada, por eso se hace la llamada ajax
     $.ajax({
       url: '/findCarreraConCargas/' + carrera,
       success: function(result,status,xhr) {
@@ -132,22 +166,6 @@ $(document).ready(function() {
               $('#warningBeca').html('Para solicitar Manutención es necesario tener' +
                           ' promedio mayor a 8.0 después de 5to semestre');
             } 
-          }
-        }
-
-        if(beca == 'INSTITUCIONAL') {
-          if(promedio >= 6.0 && promedio <= 7.99) {
-            $('#warningBeca').addClass('alert alert-info');
-            $('#warningBeca').html('Promedio: ' + promedio + '. Tipo A');
-            $('#tipo_institucional').val('A');
-          } else if(promedio >= 8.0) {
-            $('#warningBeca').addClass('alert alert-info');
-            $('#warningBeca').html('Promedio: ' + promedio + '. Tipo B');
-            $('#tipo_institucional').val('B');
-          } else {
-            $('#warningBeca').addClass('alert alert-danger');
-            $('#warningBeca').html('Promedio fuera de rango: ' + promedio);
-            $('#tipo_institucional').val('');
           }
         }
       }
@@ -191,6 +209,7 @@ $(document).ready(function() {
   $('#semestre').focusout(validarBeca);
   $('#beca_id').change(validarBeca);
   $('#promedio').focusout(validarBeca);
+  $('#reprobadas').focusout(validarBeca);
   $('#estatus_estudiante').change(validarBeca);
 
   var validarIngresos = function() {
