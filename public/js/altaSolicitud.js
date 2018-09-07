@@ -112,7 +112,6 @@ $(document).ready(function() {
     if(isNaN(promedio) || isNaN(carga) || isNaN(semestre)) {
       $('#warningBeca').addClass('alert alert-danger');
       $('#warningBeca').html('El promedio, la carga y el semestre deben ser datos numéricos');
-      return;
     }
 
     //Validacion de beca institucional por promedios
