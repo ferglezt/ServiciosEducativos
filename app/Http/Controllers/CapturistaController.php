@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Usuario;
 use App\Rol;
+use App\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\QueryException;
 
 class CapturistaController extends Controller
 {
-	const ADMIN = 1;
+    const ADMIN = 1;
 
-    public function cambiarContrasenaCapturista(Request $request, $id) {
+    public function cambiarContrasenaCapturista(Request $request, $id)
+    {
         //Esta función está reservada únicamente para el administrador
         if(!self::isAdmin($request)) {
            abort(401);
@@ -24,7 +25,7 @@ class CapturistaController extends Controller
             abort(500);
         }
 
-        $usuario = Usuario::findOrFail($id);
+        $usuario = User::findOrFail($id);
 
         //No se permite cambiarle la contraseña a otro admin
         if($usuario->rol_id == self::ADMIN) {
@@ -43,7 +44,7 @@ class CapturistaController extends Controller
            abort(401); 
         }
 
-        $usuario = Usuario::findOrFail($id);
+        $usuario = User::findOrFail($id);
 
         $usuario->nombre = $request->input('nombre');
         $usuario->email = $request->input('email');
@@ -58,7 +59,7 @@ class CapturistaController extends Controller
            abort(401);
         }
 
-        $usuario = Usuario::findOrFail($id);
+        $usuario = User::findOrFail($id);
 
         $usuario->delete();
 
@@ -71,7 +72,7 @@ class CapturistaController extends Controller
         }
 
         return view('verCapturistas', [
-            'capturistas' => Usuario::all(),
+            'capturistas' => User::all(),
             'roles' => Rol::all()
         ]);
     }
@@ -126,7 +127,7 @@ class CapturistaController extends Controller
             );
         }
 
-    	$usuario = new Usuario;
+    	$usuario = new User;
     	$usuario->nombre = $nombre;
     	$usuario->email = $email;
     	$usuario->password = Hash::make($password);
@@ -149,6 +150,6 @@ class CapturistaController extends Controller
     }
 
     private function isAdmin(Request $request) {
-    	return $request->session()->get('rol_id', 0) == self::ADMIN;
+        return $request->session()->get('rol_id', 0) == self::ADMIN;
     }
 }

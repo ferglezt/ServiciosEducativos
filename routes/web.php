@@ -11,13 +11,27 @@
 |
 */
 
-Route::group(['middleware' => ['custom.session']], function() {
-	Route::get('/', 'HomeController@home')
-		->name('home');
+//Route::get('/login', function() {
+//    return view('login');
+//})->name('login');
 
-	Route::get('/altaCapturista', 'CapturistaController@altaCapturista')
-		->name('altaCapturista');
-		
+Route::get('/cerrarSesion', 'LoginController@cerrarSesion')->name('cerrarSesion');
+
+//Route::post('/attemptLogin', 'LoginController@attemptLogin');
+
+Route::get('/test', 'TestController@test')->name('test');
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+//Route::group(['middleware' => ['custom.session']], function() {
+Route::group(['middleware' => ['auth']], function() {
+
+    Route::get('/', 'HomeController@index')->name('home');
+
+    Route::get('/altaCapturista', 'CapturistaController@altaCapturista')->name('altaCapturista');
+
 	Route::post('/attemptAltaCapturista', 'CapturistaController@attemptAltaCapturista')
 		->name('/attemptAltaCapturista');
 
@@ -122,11 +136,3 @@ Route::group(['middleware' => ['custom.session']], function() {
 
 	Route::post('/servicioSocial/attemptEdit', 'ServicioSocialController@attemptEdit');
 });
-
-Route::get('/login', function() {
-	return view('login');
-})->name('login');
-
-Route::get('/cerrarSesion', 'LoginController@cerrarSesion')->name('cerrarSesion');
-Route::post('/attemptLogin', 'LoginController@attemptLogin');
-Route::get('/test', 'TestController@test')->name('test');
