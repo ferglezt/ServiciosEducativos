@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
-use App\Usuario;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class LoginController extends Controller
 {
@@ -29,7 +29,7 @@ class LoginController extends Controller
 
     	$usuario;
     	try {
-    		$usuario = Usuario::where('email', $email)->firstOrFail();
+    		$usuario = User::where('email', $email)->firstOrFail();
     	} catch (ModelNotFoundException $e) {
     		return view('login', ['error' => 'Usuario no encontrado', 'email' => $email]);
     	}

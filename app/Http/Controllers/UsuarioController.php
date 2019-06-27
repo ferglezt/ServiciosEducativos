@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use App\Usuario;
+use App\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\QueryException;
 
@@ -66,7 +66,7 @@ class UsuarioController extends Controller
     	$usuario;
 
     	try {
-    		$usuario = Usuario::where('email', $email)->firstOrFail();
+    		$usuario = User::where('email', $email)->firstOrFail();
     	} catch(ModelNotFoundException $e) {
     		return view('cambioContrasena', [
 				'email' => $request->session()->get('email'),
